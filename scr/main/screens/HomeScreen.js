@@ -146,7 +146,7 @@ const HomeScreen = () => {
     if (commObj.player1In == true && commObj.player1Count + randomNum <= 100) {
       setCommObj(prev => ({
         ...prev,
-        player1Count: commObj.player1Count + randomNum,
+        player1Count: commObj.player1Count + 5,
       }));
     }
   }
@@ -235,11 +235,62 @@ const HomeScreen = () => {
                   }}>
                   <Text>{item.number}</Text>
                 </View>
+                {item.number == 22 && (
+                  <View
+                    style={{
+                      width: 15,
+                      height: 100,
+                      backgroundColor: 'coral',
+                      borderRadius: 20 / 2,
+                      marginLeft: 5,
+                    }}></View>
+                )}
+                {item.number == 36 && (
+                  <View
+                    style={{
+                      width: 15,
+                      height: 150,
+                      backgroundColor: 'coral',
+                      borderRadius: 20 / 2,
+                      marginLeft: 5,
+                    }}></View>
+                )}
+                {item.number == 32 && (
+                  <View
+                    style={{
+                      width: 15,
+                      height: 150,
+                      backgroundColor: 'coral',
+                      borderRadius: 20 / 2,
+                      marginLeft: 5,
+                    }}></View>
+                )}
+                {item.number == 46 && (
+                  <View
+                    style={{
+                      width: 15,
+                      height: 200,
+                      backgroundColor: 'lightgreen',
+                      borderRadius: 20 / 2,
+                      marginLeft: 5,
+                    }}></View>
+                )}
+                {item.number == 58 && (
+                  <View
+                    style={{
+                      width: 15,
+                      height: 250,
+                      backgroundColor: 'lightgreen',
+                      borderRadius: 20 / 2,
+                      marginLeft: 5,
+                    }}></View>
+                )}
                 <View
                   style={{
                     flexDirection: 'row',
                     gap: 5,
                     marginLeft: 5,
+                    position: 'absolute'
                   }}>
                   {item.number == 1 && commObj.player1In == false && (
                     <View
