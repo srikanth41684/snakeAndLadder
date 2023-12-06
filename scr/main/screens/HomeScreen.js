@@ -168,9 +168,9 @@ const HomeScreen = () => {
             style={{
               flexDirection: 'row',
               backgroundColor: 'lightblue',
-              paddingVertical: 20,
               justifyContent: 'space-between',
               paddingHorizontal: 20,
+              paddingVertical: 5,
             }}>
             <View>
               <Text>You</Text>
@@ -179,8 +179,20 @@ const HomeScreen = () => {
               onPress={() => {
                 disePlayHanlder();
               }}>
-              <View>
-                <Text>Play</Text>
+              <View
+                style={{
+                  backgroundColor: '#fff',
+                  width: 50,
+                  alignItems: 'center',
+                }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: '#000',
+                    fontWeight: 'bold',
+                  }}>
+                  {commObj.diseNumber}
+                </Text>
               </View>
             </TouchableWithoutFeedback>
             <View>
