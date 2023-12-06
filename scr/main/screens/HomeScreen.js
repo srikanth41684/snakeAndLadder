@@ -114,8 +114,9 @@ const NumbersArray = [
   {id: 10, number: 10},
 ];
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [commObj, setCommObj] = useState({
+    NumbersArray: Array.from({length: 100}, (_, idx) => `${++idx}`),
     diseNumber: 1,
     player1: true,
     player1In: false,
@@ -146,7 +147,7 @@ const HomeScreen = () => {
     if (commObj.player1In == true && commObj.player1Count + randomNum <= 100) {
       setCommObj(prev => ({
         ...prev,
-        player1Count: commObj.player1Count + 5,
+        player1Count: commObj.player1Count + randomNum,
       }));
     }
   }
@@ -244,19 +245,6 @@ const HomeScreen = () => {
     console.log('commObj------>', commObj);
   }, [commObj]);
 
-  // if (commObj.player1Count == 100 || commObj.player2Count == 100) {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 1,
-  //         justifyContent: 'center',
-  //         alignItems: 'center',
-  //         backgroundColor: 'rgba(0,0,0,0.7)',
-  //       }}>
-  //       <Text>Test</Text>
-  //     </View>
-  //   );
-  // }
   return (
     <SafeAreaView
       style={{
@@ -274,10 +262,10 @@ const HomeScreen = () => {
             flexDirection: 'row',
             flexWrap: 'wrap',
           }}>
-          {NumbersArray.map((item, index) => {
+          {commObj.NumbersArray.map((item, index) => {
             return (
               <View
-                key={item.id}
+                key={index}
                 style={{
                   width: '10%',
                   height: 50,
@@ -287,7 +275,7 @@ const HomeScreen = () => {
                   style={{
                     alignItems: 'flex-end',
                   }}>
-                  <Text>{item.number}</Text>
+                  <Text>{item}</Text>
                 </View>
                 {item.number == 22 && (
                   <View
@@ -452,6 +440,15 @@ const HomeScreen = () => {
             </View>
           </View>
         </View>
+
+        <TouchableWithoutFeedback
+          onPress={() => {
+            navigation.navigate('play');
+          }}>
+          <View>
+            <Text>Play</Text>
+          </View>
+        </TouchableWithoutFeedback>
 
         {commObj.player1Count == 100 || commObj.player2Count == 100 ? (
           <Modal animationType="fade" transparent={true}>

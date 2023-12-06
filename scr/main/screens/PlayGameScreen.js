@@ -1,11 +1,20 @@
-import {View, Text} from 'react-native';
+import {View, Text, SafeAreaView} from 'react-native';
 import React from 'react';
 
 const PlayGameScreen = () => {
   return (
-    <View>
-      <Text>PlayGameScreen</Text>
-    </View>
+    <SafeAreaView
+      style={{
+        flex: 1,
+      }}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#fff',
+        }}>
+        <Text>PlayGameScreen</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
