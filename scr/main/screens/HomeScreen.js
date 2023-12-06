@@ -1,4 +1,4 @@
-import {View, Text, TouchableWithoutFeedback, Modal} from 'react-native';
+import {View, Text, TouchableWithoutFeedback, Modal, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native';
 
