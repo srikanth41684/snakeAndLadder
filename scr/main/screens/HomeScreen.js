@@ -1,4 +1,4 @@
-import {View, Text, TouchableWithoutFeedback} from 'react-native';
+import {View, Text, TouchableWithoutFeedback, Modal} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native';
 
@@ -139,13 +139,14 @@ const HomeScreen = () => {
       setCommObj(prev => ({
         ...prev,
         player1In: true,
+        player1Count: prev.player1Count + randomNum,
       }));
     }
 
-    if (commObj.player1In == true) {
+    if (commObj.player1In == true && commObj.player1Count + randomNum <= 100) {
       setCommObj(prev => ({
         ...prev,
-        player1Count: prev.player1Count + randomNum,
+        player1Count: commObj.player1Count + randomNum,
       }));
     }
   }
@@ -163,9 +164,10 @@ const HomeScreen = () => {
       setCommObj(prev => ({
         ...prev,
         player2In: true,
+        player2Count: prev.player2Count + randomNum,
       }));
     }
-    if (commObj.player2In == true) {
+    if (commObj.player2In == true && commObj.player2Count + randomNum <= 100) {
       setCommObj(prev => ({
         ...prev,
         player2Count: prev.player2Count + randomNum,
@@ -174,8 +176,33 @@ const HomeScreen = () => {
   }
 
   useEffect(() => {
+    setTimeout(() => {
+      if (commObj.player1Count == 6) {
+        setCommObj(prev => ({
+          ...prev,
+          player1Count: 25,
+        }));
+      }
+    }, 100);
+  }, [commObj.player1Count]);
+
+  useEffect(() => {
     console.log('commObj------>', commObj);
   }, [commObj]);
+
+  // if (commObj.player1Count == 100 || commObj.player2Count == 100) {
+  //   return (
+  //     <View
+  //       style={{
+  //         flex: 1,
+  //         justifyContent: 'center',
+  //         alignItems: 'center',
+  //         backgroundColor: 'rgba(0,0,0,0.7)',
+  //       }}>
+  //       <Text>Test</Text>
+  //     </View>
+  //   );
+  // }
   return (
     <SafeAreaView
       style={{
@@ -208,7 +235,12 @@ const HomeScreen = () => {
                   }}>
                   <Text>{item.number}</Text>
                 </View>
-                <View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    gap: 5,
+                    marginLeft: 5,
+                  }}>
                   {item.number == 1 && commObj.player1In == false && (
                     <View
                       style={{
@@ -296,7 +328,7 @@ const HomeScreen = () => {
                 <Text
                   style={{
                     fontSize: 20,
-                    color: '#000',
+                    color: commObj.player1 ? 'blue' : 'red',
                     fontWeight: 'bold',
                   }}>
                   {commObj.diseNumber}
@@ -308,13 +340,95 @@ const HomeScreen = () => {
                 style={{
                   fontSize: 16,
                   fontWeight: commObj.player2 ? 'bold' : '500',
-                  color: commObj.player2 ? 'blue' : '#000',
+                  color: commObj.player2 ? 'red' : '#000',
                 }}>
                 Player 2
               </Text>
             </View>
           </View>
         </View>
+
+        {commObj.player1Count == 100 || commObj.player2Count == 100 ? (
+          <Modal animationType="fade" transparent={true}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                paddingHorizontal: 20,
+                backgroundColor: 'rgba(0,0,0,0.7)',
+              }}>
+              <View
+                style={{
+                  backgroundColor: '#fff',
+                  width: '80%',
+                  height: 200,
+                  borderRadius: 20,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 'bold',
+                    color:
+                      commObj.player1Count == 100
+                        ? 'blue'
+                        : commObj.player2Count == 100
+                        ? 'red'
+                        : '#000',
+                  }}>
+                  {commObj.player1Count == 100
+                    ? 'Player 1'
+                    : commObj.player2Count == 100
+                    ? 'Playe 2'
+                    : ''}
+                  Win
+                </Text>
+                <View
+                  style={{
+                    paddingTop: 40,
+                  }}>
+                  <TouchableWithoutFeedback
+                    onPress={() => {
+                      setCommObj(prev => ({
+                        ...prev,
+                        diseNumber: 1,
+                        player1: true,
+                        player1In: false,
+                        player2: false,
+                        player2In: false,
+                        player1Count: 0,
+                        player2Count: 0,
+                      }));
+                    }}>
+                    <View
+                      style={{
+                        backgroundColor: 'lightblue',
+                        paddingHorizontal: 30,
+                        paddingVertical: 8,
+                        borderRadius: 8,
+                      }}>
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          color:
+                            commObj.player1Count == 100
+                              ? 'blue'
+                              : commObj.player2Count == 100
+                              ? 'red'
+                              : '#000',
+                          fontWeight: 'bold',
+                        }}>
+                        OKay
+                      </Text>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </View>
+              </View>
+            </View>
+          </Modal>
+        ) : null}
       </View>
     </SafeAreaView>
   );
