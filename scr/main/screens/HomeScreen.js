@@ -123,14 +123,42 @@ const HomeScreen = () => {
     player2In: false,
   });
 
-  function disePlayHanlder() {
+  function disePlayer1Hanlder() {
     let arr = [1, 2, 3, 4, 5, 6];
     let randomNum = arr[Math.floor(Math.random() * arr.length)];
     setCommObj(prev => ({
       ...prev,
       diseNumber: randomNum,
+      player2: true,
+      player1: false,
     }));
+    if (randomNum == 1) {
+      setCommObj(prev => ({
+        ...prev,
+        player1In: true,
+        player2In: false,
+      }));
+    }
   }
+
+  function disePlayer2Hanlder() {
+    let arr = [1, 2, 3, 4, 5, 6];
+    let randomNum = arr[Math.floor(Math.random() * arr.length)];
+    setCommObj(prev => ({
+      ...prev,
+      diseNumber: randomNum,
+      player1: true,
+      player2: false,
+    }));
+    if (randomNum == 1) {
+      setCommObj(prev => ({
+        ...prev,
+        player2In: true,
+        player1In: false,
+      }));
+    }
+  }
+
   useEffect(() => {
     console.log('commObj------>', commObj);
   }, [commObj]);
@@ -208,7 +236,12 @@ const HomeScreen = () => {
             </View>
             <TouchableWithoutFeedback
               onPress={() => {
-                disePlayHanlder();
+                if (commObj.player1) {
+                  disePlayer1Hanlder();
+                }
+                if (commObj.player2) {
+                  disePlayer2Hanlder();
+                }
               }}>
               <View
                 style={{
