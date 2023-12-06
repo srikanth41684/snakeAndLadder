@@ -1,5 +1,5 @@
-import {View, Text} from 'react-native';
-import React, {useEffect} from 'react';
+import {View, Text, TouchableWithoutFeedback} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native';
 
 const NumbersArray = [
@@ -115,6 +115,18 @@ const NumbersArray = [
 ];
 
 const HomeScreen = () => {
+  const [commObj, setCommObj] = useState({
+    diseNumber: 1,
+  });
+
+  function disePlayHanlder() {
+    let arr = [1, 2, 3, 4, 5, 6];
+    let randomNum = arr[Math.floor(Math.random() * arr.length)];
+    setCommObj(prev => ({
+      ...prev,
+      diseNumber: randomNum,
+    }));
+  }
   useEffect(() => {}, []);
   return (
     <SafeAreaView
@@ -147,6 +159,34 @@ const HomeScreen = () => {
               </View>
             );
           })}
+        </View>
+        <View>
+          <View>
+            <Text>{commObj.diseNumber}</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              backgroundColor: 'lightblue',
+              paddingVertical: 20,
+              justifyContent: 'space-between',
+              paddingHorizontal: 20,
+            }}>
+            <View>
+              <Text>You</Text>
+            </View>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                disePlayHanlder();
+              }}>
+              <View>
+                <Text>Play</Text>
+              </View>
+            </TouchableWithoutFeedback>
+            <View>
+              <Text>Opponent</Text>
+            </View>
+          </View>
         </View>
       </View>
     </SafeAreaView>
