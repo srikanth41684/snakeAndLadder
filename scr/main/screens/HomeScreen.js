@@ -117,6 +117,10 @@ const NumbersArray = [
 const HomeScreen = () => {
   const [commObj, setCommObj] = useState({
     diseNumber: 1,
+    player1: true,
+    player1In: false,
+    player2: false,
+    player2In: false,
   });
 
   function disePlayHanlder() {
@@ -127,7 +131,9 @@ const HomeScreen = () => {
       diseNumber: randomNum,
     }));
   }
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log('commObj------>', commObj);
+  }, [commObj]);
   return (
     <SafeAreaView
       style={{
@@ -153,9 +159,33 @@ const HomeScreen = () => {
                   width: '10%',
                   height: 50,
                   borderWidth: 0.5,
-                  alignItems: 'flex-end',
                 }}>
-                <Text>{item.number}</Text>
+                <View
+                  style={{
+                    alignItems: 'flex-end',
+                  }}>
+                  <Text>{item.number}</Text>
+                </View>
+                <View>
+                  {item.number == 1 && commObj.player1In == false && (
+                    <View
+                      style={{
+                        width: 10,
+                        height: 10,
+                        borderRadius: 10 / 2,
+                        backgroundColor: 'blue',
+                      }}></View>
+                  )}
+                  {item.number == 1 && commObj.player2In == false && (
+                    <View
+                      style={{
+                        width: 10,
+                        height: 10,
+                        borderRadius: 10 / 2,
+                        backgroundColor: 'red',
+                      }}></View>
+                  )}
+                </View>
               </View>
             );
           })}
@@ -171,9 +201,10 @@ const HomeScreen = () => {
               justifyContent: 'space-between',
               paddingHorizontal: 20,
               paddingVertical: 5,
+              alignItems: 'center',
             }}>
             <View>
-              <Text>You</Text>
+              <Text>Player 1</Text>
             </View>
             <TouchableWithoutFeedback
               onPress={() => {
@@ -196,7 +227,7 @@ const HomeScreen = () => {
               </View>
             </TouchableWithoutFeedback>
             <View>
-              <Text>Opponent</Text>
+              <Text>Player 2</Text>
             </View>
           </View>
         </View>
