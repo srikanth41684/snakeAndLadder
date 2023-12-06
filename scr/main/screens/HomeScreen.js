@@ -201,6 +201,42 @@ const HomeScreen = () => {
           player2Count: 58,
         }));
       }
+      if (commObj.player1Count == 22) {
+        setCommObj(prev => ({
+          ...prev,
+          player1Count: 2,
+        }));
+      }
+      if (commObj.player1Count == 32) {
+        setCommObj(prev => ({
+          ...prev,
+          player1Count: 9,
+        }));
+      }
+      if (commObj.player1Count == 36) {
+        setCommObj(prev => ({
+          ...prev,
+          player1Count: 5,
+        }));
+      }
+      if (commObj.player2Count == 22) {
+        setCommObj(prev => ({
+          ...prev,
+          player2Count: 2,
+        }));
+      }
+      if (commObj.player2Count == 32) {
+        setCommObj(prev => ({
+          ...prev,
+          player2Count: 9,
+        }));
+      }
+      if (commObj.player2Count == 36) {
+        setCommObj(prev => ({
+          ...prev,
+          player2Count: 5,
+        }));
+      }
     }, 100);
   }, [commObj.player1Count, commObj.player2Count]);
 
