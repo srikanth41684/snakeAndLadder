@@ -121,22 +121,31 @@ const HomeScreen = () => {
     player1In: false,
     player2: false,
     player2In: false,
+    player1Count: 0,
+    player2Count: 0,
   });
 
   function disePlayer1Hanlder() {
     let arr = [1, 2, 3, 4, 5, 6];
     let randomNum = arr[Math.floor(Math.random() * arr.length)];
+
     setCommObj(prev => ({
       ...prev,
       diseNumber: randomNum,
       player2: true,
       player1: false,
     }));
-    if (randomNum == 1) {
+    if (randomNum == 1 && commObj.player1In == false) {
       setCommObj(prev => ({
         ...prev,
         player1In: true,
-        player2In: false,
+      }));
+    }
+
+    if (commObj.player1In == true) {
+      setCommObj(prev => ({
+        ...prev,
+        player1Count: prev.player1Count + randomNum,
       }));
     }
   }
@@ -150,11 +159,16 @@ const HomeScreen = () => {
       player1: true,
       player2: false,
     }));
-    if (randomNum == 1) {
+    if (randomNum == 1 && commObj.player2In == false) {
       setCommObj(prev => ({
         ...prev,
         player2In: true,
-        player1In: false,
+      }));
+    }
+    if (commObj.player2In == true) {
+      setCommObj(prev => ({
+        ...prev,
+        player2Count: prev.player2Count + randomNum,
       }));
     }
   }
@@ -204,6 +218,18 @@ const HomeScreen = () => {
                         backgroundColor: 'blue',
                       }}></View>
                   )}
+
+                  {commObj.player1In == true &&
+                    commObj.player1Count == item.number && (
+                      <View
+                        style={{
+                          width: 10,
+                          height: 20,
+                          backgroundColor: 'blue',
+                          borderBottomLeftRadius: 10,
+                          borderBottomRightRadius: 10,
+                        }}></View>
+                    )}
                   {item.number == 1 && commObj.player2In == false && (
                     <View
                       style={{
@@ -213,6 +239,17 @@ const HomeScreen = () => {
                         backgroundColor: 'red',
                       }}></View>
                   )}
+                  {commObj.player2In == true &&
+                    commObj.player2Count == item.number && (
+                      <View
+                        style={{
+                          width: 10,
+                          height: 20,
+                          backgroundColor: 'red',
+                          borderBottomLeftRadius: 10,
+                          borderBottomRightRadius: 10,
+                        }}></View>
+                    )}
                 </View>
               </View>
             );
@@ -232,7 +269,14 @@ const HomeScreen = () => {
               alignItems: 'center',
             }}>
             <View>
-              <Text>Player 1</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: commObj.player1 ? 'bold' : '500',
+                  color: commObj.player1 ? 'blue' : '#000',
+                }}>
+                Player 1
+              </Text>
             </View>
             <TouchableWithoutFeedback
               onPress={() => {
@@ -260,7 +304,14 @@ const HomeScreen = () => {
               </View>
             </TouchableWithoutFeedback>
             <View>
-              <Text>Player 2</Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: commObj.player2 ? 'bold' : '500',
+                  color: commObj.player2 ? 'blue' : '#000',
+                }}>
+                Player 2
+              </Text>
             </View>
           </View>
         </View>
