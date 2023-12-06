@@ -180,11 +180,29 @@ const HomeScreen = () => {
       if (commObj.player1Count == 6) {
         setCommObj(prev => ({
           ...prev,
-          player1Count: 25,
+          player1Count: 46,
+        }));
+      }
+      if (commObj.player1Count == 3) {
+        setCommObj(prev => ({
+          ...prev,
+          player1Count: 58,
+        }));
+      }
+      if (commObj.player2Count == 6) {
+        setCommObj(prev => ({
+          ...prev,
+          player2Count: 46,
+        }));
+      }
+      if (commObj.player2Count == 3) {
+        setCommObj(prev => ({
+          ...prev,
+          player2Count: 58,
         }));
       }
     }, 100);
-  }, [commObj.player1Count]);
+  }, [commObj.player1Count, commObj.player2Count]);
 
   useEffect(() => {
     console.log('commObj------>', commObj);
@@ -290,7 +308,7 @@ const HomeScreen = () => {
                     flexDirection: 'row',
                     gap: 5,
                     marginLeft: 5,
-                    position: 'absolute'
+                    position: 'absolute',
                   }}>
                   {item.number == 1 && commObj.player1In == false && (
                     <View
