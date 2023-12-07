@@ -14,10 +14,13 @@ const PlayGameScreen = () => {
     diseNumber: 1,
     playerOneCount: null,
     playerTwoCount: null,
+    // ladderSnakes: null,
     ladderSnakes: [
       [22, 4],
       [44, 6],
       [65, 27],
+      [6, 64],
+      [16, 45],
     ],
   });
 
@@ -46,13 +49,58 @@ const PlayGameScreen = () => {
     for (let i = 0; i < 10; i++) {
       let randomArray = [];
       for (let j = 0; j < 2; j++) {
-        let randomNumber = Math.floor(Math.random() * 100) + 1;
-        randomArray.push(randomNumber);
+        let randomNumber = Math.floor(Math.random() * 100);
+        if (randomNumber !== 100 && randomNumber !== 1) {
+          if (randomArray.length == 0) {
+            randomArray.push(randomNumber);
+          } else if (randomNumber >= randomArray[0] + 16) {
+            randomArray.push(randomNumber);
+          } else if (randomNumber <= randomArray[0] - 16) {
+            randomArray.push(randomNumber);
+          } else {
+            randomArray.push(randomNumber + 20);
+          }
+        }
+      }
+      if (randomArrays.length > 0) {
       }
       randomArrays.push(randomArray);
     }
-    console.log('randomArrays------>', randomArrays);
+    setCommObj(prev => ({
+      ...prev,
+      ladderSnakes: randomArrays,
+    }));
   }, []);
+
+  // useEffect(() => {
+  //   let snakesStart = [];
+  //   let snakesEnd = [];
+  //   let laddersStart = [];
+  //   let laddersEnd = [];
+  //   commObj.ladderSnakes.filter(item => {
+  //     if (item[0] > item[1]) {
+  //       snakesStart.push(item[0]);
+  //       snakesEnd.push(item[1]);
+  //     } else {
+  //       laddersStart.push(item[0]);
+  //       laddersEnd.push(item[1]);
+  //     }
+  //   });
+  //   console.log('ladders-------->', snakesStart);
+  // }, []);
+
+  useEffect(() => {
+    if (commObj.ladderSnakes) {
+      commObj.ladderSnakes.forEach(item => {
+        if (item[0] == commObj.playerOneCount) {
+          setCommObj(prev => ({
+            ...prev,
+            playerOneCount: item[1],
+          }));
+        }
+      });
+    }
+  }, [commObj.playerOneCount]);
 
   function disePlayer1Hanlder() {
     let arr = [1, 2, 3, 4, 5, 6];
@@ -64,9 +112,8 @@ const PlayGameScreen = () => {
       player: 'p2',
     }));
     if (
-      randomNum == 6 ||
-      (commObj.playerOneCount !== null &&
-        commObj.playerOneCount + randomNum <= 100)
+      (randomNum == 6 || commObj.playerOneCount !== null) &&
+      commObj.playerOneCount + randomNum <= 100
     ) {
       setCommObj(prev => ({
         ...prev,
@@ -85,9 +132,8 @@ const PlayGameScreen = () => {
       player: 'p1',
     }));
     if (
-      randomNum == 6 ||
-      (commObj.playerTwoCount !== null &&
-        commObj.playerTwoCount + randomNum <= 100)
+      (randomNum == 6 || commObj.playerTwoCount !== null) &&
+      commObj.playerTwoCount + randomNum <= 100
     ) {
       setCommObj(prev => ({
         ...prev,
@@ -347,3 +393,20 @@ const PlayGameScreen = () => {
 };
 
 export default PlayGameScreen;
+
+let arr = [
+  68, 11, 29, 6, 76, 98, 18, 57, 65, 87, 17, 12, 87, 93, 45, 65, 31, 13, 40,
+];
+
+[
+  [68, 11],
+  [29, 6],
+  [76, 98],
+  [18, 57],
+  [65, 87],
+  [17, 12],
+  [87, 93],
+  [45, 65],
+  [31, 13],
+  [40, 2],
+];
