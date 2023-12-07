@@ -58,8 +58,20 @@ const PlayGameScreen = () => {
                           width: '10%',
                           height: 50,
                           borderWidth: 0.5,
+                          borderColor: '#777777',
                         }}>
-                        <Text>{item2}</Text>
+                        <View
+                          style={{
+                            alignItems: 'flex-end',
+                          }}>
+                          <Text
+                            style={{
+                              fontSize: 14,
+                              color: '#000',
+                            }}>
+                            {item2}
+                          </Text>
+                        </View>
                       </View>
                     );
                   })}
