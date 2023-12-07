@@ -44,33 +44,33 @@ const PlayGameScreen = () => {
     }));
   }, []);
 
-  useEffect(() => {
-    let randomArrays = [];
-    for (let i = 0; i < 10; i++) {
-      let randomArray = [];
-      for (let j = 0; j < 2; j++) {
-        let randomNumber = Math.floor(Math.random() * 100);
-        if (randomNumber !== 100 && randomNumber !== 1) {
-          if (randomArray.length == 0) {
-            randomArray.push(randomNumber);
-          } else if (randomNumber >= randomArray[0] + 16) {
-            randomArray.push(randomNumber);
-          } else if (randomNumber <= randomArray[0] - 16) {
-            randomArray.push(randomNumber);
-          } else {
-            randomArray.push(randomNumber + 20);
-          }
-        }
-      }
-      if (randomArrays.length > 0) {
-      }
-      randomArrays.push(randomArray);
-    }
-    setCommObj(prev => ({
-      ...prev,
-      ladderSnakes: randomArrays,
-    }));
-  }, []);
+  // useEffect(() => {
+  //   let randomArrays = [];
+  //   for (let i = 0; i < 10; i++) {
+  //     let randomArray = [];
+  //     for (let j = 0; j < 2; j++) {
+  //       let randomNumber = Math.floor(Math.random() * 100);
+  //       if (randomNumber !== 100 && randomNumber !== 1) {
+  //         if (randomArray.length == 0) {
+  //           randomArray.push(randomNumber);
+  //         } else if (randomNumber >= randomArray[0] + 16) {
+  //           randomArray.push(randomNumber);
+  //         } else if (randomNumber <= randomArray[0] - 16) {
+  //           randomArray.push(randomNumber);
+  //         } else {
+  //           randomArray.push(randomNumber + 20);
+  //         }
+  //       }
+  //     }
+  //     if (randomArrays.length > 0) {
+  //     }
+  //     randomArrays.push(randomArray);
+  //   }
+  //   setCommObj(prev => ({
+  //     ...prev,
+  //     ladderSnakes: randomArrays,
+  //   }));
+  // }, []);
 
   // useEffect(() => {
   //   let snakesStart = [];
@@ -167,6 +167,16 @@ const PlayGameScreen = () => {
                     flexDirection: 'row',
                   }}>
                   {item.map((item2, index2) => {
+                    let snake = [];
+                    let ladder = [];
+                    commObj.ladderSnakes.filter(res => {
+                      if (res[0] > res[1]) {
+                        snake.push(res[0]);
+                      } else {
+                        ladder.push(res[0]);
+                      }
+                    });
+                    console.log(snake);
                     return (
                       <View
                         key={index2}
@@ -176,7 +186,49 @@ const PlayGameScreen = () => {
                           borderWidth: 0.5,
                           borderColor: '#777777',
                           backgroundColor: item2 % 2 !== 0 ? '#fcf0f0' : '#fff',
+                          position: 'relative',
                         }}>
+                        <View
+                          style={{
+                            position: 'absolute',
+                          }}>
+                          {snake.includes(item2) && (
+                            <View
+                              style={{
+                                backgroundColor: 'coral',
+                                width: 25,
+                                height: 25,
+                                alignItems: 'center',
+                                borderRadius: 25 / 2,
+                              }}>
+                              <Text
+                                style={{
+                                  fontSize: 20,
+                                  color: 'red',
+                                }}>
+                                S
+                              </Text>
+                            </View>
+                          )}
+                          {ladder.includes(item2) && (
+                            <View
+                              style={{
+                                backgroundColor: 'lightblue',
+                                width: 25,
+                                height: 25,
+                                alignItems: 'center',
+                                borderRadius: 25 / 2,
+                              }}>
+                              <Text
+                                style={{
+                                  fontSize: 20,
+                                  color: 'blue',
+                                }}>
+                                L
+                              </Text>
+                            </View>
+                          )}
+                        </View>
                         <View
                           style={{
                             alignItems: 'flex-end',
