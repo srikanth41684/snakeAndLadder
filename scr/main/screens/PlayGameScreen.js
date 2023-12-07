@@ -1,4 +1,10 @@
-import {View, Text, SafeAreaView, TouchableWithoutFeedback} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+  Modal,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 const PlayGameScreen = () => {
@@ -39,7 +45,11 @@ const PlayGameScreen = () => {
       diseNumber: randomNum,
       player: 'p2',
     }));
-    if (randomNum == 6 || commObj.playerOneCount !== null) {
+    if (
+      randomNum == 6 ||
+      (commObj.playerOneCount !== null &&
+        commObj.playerOneCount + randomNum <= 100)
+    ) {
       setCommObj(prev => ({
         ...prev,
         playerOneCount: prev.playerOneCount + randomNum,
@@ -56,7 +66,11 @@ const PlayGameScreen = () => {
       diseNumber: randomNum,
       player: 'p1',
     }));
-    if (randomNum == 6 || commObj.playerTwoCount !== null) {
+    if (
+      randomNum == 6 ||
+      (commObj.playerTwoCount !== null &&
+        commObj.playerTwoCount + randomNum <= 100)
+    ) {
       setCommObj(prev => ({
         ...prev,
         playerTwoCount: prev.playerTwoCount + randomNum,
@@ -276,13 +290,10 @@ const PlayGameScreen = () => {
                     onPress={() => {
                       setCommObj(prev => ({
                         ...prev,
+                        player: 'p1',
                         diseNumber: 1,
-                        player1: true,
-                        player1In: false,
-                        player2: false,
-                        player2In: false,
-                        playerOneCount: 0,
-                        playerTwoCount: 0,
+                        playerOneCount: null,
+                        playerTwoCount: null,
                       }));
                     }}>
                     <View
