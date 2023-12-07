@@ -7,7 +7,6 @@ const PlayGameScreen = () => {
   });
 
   useEffect(() => {
-    console.log('yes');
     let result = [];
     let counter = 1;
     for (let i = 0; i < 10; i++) {
@@ -15,7 +14,11 @@ const PlayGameScreen = () => {
       for (let j = 0; j < 10; j++) {
         row.push(counter++);
       }
-      result.push(row);
+      if (i % 2 === 0) {
+        result.push(row);
+      } else {
+        result.push(row.reverse());
+      }
     }
     setCommObj(prev => ({
       ...prev,
@@ -37,13 +40,7 @@ const PlayGameScreen = () => {
           backgroundColor: '#fff',
         }}>
         <Text>PlayGameScreen</Text>
-        <View
-          style={
-            {
-              // flexDirection: 'row',
-              // flexWrap: 'wrap',
-            }
-          }>
+        <View>
           {commObj.NumbersArray &&
             commObj.NumbersArray.map((item, index) => {
               return (
@@ -51,8 +48,6 @@ const PlayGameScreen = () => {
                   key={index}
                   style={{
                     width: '100%',
-                    height: 50,
-                    borderWidth: 0.5,
                     flexDirection: 'row',
                   }}>
                   {item.map((item2, index2) => {
@@ -61,6 +56,8 @@ const PlayGameScreen = () => {
                         key={index2}
                         style={{
                           width: '10%',
+                          height: 50,
+                          borderWidth: 0.5,
                         }}>
                         <Text>{item2}</Text>
                       </View>
