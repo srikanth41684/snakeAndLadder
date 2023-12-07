@@ -6,14 +6,21 @@ const PlayGameScreen = () => {
     NumbersArray: [],
   });
 
-  function generateRange(start, end) {
-    return Array.from({length: end - start + 1}, (_, index) => start + index);
-  }
-
   useEffect(() => {
-    for (let i = 1; i <= 10; i++) {
-      commObj.NumbersArray.push(generateRange((i - 1) * 10 + 1, i * 10));
+    console.log('yes');
+    let result = [];
+    let counter = 1;
+    for (let i = 0; i < 10; i++) {
+      let row = [];
+      for (let j = 0; j < 10; j++) {
+        row.push(counter++);
+      }
+      result.push(row);
     }
+    setCommObj(prev => ({
+      ...prev,
+      NumbersArray: result.reverse(),
+    }));
   }, []);
 
   useEffect(() => {
@@ -31,26 +38,34 @@ const PlayGameScreen = () => {
         }}>
         <Text>PlayGameScreen</Text>
         <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-          }}>
-          {commObj.NumbersArray.length > 0 &&
+          style={
+            {
+              // flexDirection: 'row',
+              // flexWrap: 'wrap',
+            }
+          }>
+          {commObj.NumbersArray &&
             commObj.NumbersArray.map((item, index) => {
               return (
                 <View
                   key={index}
                   style={{
-                    width: '10%',
+                    width: '100%',
                     height: 50,
                     borderWidth: 0.5,
+                    flexDirection: 'row',
                   }}>
-                  <View
-                    style={{
-                      alignItems: 'flex-end',
-                    }}>
-                    <Text>{item}</Text>
-                  </View>
+                  {item.map((item2, index2) => {
+                    return (
+                      <View
+                        key={index2}
+                        style={{
+                          width: '10%',
+                        }}>
+                        <Text>{item2}</Text>
+                      </View>
+                    );
+                  })}
                 </View>
               );
             })}
