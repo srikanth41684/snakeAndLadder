@@ -262,7 +262,7 @@ const HomeScreen = ({navigation}) => {
             flexDirection: 'row',
             flexWrap: 'wrap',
           }}>
-          {commObj.NumbersArray.map((item, index) => {
+          {NumbersArray.map((item, index) => {
             return (
               <View
                 key={index}
@@ -275,7 +275,7 @@ const HomeScreen = ({navigation}) => {
                   style={{
                     alignItems: 'flex-end',
                   }}>
-                  <Text>{item}</Text>
+                  <Text>{item.number}</Text>
                 </View>
                 {item.number == 22 && (
                   <View
