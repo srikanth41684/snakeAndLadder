@@ -83,6 +83,8 @@ const PlayGameScreen = () => {
                           height: 50,
                           borderWidth: 0.5,
                           borderColor: '#777777',
+                          backgroundColor:
+                            item2 % 2 !== 0 ? '#fcf0f0' : '#fff',
                         }}>
                         <View
                           style={{
@@ -90,8 +92,9 @@ const PlayGameScreen = () => {
                           }}>
                           <Text
                             style={{
-                              fontSize: 14,
+                              fontSize: 12,
                               color: '#000',
+                              fontWeight: 'bold',
                             }}>
                             {item2}
                           </Text>
