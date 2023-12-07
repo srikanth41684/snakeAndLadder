@@ -14,6 +14,11 @@ const PlayGameScreen = () => {
     diseNumber: 1,
     playerOneCount: null,
     playerTwoCount: null,
+    ladderSnakes: [
+      [22, 4],
+      [44, 6],
+      [65, 27],
+    ],
   });
 
   useEffect(() => {
@@ -34,6 +39,19 @@ const PlayGameScreen = () => {
       ...prev,
       NumbersArray: result.reverse(),
     }));
+  }, []);
+
+  useEffect(() => {
+    let randomArrays = [];
+    for (let i = 0; i < 10; i++) {
+      let randomArray = [];
+      for (let j = 0; j < 2; j++) {
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        randomArray.push(randomNumber);
+      }
+      randomArrays.push(randomArray);
+    }
+    console.log('randomArrays------>', randomArrays);
   }, []);
 
   function disePlayer1Hanlder() {
