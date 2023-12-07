@@ -6,6 +6,8 @@ const PlayGameScreen = () => {
     NumbersArray: [],
     player: 'p1',
     diseNumber: 1,
+    playerOneCount: null,
+    playerTwoCount: null,
   });
 
   useEffect(() => {
@@ -37,6 +39,12 @@ const PlayGameScreen = () => {
       diseNumber: randomNum,
       player: 'p2',
     }));
+    if (randomNum == 6 || commObj.playerOneCount !== null) {
+      setCommObj(prev => ({
+        ...prev,
+        playerOneCount: prev.playerOneCount + randomNum,
+      }));
+    }
   }
 
   function disePlayer2Hanlder() {
@@ -48,6 +56,12 @@ const PlayGameScreen = () => {
       diseNumber: randomNum,
       player: 'p1',
     }));
+    if (randomNum == 6 || commObj.playerTwoCount !== null) {
+      setCommObj(prev => ({
+        ...prev,
+        playerTwoCount: prev.playerTwoCount + randomNum,
+      }));
+    }
   }
 
   useEffect(() => {
@@ -83,8 +97,7 @@ const PlayGameScreen = () => {
                           height: 50,
                           borderWidth: 0.5,
                           borderColor: '#777777',
-                          backgroundColor:
-                            item2 % 2 !== 0 ? '#fcf0f0' : '#fff',
+                          backgroundColor: item2 % 2 !== 0 ? '#fcf0f0' : '#fff',
                         }}>
                         <View
                           style={{
@@ -99,12 +112,63 @@ const PlayGameScreen = () => {
                             {item2}
                           </Text>
                         </View>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            gap: 5,
+                            marginLeft: 5,
+                          }}>
+                          {commObj.playerOneCount == item2 && (
+                            <View
+                              style={{
+                                width: 10,
+                                height: 20,
+                                backgroundColor: 'blue',
+                                borderBottomLeftRadius: 10,
+                                borderBottomRightRadius: 10,
+                              }}></View>
+                          )}
+                          {commObj.playerTwoCount == item2 && (
+                            <View
+                              style={{
+                                width: 10,
+                                height: 20,
+                                backgroundColor: 'red',
+                                borderBottomLeftRadius: 10,
+                                borderBottomRightRadius: 10,
+                              }}></View>
+                          )}
+                        </View>
                       </View>
                     );
                   })}
                 </View>
               );
             })}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            gap: 5,
+          }}>
+          {commObj.playerOneCount == null && (
+            <View
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: 10 / 2,
+                backgroundColor: 'blue',
+              }}></View>
+          )}
+          {commObj.playerTwoCount == null && (
+            <View
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: 10 / 2,
+                backgroundColor: 'red',
+              }}></View>
+          )}
         </View>
         <View
           style={{
@@ -167,6 +231,87 @@ const PlayGameScreen = () => {
             </View>
           </View>
         </View>
+        {commObj.playerOneCount == 100 || commObj.playerTwoCount == 100 ? (
+          <Modal animationType="fade" transparent={true}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                paddingHorizontal: 20,
+                backgroundColor: 'rgba(0,0,0,0.7)',
+              }}>
+              <View
+                style={{
+                  backgroundColor: '#fff',
+                  width: '80%',
+                  height: 200,
+                  borderRadius: 20,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 'bold',
+                    color:
+                      commObj.playerOneCount == 100
+                        ? 'blue'
+                        : commObj.playerTwoCount == 100
+                        ? 'red'
+                        : '#000',
+                  }}>
+                  {commObj.playerOneCount == 100
+                    ? 'Player 1'
+                    : commObj.playerTwoCount == 100
+                    ? 'Playe 2'
+                    : ''}
+                  Win
+                </Text>
+                <View
+                  style={{
+                    paddingTop: 40,
+                  }}>
+                  <TouchableWithoutFeedback
+                    onPress={() => {
+                      setCommObj(prev => ({
+                        ...prev,
+                        diseNumber: 1,
+                        player1: true,
+                        player1In: false,
+                        player2: false,
+                        player2In: false,
+                        playerOneCount: 0,
+                        playerTwoCount: 0,
+                      }));
+                    }}>
+                    <View
+                      style={{
+                        backgroundColor: 'lightblue',
+                        paddingHorizontal: 30,
+                        paddingVertical: 8,
+                        borderRadius: 8,
+                      }}>
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          color:
+                            commObj.playerOneCount == 100
+                              ? 'blue'
+                              : commObj.playerTwoCount == 100
+                              ? 'red'
+                              : '#000',
+                          fontWeight: 'bold',
+                        }}>
+                        OKay
+                      </Text>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </View>
+              </View>
+            </View>
+          </Modal>
+        ) : null}
       </View>
     </SafeAreaView>
   );
