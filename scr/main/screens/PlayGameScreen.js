@@ -14,14 +14,14 @@ const PlayGameScreen = () => {
     diseNumber: 1,
     playerOneCount: null,
     playerTwoCount: null,
-    // ladderSnakes: null,
-    ladderSnakes: [
-      [22, 4],
-      [44, 6],
-      [65, 27],
-      [6, 64],
-      [16, 45],
-    ],
+    ladderSnakes: null,
+    // ladderSnakes: [
+    //   [22, 4],
+    //   [44, 6],
+    //   [65, 27],
+    //   [6, 64],
+    //   [16, 45],
+    // ],
   });
 
   useEffect(() => {
@@ -44,77 +44,60 @@ const PlayGameScreen = () => {
     }));
   }, []);
 
-  useEffect(() => {
-    let randomArrays = [];
-    for (let i = 0; i < 10; i++) {
-      let randomArray = [];
-      for (let j = 0; j < 2; j++) {
-        let randomNumber = Math.floor(Math.random() * 100);
-        if (randomNumber !== 100 && randomNumber !== 1) {
-          if (randomArray.length == 0) {
-            randomArray.push(randomNumber);
-          } else if (randomNumber >= randomArray[0] + 16) {
-            randomArray.push(randomNumber);
-          } else if (randomNumber <= randomArray[0] - 16) {
-            randomArray.push(randomNumber);
-          } else {
-            randomArray.push(randomNumber + 20);
-          }
-        }
-      }
-      if (randomArrays.length > 0) {
-      }
-      randomArrays.push(randomArray);
-    }
-    setCommObj(prev => ({
-      ...prev,
-      ladderSnakes: randomArrays,
-    }));
-  }, []);
-
   // useEffect(() => {
-  //   let snakesStart = [];
-  //   let snakesEnd = [];
-  //   let laddersStart = [];
-  //   let laddersEnd = [];
-  //   commObj.ladderSnakes.filter(item => {
-  //     if (item[0] > item[1]) {
-  //       snakesStart.push(item[0]);
-  //       snakesEnd.push(item[1]);
-  //     } else {
-  //       laddersStart.push(item[0]);
-  //       laddersEnd.push(item[1]);
+  //   let randomArrays = [];
+  //   for (let i = 0; i < 10; i++) {
+  //     let randomArray = [];
+  //     for (let j = 0; j < 2; j++) {
+  //       let randomNumber = Math.floor(Math.random() * 100);
+  //       if (randomNumber !== 100 && randomNumber !== 1) {
+  //         if (randomArray.length == 0) {
+  //           randomArray.push(randomNumber);
+  //         } else if (randomNumber >= randomArray[0] + 16) {
+  //           randomArray.push(randomNumber);
+  //         } else if (randomNumber <= randomArray[0] - 16) {
+  //           randomArray.push(randomNumber);
+  //         } else {
+  //           randomArray.push(randomNumber + 20);
+  //         }
+  //       }
   //     }
-  //   });
-  //   console.log('ladders-------->', snakesStart);
+  //     if (randomArrays.length > 0) {
+  //     }
+  //     randomArrays.push(randomArray);
+  //   }
+  //   setCommObj(prev => ({
+  //     ...prev,
+  //     ladderSnakes: randomArrays,
+  //   }));
   // }, []);
 
   useEffect(() => {
+    let value = commObj.playerOneCount;
     if (commObj.ladderSnakes) {
       commObj.ladderSnakes.forEach(item => {
-        setTimeout(() => {
-          if (item[0] == commObj.playerOneCount) {
-            setCommObj(prev => ({
-              ...prev,
-              playerOneCount: item[1],
-            }));
-          }
-        }, 100);
+        console.log('item---->', item);
+        if (value in item) {
+          setCommObj(prev => ({
+            ...prev,
+            playerOneCount: item[value],
+          }));
+        }
       });
     }
   }, [commObj.playerOneCount]);
 
   useEffect(() => {
+    let value = commObj.playerTwoCount;
     if (commObj.ladderSnakes) {
       commObj.ladderSnakes.forEach(item => {
-        setTimeout(() => {
-          if (item[0] == commObj.playerTwoCount) {
-            setCommObj(prev => ({
-              ...prev,
-              playerTwoCount: item[1],
-            }));
-          }
-        }, 100);
+        console.log('item---->', item);
+        if (value in item) {
+          setCommObj(prev => ({
+            ...prev,
+            playerTwoCount: item[value],
+          }));
+        }
       });
     }
   }, [commObj.playerTwoCount]);
@@ -158,6 +141,30 @@ const PlayGameScreen = () => {
   }
 
   useEffect(() => {
+    generateSnakesAndLadders();
+  }, []);
+
+  const generateSnakesAndLadders = () => {
+    let randomSnakeLadders = [];
+    let snakesObj = {};
+    let ladderObj = {};
+    for (let i = 0; i < 10; i++) {
+      let startNum = Math.floor(Math.random() * 80) + 1;
+      let endNum = Math.floor(Math.random() * 98) + 1;
+      if (startNum > endNum) {
+        snakesObj[startNum] = endNum;
+      } else {
+        ladderObj[startNum] = endNum;
+      }
+    }
+    randomSnakeLadders.push(snakesObj, ladderObj);
+    setCommObj(prev => ({
+      ...prev,
+      ladderSnakes: randomSnakeLadders,
+    }));
+  };
+
+  useEffect(() => {
     console.log('PlayGameScreen-commObj------>', commObj);
   }, [commObj]);
   return (
@@ -182,15 +189,15 @@ const PlayGameScreen = () => {
                     flexDirection: 'row',
                   }}>
                   {item.map((item2, index2) => {
-                    let snake = [];
-                    let ladder = [];
-                    commObj.ladderSnakes.filter(res => {
-                      if (res[0] > res[1]) {
-                        snake.push(res[0]);
-                      } else {
-                        ladder.push(res[0]);
-                      }
-                    });
+                    // let snake = [];
+                    // let ladder = [];
+                    // commObj.ladderSnakes.filter(res => {
+                    //   if (res[0] > res[1]) {
+                    //     snake.push(res[0]);
+                    //   } else {
+                    //     ladder.push(res[0]);
+                    //   }
+                    // });
                     return (
                       <View
                         key={index2}
@@ -202,47 +209,74 @@ const PlayGameScreen = () => {
                           backgroundColor: item2 % 2 !== 0 ? '#fcf0f0' : '#fff',
                           position: 'relative',
                         }}>
-                        <View
-                          style={{
-                            position: 'absolute',
-                          }}>
-                          {snake.includes(item2) && (
-                            <View
+                        {commObj.ladderSnakes[0][item2] && (
+                          <View
+                            style={{
+                              backgroundColor: 'coral',
+                              width: 20,
+                              height: 20,
+                              alignItems: 'center',
+                              borderRadius: 20 / 2,
+                              position: 'absolute',
+                            }}>
+                            <Text
                               style={{
-                                backgroundColor: 'coral',
-                                width: 25,
-                                height: 25,
-                                alignItems: 'center',
-                                borderRadius: 25 / 2,
+                                fontSize: 18,
+                                color: '#fff',
                               }}>
-                              <Text
-                                style={{
-                                  fontSize: 20,
-                                  color: '#fff',
-                                }}>
-                                S
-                              </Text>
-                            </View>
-                          )}
-                          {ladder.includes(item2) && (
-                            <View
+                              S
+                            </Text>
+                          </View>
+                        )}
+                        {commObj.ladderSnakes[0][item2] && (
+                          <View
+                            style={{
+                              position: 'absolute',
+                              bottom: 0,
+                            }}>
+                            <Text
                               style={{
-                                backgroundColor: 'lightblue',
-                                width: 25,
-                                height: 25,
-                                alignItems: 'center',
-                                borderRadius: 25 / 2,
+                                fontSize: 10,
+                                color: '#000',
                               }}>
-                              <Text
-                                style={{
-                                  fontSize: 20,
-                                  color: 'blue',
-                                }}>
-                                L
-                              </Text>
-                            </View>
-                          )}
-                        </View>
+                              {`${item2} to ${commObj.ladderSnakes[0][item2]}`}
+                            </Text>
+                          </View>
+                        )}
+                        {commObj.ladderSnakes[1][item2] && (
+                          <View
+                            style={{
+                              backgroundColor: 'lightblue',
+                              width: 20,
+                              height: 20,
+                              alignItems: 'center',
+                              borderRadius: 20 / 2,
+                              position: 'absolute',
+                            }}>
+                            <Text
+                              style={{
+                                fontSize: 18,
+                                color: 'blue',
+                              }}>
+                              L
+                            </Text>
+                          </View>
+                        )}
+                        {commObj.ladderSnakes[1][item2] && (
+                          <View
+                            style={{
+                              position: 'absolute',
+                              bottom: 0,
+                            }}>
+                            <Text
+                              style={{
+                                fontSize: 10,
+                                color: '#000',
+                              }}>
+                              {`${item2} to ${commObj.ladderSnakes[1][item2]}`}
+                            </Text>
+                          </View>
+                        )}
                         <View
                           style={{
                             alignItems: 'flex-end',
