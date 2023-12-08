@@ -76,49 +76,80 @@ const PlayGameScreen = () => {
     }
   }, [commObj.playerTwoCount]);
 
-  function disePlayer1Hanlder() {
+  function disePlayerHanlder(player) {
     let randomNum = Math.floor(Math.random() * 6) + 1;
+    let playerCount =
+      player == 'p1' ? commObj.playerOneCount : commObj.playerTwoCount;
 
     if (
-      (randomNum == 6 || commObj.playerOneCount !== null) &&
-      commObj.playerOneCount + randomNum <= 100
+      (randomNum == 6 || playerCount !== null) &&
+      playerCount + randomNum <= 100
     ) {
       setCommObj(prev => ({
         ...prev,
         diseNumber: randomNum,
-        playerOneCount: prev.playerOneCount + randomNum,
-        player: 'p2',
+        playerOneCount:
+          player == 'p1'
+            ? prev.playerOneCount + randomNum
+            : prev.playerOneCount,
+        playerTwoCount:
+          player == 'p2'
+            ? prev.playerTwoCount + randomNum
+            : prev.playerTwoCount,
+        player: player == 'p1' ? 'p2' : 'p1',
       }));
     } else {
       setCommObj(prev => ({
         ...prev,
         diseNumber: randomNum,
-        player: 'p2',
+        player: player == 'p1' ? 'p2' : 'p1',
       }));
     }
   }
 
-  function disePlayer2Hanlder() {
-    let randomNum = Math.floor(Math.random() * 6) + 1;
+  // function disePlayer1Hanlder() {
+  //   let randomNum = Math.floor(Math.random() * 6) + 1;
 
-    if (
-      (randomNum == 6 || commObj.playerTwoCount !== null) &&
-      commObj.playerTwoCount + randomNum <= 100
-    ) {
-      setCommObj(prev => ({
-        ...prev,
-        diseNumber: randomNum,
-        playerTwoCount: prev.playerTwoCount + randomNum,
-        player: 'p1',
-      }));
-    } else {
-      setCommObj(prev => ({
-        ...prev,
-        diseNumber: randomNum,
-        player: 'p1',
-      }));
-    }
-  }
+  //   if (
+  //     (randomNum == 6 || commObj.playerOneCount !== null) &&
+  //     commObj.playerOneCount + randomNum <= 100
+  //   ) {
+  //     setCommObj(prev => ({
+  //       ...prev,
+  //       diseNumber: randomNum,
+  //       playerOneCount: prev.playerOneCount + randomNum,
+  //       player: 'p2',
+  //     }));
+  //   } else {
+  //     setCommObj(prev => ({
+  //       ...prev,
+  //       diseNumber: randomNum,
+  //       player: 'p2',
+  //     }));
+  //   }
+  // }
+
+  // function disePlayer2Hanlder() {
+  //   let randomNum = Math.floor(Math.random() * 6) + 1;
+
+  //   if (
+  //     (randomNum == 6 || commObj.playerTwoCount !== null) &&
+  //     commObj.playerTwoCount + randomNum <= 100
+  //   ) {
+  //     setCommObj(prev => ({
+  //       ...prev,
+  //       diseNumber: randomNum,
+  //       playerTwoCount: prev.playerTwoCount + randomNum,
+  //       player: 'p1',
+  //     }));
+  //   } else {
+  //     setCommObj(prev => ({
+  //       ...prev,
+  //       diseNumber: randomNum,
+  //       player: 'p1',
+  //     }));
+  //   }
+  // }
 
   useEffect(() => {
     let randomSnakeLadders = [];
@@ -397,12 +428,13 @@ const PlayGameScreen = () => {
             </View>
             <TouchableWithoutFeedback
               onPress={() => {
-                if (commObj.player == 'p1') {
-                  disePlayer1Hanlder();
-                }
-                if (commObj.player == 'p2') {
-                  disePlayer2Hanlder();
-                }
+                disePlayerHanlder(commObj.player);
+                // if (commObj.player == 'p1') {
+                //   disePlayer1Hanlder();
+                // }
+                // if (commObj.player == 'p2') {
+                //   disePlayer2Hanlder();
+                // }
               }}>
               <View
                 style={{
