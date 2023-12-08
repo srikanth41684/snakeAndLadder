@@ -79,18 +79,21 @@ const PlayGameScreen = () => {
   function disePlayer1Hanlder() {
     let randomNum = Math.floor(Math.random() * 6) + 1;
 
-    setCommObj(prev => ({
-      ...prev,
-      diseNumber: randomNum,
-      player: 'p2',
-    }));
     if (
       (randomNum == 6 || commObj.playerOneCount !== null) &&
       commObj.playerOneCount + randomNum <= 100
     ) {
       setCommObj(prev => ({
         ...prev,
+        diseNumber: randomNum,
         playerOneCount: prev.playerOneCount + randomNum,
+        player: 'p2',
+      }));
+    } else {
+      setCommObj(prev => ({
+        ...prev,
+        diseNumber: randomNum,
+        player: 'p2',
       }));
     }
   }
@@ -98,18 +101,21 @@ const PlayGameScreen = () => {
   function disePlayer2Hanlder() {
     let randomNum = Math.floor(Math.random() * 6) + 1;
 
-    setCommObj(prev => ({
-      ...prev,
-      diseNumber: randomNum,
-      player: 'p1',
-    }));
     if (
       (randomNum == 6 || commObj.playerTwoCount !== null) &&
       commObj.playerTwoCount + randomNum <= 100
     ) {
       setCommObj(prev => ({
         ...prev,
+        diseNumber: randomNum,
         playerTwoCount: prev.playerTwoCount + randomNum,
+        player: 'p1',
+      }));
+    } else {
+      setCommObj(prev => ({
+        ...prev,
+        diseNumber: randomNum,
+        player: 'p1',
       }));
     }
   }
