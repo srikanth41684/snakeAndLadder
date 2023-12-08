@@ -53,8 +53,14 @@ const PlayGameScreen = () => {
             setCommObj(prev => ({
               ...prev,
               playerOneCount: item[value],
+              player: 'p2',
             }));
           }, 100);
+        } else {
+          setCommObj(prev => ({
+            ...prev,
+            player: 'p2',
+          }));
         }
       });
     }
@@ -69,8 +75,14 @@ const PlayGameScreen = () => {
             setCommObj(prev => ({
               ...prev,
               playerTwoCount: item[value],
+              player: 'p1',
             }));
           }, 100);
+        } else {
+          setCommObj(prev => ({
+            ...prev,
+            player: 'p1',
+          }));
         }
       });
     }
@@ -96,7 +108,7 @@ const PlayGameScreen = () => {
           player == 'p2'
             ? prev.playerTwoCount + randomNum
             : prev.playerTwoCount,
-        player: player == 'p1' ? 'p2' : 'p1',
+        // player: player == 'p1' ? 'p2' : 'p1',
       }));
     } else {
       setCommObj(prev => ({
@@ -176,31 +188,6 @@ const PlayGameScreen = () => {
       ...prev,
       ladderSnakes: randomSnakeLadders,
     }));
-    console.log('randomSnakeLadders======>', randomSnakeLadders);
-    // for (let i = 0; i < 10; i++) {
-    //   let randomArray = [];
-    //   for (let j = 0; j < 2; j++) {
-    //     let randomNumber = Math.floor(Math.random() * 100);
-    //     if (randomNumber !== 100 && randomNumber !== 1) {
-    //       if (randomArray.length == 0) {
-    //         randomArray.push(randomNumber);
-    //       } else if (randomNumber >= randomArray[0] + 16) {
-    //         randomArray.push(randomNumber);
-    //       } else if (randomNumber <= randomArray[0] - 16) {
-    //         randomArray.push(randomNumber);
-    //       } else {
-    //         randomArray.push(randomNumber + 20);
-    //       }
-    //     }
-    //   }
-    //   if (randomArrays.length > 0) {
-    //   }
-    //   randomArrays.push(randomArray);
-    // }
-    // setCommObj(prev => ({
-    //   ...prev,
-    //   ladderSnakes: randomArrays,
-    // }));
   }, []);
 
   // useEffect(() => {
