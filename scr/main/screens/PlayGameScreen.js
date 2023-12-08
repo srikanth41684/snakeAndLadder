@@ -120,8 +120,7 @@ const PlayGameScreen = () => {
   }, [commObj.playerTwoCount]);
 
   function disePlayer1Hanlder() {
-    let arr = [1, 2, 3, 4, 5, 6];
-    let randomNum = arr[Math.floor(Math.random() * arr.length)];
+    let randomNum = Math.floor(Math.random() * 6) + 1;
 
     setCommObj(prev => ({
       ...prev,
@@ -140,8 +139,7 @@ const PlayGameScreen = () => {
   }
 
   function disePlayer2Hanlder() {
-    let arr = [1, 2, 3, 4, 5, 6];
-    let randomNum = arr[Math.floor(Math.random() * arr.length)];
+    let randomNum = Math.floor(Math.random() * 6) + 1;
 
     setCommObj(prev => ({
       ...prev,
@@ -193,7 +191,6 @@ const PlayGameScreen = () => {
                         ladder.push(res[0]);
                       }
                     });
-                    console.log(snake);
                     return (
                       <View
                         key={index2}
