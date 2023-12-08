@@ -44,44 +44,17 @@ const PlayGameScreen = () => {
     }));
   }, []);
 
-  // useEffect(() => {
-  //   let randomArrays = [];
-  //   for (let i = 0; i < 10; i++) {
-  //     let randomArray = [];
-  //     for (let j = 0; j < 2; j++) {
-  //       let randomNumber = Math.floor(Math.random() * 100);
-  //       if (randomNumber !== 100 && randomNumber !== 1) {
-  //         if (randomArray.length == 0) {
-  //           randomArray.push(randomNumber);
-  //         } else if (randomNumber >= randomArray[0] + 16) {
-  //           randomArray.push(randomNumber);
-  //         } else if (randomNumber <= randomArray[0] - 16) {
-  //           randomArray.push(randomNumber);
-  //         } else {
-  //           randomArray.push(randomNumber + 20);
-  //         }
-  //       }
-  //     }
-  //     if (randomArrays.length > 0) {
-  //     }
-  //     randomArrays.push(randomArray);
-  //   }
-  //   setCommObj(prev => ({
-  //     ...prev,
-  //     ladderSnakes: randomArrays,
-  //   }));
-  // }, []);
-
   useEffect(() => {
     let value = commObj.playerOneCount;
     if (commObj.ladderSnakes) {
       commObj.ladderSnakes.forEach(item => {
-        console.log('item---->', item);
         if (value in item) {
-          setCommObj(prev => ({
-            ...prev,
-            playerOneCount: item[value],
-          }));
+          setTimeout(() => {
+            setCommObj(prev => ({
+              ...prev,
+              playerOneCount: item[value],
+            }));
+          }, 100);
         }
       });
     }
@@ -91,12 +64,13 @@ const PlayGameScreen = () => {
     let value = commObj.playerTwoCount;
     if (commObj.ladderSnakes) {
       commObj.ladderSnakes.forEach(item => {
-        console.log('item---->', item);
         if (value in item) {
-          setCommObj(prev => ({
-            ...prev,
-            playerTwoCount: item[value],
-          }));
+          setTimeout(() => {
+            setCommObj(prev => ({
+              ...prev,
+              playerTwoCount: item[value],
+            }));
+          }, 100);
         }
       });
     }
@@ -141,28 +115,81 @@ const PlayGameScreen = () => {
   }
 
   useEffect(() => {
-    snakesAndLaddersHandler();
-  }, []);
-
-  const snakesAndLaddersHandler = () => {
     let randomSnakeLadders = [];
     let snakesObj = {};
-    let ladderObj = {};
-    for (let i = 0; i < 10; i++) {
-      let startNum = Math.floor(Math.random() * 80) + 1;
+    let laddersObj = {};
+    for (let i = 0; Object.keys(snakesObj).length < 5; i++) {
+      let startNum = Math.floor(Math.random() * 98) + 1;
       let endNum = Math.floor(Math.random() * 98) + 1;
-      if (startNum > endNum) {
+      if (startNum > endNum && startNum > endNum + 16) {
         snakesObj[startNum] = endNum;
-      } else {
-        ladderObj[startNum] = endNum;
       }
     }
-    randomSnakeLadders.push(snakesObj, ladderObj);
+    for (let i = 0; Object.keys(laddersObj).length < 5; i++) {
+      let startNum = Math.floor(Math.random() * 98) + 1;
+      let endNum = Math.floor(Math.random() * 98) + 1;
+      if (startNum < endNum && endNum > startNum + 16) {
+        laddersObj[startNum] = endNum;
+      }
+    }
+
+    randomSnakeLadders.push(snakesObj);
+    randomSnakeLadders.push(laddersObj);
     setCommObj(prev => ({
       ...prev,
       ladderSnakes: randomSnakeLadders,
     }));
-  };
+    console.log('randomSnakeLadders======>', randomSnakeLadders);
+    // for (let i = 0; i < 10; i++) {
+    //   let randomArray = [];
+    //   for (let j = 0; j < 2; j++) {
+    //     let randomNumber = Math.floor(Math.random() * 100);
+    //     if (randomNumber !== 100 && randomNumber !== 1) {
+    //       if (randomArray.length == 0) {
+    //         randomArray.push(randomNumber);
+    //       } else if (randomNumber >= randomArray[0] + 16) {
+    //         randomArray.push(randomNumber);
+    //       } else if (randomNumber <= randomArray[0] - 16) {
+    //         randomArray.push(randomNumber);
+    //       } else {
+    //         randomArray.push(randomNumber + 20);
+    //       }
+    //     }
+    //   }
+    //   if (randomArrays.length > 0) {
+    //   }
+    //   randomArrays.push(randomArray);
+    // }
+    // setCommObj(prev => ({
+    //   ...prev,
+    //   ladderSnakes: randomArrays,
+    // }));
+  }, []);
+
+  // useEffect(() => {
+  //   snakesAndLaddersHandler();
+  // }, []);
+
+  // const snakesAndLaddersHandler = () => {
+  //   let randomSnakeLadders = [];
+  //   let snakesObj = {};
+  //   let ladderObj = {};
+  //   for (let i = 0; i < 10; i++) {
+  //     let startNum = Math.floor(Math.random() * 98) + 1;
+  //     let endNum = Math.floor(Math.random() * 98) + 1;
+  //     if (startNum > endNum) {
+  //       snakesObj[startNum] = endNum;
+  //     } else {
+  //       ladderObj[startNum] = endNum;
+  //     }
+  //   }
+  //   randomSnakeLadders.push(snakesObj);
+  //   randomSnakeLadders.push(ladderObj);
+  //   setCommObj(prev => ({
+  //     ...prev,
+  //     ladderSnakes: randomSnakeLadders,
+  //   }));
+  // };
 
   useEffect(() => {
     console.log('PlayGameScreen-commObj------>', commObj);
