@@ -141,10 +141,10 @@ const PlayGameScreen = () => {
   }
 
   useEffect(() => {
-    generateSnakesAndLadders();
+    snakesAndLaddersHandler();
   }, []);
 
-  const generateSnakesAndLadders = () => {
+  const snakesAndLaddersHandler = () => {
     let randomSnakeLadders = [];
     let snakesObj = {};
     let ladderObj = {};
@@ -189,15 +189,6 @@ const PlayGameScreen = () => {
                     flexDirection: 'row',
                   }}>
                   {item.map((item2, index2) => {
-                    // let snake = [];
-                    // let ladder = [];
-                    // commObj.ladderSnakes.filter(res => {
-                    //   if (res[0] > res[1]) {
-                    //     snake.push(res[0]);
-                    //   } else {
-                    //     ladder.push(res[0]);
-                    //   }
-                    // });
                     return (
                       <View
                         key={index2}
@@ -493,20 +484,3 @@ const PlayGameScreen = () => {
 };
 
 export default PlayGameScreen;
-
-let arr = [
-  68, 11, 29, 6, 76, 98, 18, 57, 65, 87, 17, 12, 87, 93, 45, 65, 31, 13, 40,
-];
-
-[
-  [68, 11],
-  [29, 6],
-  [76, 98],
-  [18, 57],
-  [65, 87],
-  [17, 12],
-  [87, 93],
-  [45, 65],
-  [31, 13],
-  [40, 2],
-];
