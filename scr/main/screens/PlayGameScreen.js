@@ -46,48 +46,65 @@ const PlayGameScreen = () => {
   }, []);
 
   useEffect(() => {
-    let value = commObj.playerOneCount;
+    let value =
+      commObj.player == 'p1' ? commObj.playerOneCount : commObj.playerTwoCount;
     if (commObj.ladderSnakes) {
       commObj.ladderSnakes.forEach(item => {
         if (value in item) {
           setTimeout(() => {
             setCommObj(prev => ({
               ...prev,
-              playerOneCount: item[value],
-              player: 'p2',
+              playerOneCount:
+                commObj.player == 'p1' ? item[value] : commObj.playerOneCount,
+              playerTwoCount:
+                commObj.player == 'p2' ? item[value] : commObj.playerTwoCount,
+              player: commObj.player == 'p1' ? 'p2' : 'p1',
             }));
+            // if (commObj.player == 'p1') {
+            //   setCommObj(prev => ({
+            //     ...prev,
+            //     playerOneCount: item[value],
+            //     player: 'p2',
+            //   }));
+            // } else {
+            //   setCommObj(prev => ({
+            //     ...prev,
+            //     playerTwoCount: item[value],
+            //     player: 'p1',
+            //   }));
+            // }
           }, 100);
         } else {
           setCommObj(prev => ({
             ...prev,
-            player: 'p2',
+            player: commObj.player == 'p1' ? 'p2' : 'p1',
           }));
         }
       });
     }
-  }, [commObj.playerOneCount]);
+  }, [commObj.playerOneCount, commObj.playerTwoCount]);
 
-  useEffect(() => {
-    let value = commObj.playerTwoCount;
-    if (commObj.ladderSnakes) {
-      commObj.ladderSnakes.forEach(item => {
-        if (value in item) {
-          setTimeout(() => {
-            setCommObj(prev => ({
-              ...prev,
-              playerTwoCount: item[value],
-              player: 'p1',
-            }));
-          }, 100);
-        } else {
-          setCommObj(prev => ({
-            ...prev,
-            player: 'p1',
-          }));
-        }
-      });
-    }
-  }, [commObj.playerTwoCount]);
+  // useEffect(() => {
+  //   let value = commObj.playerTwoCount;
+  //   if (commObj.ladderSnakes) {
+  //     commObj.ladderSnakes.forEach(item => {
+  //       if (value in item) {
+  //         setTimeout(() => {
+  //           setCommObj(prev => ({
+  //             ...prev,
+  //             playerTwoCount: item[value],
+  //             player: 'p1',
+  //           }));
+  //         }, 100);
+  //       } else {
+  //         setCommObj(prev => ({
+  //           ...prev,
+  //           player: 'p1',
+  //         }));
+  //       }
+  //     });
+  //   }
+  // }, [commObj.playerTwoCount]);
 
   function disePlayerHanlder(player) {
     let randomNum = Math.floor(Math.random() * 6) + 1;
@@ -176,7 +193,7 @@ const PlayGameScreen = () => {
       }
     }
     for (let i = 0; Object.keys(laddersObj).length < 5; i++) {
-      let startNum = Math.floor(Math.random() * (90 - 2 + 1)) + 2;
+      let startNum = Math.floor(Math.random() * (90 - 6 + 1)) + 6;
       let endNum = Math.floor(Math.random() * (99 - startNum + 1)) + startNum;
       if (endNum > startNum + 12) {
         laddersObj[startNum] = endNum;
