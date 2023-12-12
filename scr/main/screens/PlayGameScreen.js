@@ -15,6 +15,7 @@ const PlayGameScreen = () => {
     playerOneCount: null,
     playerTwoCount: null,
     ladderSnakes: null,
+    refresh: false,
     // ladderSnakes: [
     //   [22, 4],
     //   [44, 6],
@@ -190,38 +191,20 @@ const PlayGameScreen = () => {
       }
     }
 
+    for (let key in laddersObj) {
+      if (snakesObj.hasOwnProperty(laddersObj[key])) {
+        delete laddersObj[key];
+      }
+    }
+
     randomSnakeLadders.push(snakesObj);
     randomSnakeLadders.push(laddersObj);
     setCommObj(prev => ({
       ...prev,
       ladderSnakes: randomSnakeLadders,
+      refresh: false,
     }));
-  }, []);
-
-  // useEffect(() => {
-  //   snakesAndLaddersHandler();
-  // }, []);
-
-  // const snakesAndLaddersHandler = () => {
-  //   let randomSnakeLadders = [];
-  //   let snakesObj = {};
-  //   let ladderObj = {};
-  //   for (let i = 0; i < 10; i++) {
-  //     let startNum = Math.floor(Math.random() * 98) + 1;
-  //     let endNum = Math.floor(Math.random() * 98) + 1;
-  //     if (startNum > endNum) {
-  //       snakesObj[startNum] = endNum;
-  //     } else {
-  //       ladderObj[startNum] = endNum;
-  //     }
-  //   }
-  //   randomSnakeLadders.push(snakesObj);
-  //   randomSnakeLadders.push(ladderObj);
-  //   setCommObj(prev => ({
-  //     ...prev,
-  //     ladderSnakes: randomSnakeLadders,
-  //   }));
-  // };
+  }, [commObj.refresh]);
 
   useEffect(() => {
     console.log('PlayGameScreen-commObj------>', commObj);
@@ -236,7 +219,20 @@ const PlayGameScreen = () => {
           flex: 1,
           backgroundColor: '#fff',
         }}>
-        <Text>PlayGameScreen</Text>
+        <View
+          style={{
+            alignItems: 'center',
+            paddingVertical: 10,
+          }}>
+          <Text
+            style={{
+              fontSize: 16,
+              lineHeight: 23,
+              color: '#000',
+            }}>
+            PlayGameScreen
+          </Text>
+        </View>
         <View>
           {commObj.NumbersArray &&
             commObj.NumbersArray.map((item, index) => {
@@ -400,7 +396,7 @@ const PlayGameScreen = () => {
         </View>
         <View
           style={{
-            paddingTop: 50,
+            paddingTop: 20,
           }}>
           <View
             style={{
@@ -459,6 +455,40 @@ const PlayGameScreen = () => {
               </Text>
             </View>
           </View>
+          <View
+            style={{
+              paddingVertical: 10,
+              alignItems: 'center',
+            }}>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                setCommObj(prev => ({
+                  ...prev,
+                  player: 'p1',
+                  diseNumber: 1,
+                  playerOneCount: null,
+                  playerTwoCount: null,
+                  refresh: true,
+                }));
+              }}>
+              <View
+                style={{
+                  backgroundColor: 'blue',
+                  paddingHorizontal: 20,
+                  paddingVertical: 5,
+                  borderRadius: 5,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    lineHeight: 23,
+                    color: '#fff',
+                  }}>
+                  Refresh
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
         </View>
         {commObj.playerOneCount == 100 || commObj.playerTwoCount == 100 ? (
           <Modal animationType="fade" transparent={true}>
@@ -509,6 +539,7 @@ const PlayGameScreen = () => {
                         diseNumber: 1,
                         playerOneCount: null,
                         playerTwoCount: null,
+                        refresh: true,
                       }));
                     }}>
                     <View
