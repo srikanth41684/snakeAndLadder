@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback,
   Modal,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
 const PlayGameScreen = () => {
   const [commObj, setCommObj] = useState({
@@ -168,17 +168,25 @@ const PlayGameScreen = () => {
     let snakesObj = {};
     let laddersObj = {};
     for (let i = 0; Object.keys(snakesObj).length < 5; i++) {
-      let startNum = Math.floor(Math.random() * 98) + 1;
-      let endNum = Math.floor(Math.random() * 98) + 1;
-      if (startNum > endNum && startNum > endNum + 16) {
+      let startNum = Math.floor(Math.random() * (99 - 12 + 1)) + 12;
+      let endNum = Math.floor(Math.random() * (startNum - 2 + 1)) + 2;
+      if (startNum > endNum + 12) {
         snakesObj[startNum] = endNum;
       }
     }
     for (let i = 0; Object.keys(laddersObj).length < 5; i++) {
-      let startNum = Math.floor(Math.random() * 98) + 1;
-      let endNum = Math.floor(Math.random() * 98) + 1;
-      if (startNum < endNum && endNum > startNum + 16) {
+      let startNum = Math.floor(Math.random() * (90 - 2 + 1)) + 2;
+      let endNum = Math.floor(Math.random() * (99 - startNum + 1)) + startNum;
+      if (endNum > startNum + 12) {
         laddersObj[startNum] = endNum;
+      }
+    }
+    for (let key in snakesObj) {
+      if (
+        laddersObj.hasOwnProperty(snakesObj[key]) ||
+        laddersObj.hasOwnProperty(key)
+      ) {
+        delete snakesObj[key];
       }
     }
 
