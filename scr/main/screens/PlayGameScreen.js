@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
   Modal,
+  TextInput,
 } from 'react-native';
 import React, {useEffect, useMemo, useState} from 'react';
 
@@ -602,6 +603,115 @@ const PlayGameScreen = () => {
             </View>
           </Modal>
         ) : null}
+        <Modal animationType="fade" transparent={true}>
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingHorizontal: 20,
+              backgroundColor: 'rgba(0,0,0,0.8)',
+            }}>
+            <View
+              style={{
+                flexDirection: 'column',
+                gap: 15,
+                backgroundColor: '#fff',
+                width: '100%',
+                borderRadius: 20,
+                alignItems: 'center',
+                justifyContent: 'center',
+                paddingVertical: 20,
+              }}>
+              <View>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    textTransform: 'uppercase',
+                    color: '#000',
+                    fontWeight: 'bold',
+                  }}>
+                  choose color and name
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'column',
+                  gap: 10,
+                }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 5,
+                  }}>
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      borderRadius: 20 / 2,
+                      backgroundColor: 'blue',
+                    }}></View>
+                  <View
+                    style={{
+                      width: 200,
+                    }}>
+                    <TextInput
+                      style={{
+                        borderWidth: 0.5,
+                        padding: 0,
+                        borderRadius: 8,
+                        paddingLeft: 5,
+                      }}
+                      placeholder="Player 1"
+                    />
+                  </View>
+                </View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 5,
+                  }}>
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      borderRadius: 20 / 2,
+                      backgroundColor: 'red',
+                    }}></View>
+                  <View
+                    style={{
+                      width: 200,
+                    }}>
+                    <TextInput
+                      style={{
+                        borderWidth: 0.5,
+                        padding: 0,
+                        borderRadius: 8,
+                        paddingLeft: 5,
+                      }}
+                      placeholder="Player 2"
+                    />
+                  </View>
+                </View>
+              </View>
+              <View>
+                <TouchableWithoutFeedback>
+                  <View
+                    style={{
+                      backgroundColor: 'skyblue',
+                      paddingHorizontal: 20,
+                      paddingVertical: 5,
+                      borderRadius: 8,
+                    }}>
+                    <Text>Play</Text>
+                  </View>
+                </TouchableWithoutFeedback>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </View>
     </SafeAreaView>
   );
