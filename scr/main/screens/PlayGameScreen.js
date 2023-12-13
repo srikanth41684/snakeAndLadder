@@ -89,6 +89,32 @@ const PlayGameScreen = () => {
     }
   }, [commObj.playerTwoCount]);
 
+  // useEffect(() => {
+  //   let value =
+  //     commObj.player == 'p1' ? commObj.playerOneCount : commObj.playerTwoCount;
+  //   if (commObj.ladderSnakes) {
+  //     commObj.ladderSnakes.forEach(item => {
+  //       if (value in item) {
+  //         setTimeout(() => {
+  //           setCommObj(prev => ({
+  //             ...prev,
+  //             playerOneCount:
+  //               commObj.player == 'p1' ? item[value] : commObj.playerOneCount,
+  //             playerTwoCount:
+  //               commObj.player == 'p2' ? item[value] : commObj.playerTwoCount,
+  //             // player: commObj.player == 'p1' ? 'p2' : 'p1',
+  //           }));
+  //         }, 100);
+  //       } else {
+  //         setCommObj(prev => ({
+  //           ...prev,
+  //           player: commObj.player == 'p1' ? 'p2' : 'p1',
+  //         }));
+  //       }
+  //     });
+  //   }
+  // }, [commObj.playerOneCount, commObj.playerTwoCount]);
+
   function disePlayerHanlder(player) {
     let randomNum = Math.floor(Math.random() * 6) + 1;
     let playerCount =
