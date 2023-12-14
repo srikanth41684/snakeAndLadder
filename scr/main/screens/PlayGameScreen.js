@@ -7,6 +7,7 @@ import {
   TextInput,
 } from 'react-native';
 import React, {useEffect, useMemo, useState} from 'react';
+import {Line, Svg} from 'react-native-svg';
 
 const PlayGameScreen = () => {
   const [commObj, setCommObj] = useState({
@@ -17,6 +18,8 @@ const PlayGameScreen = () => {
     playerTwoCount: null,
     ladderSnakes: null,
     refresh: false,
+    snakesLines: null,
+    laddersLines: null,
     // ladderSnakes: [
     //   [22, 4],
     //   [44, 6],
@@ -238,11 +241,102 @@ const PlayGameScreen = () => {
       ladderSnakes: randomSnakeLadders,
       refresh: false,
     }));
+    console.log('randomSnakeLadders---->', randomSnakeLadders);
+    let snakes = [];
+    let ladders = [];
+    if (randomSnakeLadders) {
+      for (let key in randomSnakeLadders[0]) {
+        let obj = {};
+        let value = randomSnakeLadders[0][key].toString();
+        if (key[0] % 2 == 0) {
+          obj['x1'] = key[1] == '0' ? 5 : key[1] * 10 - 5;
+          obj['y1'] =
+            key[1] == '0' ? (10 - key[0]) * 50 + 25 : (10 - key[0]) * 50 - 25;
+        } else {
+          obj['x1'] = key[1] == 0 ? 95 : (10 - key[1]) * 10 + 5;
+          obj['y1'] =
+            key[1] == 0 ? (10 - key[0]) * 50 + 25 : (10 - key[0]) * 50 - 25;
+        }
+        if (value[0] % 2 == 0) {
+          obj['x2'] = value[1]
+            ? value[1] == 0
+              ? 5
+              : value[1] * 10 - 5
+            : 10 * value[0] - 5;
+          obj['y2'] = value[1]
+            ? value[1] == 0
+              ? (10 - value[0]) * 50 + 25
+              : (10 - value[0] - 1) * 50 + 25
+            : 475;
+        } else {
+          obj['x2'] = value[1]
+            ? value[1] == 0
+              ? 95
+              : (10 - value[1]) * 10 + 5
+            : value[0] * 10 - 5;
+          obj['y2'] = value[1]
+            ? value[1] == 0
+              ? (10 - value[0]) * 50 + 25
+              : (10 - value[0]) * 50 - 25
+            : 475;
+        }
+        if (obj) {
+          snakes.push(obj);
+        }
+      }
+      for (let key in randomSnakeLadders[1]) {
+        let obj = {};
+        let value = randomSnakeLadders[1][key].toString();
+        if (key[0] % 2 == 0) {
+          obj['x1'] = key[1] == '0' ? 5 : key[1] * 10 - 5;
+          obj['y1'] =
+            key[1] == '0' ? (10 - key[0]) * 50 + 25 : (10 - key[0]) * 50 - 25;
+        } else {
+          obj['x1'] = key[1] == 0 ? 95 : (10 - key[1]) * 10 + 5;
+          obj['y1'] =
+            key[1] == 0 ? (10 - key[0]) * 50 + 25 : (10 - key[0]) * 50 - 25;
+        }
+
+        if (value[0] % 2 == 0) {
+          obj['x2'] = value[1]
+            ? value[1] == 0
+              ? 5
+              : value[1] * 10 - 5
+            : 10 * value[0] - 5;
+          obj['y2'] = value[1]
+            ? value[1] == 0
+              ? (10 - value[0]) * 50 + 25
+              : (10 - value[0] - 1) * 50 + 25
+            : 475;
+        } else {
+          obj['x2'] = value[1]
+            ? value[1] == 0
+              ? 95
+              : (10 - value[1]) * 10 + 5
+            : value[0] * 10 - 5;
+          obj['y2'] = value[1]
+            ? value[1] == 0
+              ? (10 - value[0]) * 50 + 25
+              : (10 - value[0]) * 50 - 25
+            : 475;
+        }
+
+        if (obj) {
+          ladders.push(obj);
+        }
+      }
+    }
+    console.log('lines------->', snakes, ladders);
+    setCommObj(prev => ({
+      ...prev,
+      snakesLines: snakes,
+      laddersLines: ladders,
+    }));
   }, [commObj.refresh]);
 
-  useEffect(() => {
-    console.log('PlayGameScreen-commObj------>', commObj);
-  }, [commObj]);
+  // useEffect(() => {
+  //   console.log('PlayGameScreen-commObj------>', commObj);
+  // }, [commObj]);
   return (
     <SafeAreaView
       style={{
@@ -267,7 +361,50 @@ const PlayGameScreen = () => {
             PlayGameScreen
           </Text>
         </View>
-        <View>
+        <View
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '500',
+          }}>
+          <View
+            style={{
+              position: 'absolute',
+              zIndex: 10,
+              width: '100%',
+              height: '100%',
+            }}>
+            <Svg height="500" width="100%">
+              {commObj.snakesLines &&
+                commObj.snakesLines.map((item, index) => {
+                  return (
+                    <Line
+                      key={index}
+                      x1={`${item.x1}%`}
+                      y1={item.y1}
+                      x2={`${item.x2}%`}
+                      y2={item.y2}
+                      stroke="coral"
+                      strokeWidth="10"
+                    />
+                  );
+                })}
+              {commObj.laddersLines &&
+                commObj.laddersLines.map((item, index) => {
+                  return (
+                    <Line
+                      key={index}
+                      x1={`${item.x1}%`}
+                      y1={item.y1}
+                      x2={`${item.x2}%`}
+                      y2={item.y2}
+                      stroke="blue"
+                      strokeWidth="10"
+                    />
+                  );
+                })}
+            </Svg>
+          </View>
           {commObj.NumbersArray &&
             commObj.NumbersArray.map((item, index) => {
               return (
@@ -603,7 +740,7 @@ const PlayGameScreen = () => {
             </View>
           </Modal>
         ) : null}
-        <Modal animationType="fade" transparent={true}>
+        {/* <Modal animationType="fade" transparent={true}>
           <View
             style={{
               flex: 1,
@@ -711,7 +848,7 @@ const PlayGameScreen = () => {
               </View>
             </View>
           </View>
-        </Modal>
+        </Modal> */}
       </View>
     </SafeAreaView>
   );
