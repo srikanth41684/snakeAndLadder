@@ -198,14 +198,14 @@ const PlayGameScreen = () => {
     let randomSnakeLadders = [];
     let snakesObj = {};
     let laddersObj = {};
-    for (let i = 0; Object.keys(snakesObj).length < 5; i++) {
+    for (let i = 0; Object.keys(snakesObj).length < 4; i++) {
       let startNum = Math.floor(Math.random() * (99 - 12 + 1)) + 12;
       let endNum = Math.floor(Math.random() * (startNum - 2 + 1)) + 2;
       if (startNum > endNum + 12) {
         snakesObj[startNum] = endNum;
       }
     }
-    for (let i = 0; Object.keys(laddersObj).length < 5; i++) {
+    for (let i = 0; Object.keys(laddersObj).length < 4; i++) {
       let startNum = Math.floor(Math.random() * (90 - 6 + 1)) + 6;
       let endNum = Math.floor(Math.random() * (99 - startNum + 1)) + startNum;
       if (endNum > startNum + 12) {
@@ -288,13 +288,27 @@ const PlayGameScreen = () => {
         let obj = {};
         let value = randomSnakeLadders[1][key].toString();
         if (key[0] % 2 == 0) {
-          obj['x1'] = key[1] == '0' ? 5 : key[1] * 10 - 5;
+          obj['x1'] =
+            key[1] == 0 ? 5 : key[1] ? key[1] * 10 - 5 : key[0] * 10 - 5;
           obj['y1'] =
-            key[1] == '0' ? (10 - key[0]) * 50 + 25 : (10 - key[0]) * 50 - 25;
+            key[1] == 0
+              ? (10 - key[0]) * 50 + 25
+              : key[1]
+              ? (10 - key[0]) * 50 - 25
+              : 475;
         } else {
-          obj['x1'] = key[1] == 0 ? 95 : (10 - key[1]) * 10 + 5;
+          obj['x1'] =
+            key[1] == 0
+              ? 95
+              : key[1]
+              ? (10 - key[1]) * 10 + 5
+              : key[0] * 10 - 5;
           obj['y1'] =
-            key[1] == 0 ? (10 - key[0]) * 50 + 25 : (10 - key[0]) * 50 - 25;
+            key[1] == 0
+              ? (10 - key[0]) * 50 + 25
+              : key[1]
+              ? (10 - key[0]) * 50 - 25
+              : 475;
         }
 
         if (value[0] % 2 == 0) {
@@ -370,7 +384,7 @@ const PlayGameScreen = () => {
           <View
             style={{
               position: 'absolute',
-              zIndex: 10,
+              zIndex: 1,
               width: '100%',
               height: '100%',
             }}>
@@ -384,7 +398,7 @@ const PlayGameScreen = () => {
                       y1={item.y1}
                       x2={`${item.x2}%`}
                       y2={item.y2}
-                      stroke="coral"
+                      stroke="#e64343"
                       strokeWidth="10"
                     />
                   );
@@ -398,7 +412,7 @@ const PlayGameScreen = () => {
                       y1={item.y1}
                       x2={`${item.x2}%`}
                       y2={item.y2}
-                      stroke="blue"
+                      stroke="#209cf5"
                       strokeWidth="10"
                     />
                   );
@@ -435,6 +449,7 @@ const PlayGameScreen = () => {
                               alignItems: 'center',
                               borderRadius: 20 / 2,
                               position: 'absolute',
+                              zIndex: 5,
                             }}>
                             <Text
                               style={{
@@ -450,6 +465,7 @@ const PlayGameScreen = () => {
                             style={{
                               position: 'absolute',
                               bottom: 0,
+                              zIndex: 5,
                             }}>
                             <Text
                               style={{
@@ -469,6 +485,7 @@ const PlayGameScreen = () => {
                               alignItems: 'center',
                               borderRadius: 20 / 2,
                               position: 'absolute',
+                              zIndex: 5,
                             }}>
                             <Text
                               style={{
@@ -484,6 +501,7 @@ const PlayGameScreen = () => {
                             style={{
                               position: 'absolute',
                               bottom: 0,
+                              zIndex: 5,
                             }}>
                             <Text
                               style={{
