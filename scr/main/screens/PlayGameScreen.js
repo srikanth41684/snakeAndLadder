@@ -275,23 +275,33 @@ const PlayGameScreen = () => {
     for (let i = 0; Object.keys(snakesObj).length < 4; i++) {
       let startNum = Math.floor(Math.random() * (99 - 12 + 1)) + 12;
       let endNum = Math.floor(Math.random() * (startNum - 2 + 1)) + 2;
-      if (startNum > endNum + 12) {
+      if (
+        startNum > endNum + 12 &&
+        !Object.values(snakesObj).includes(endNum)
+      ) {
         snakesObj[startNum] = endNum;
       }
     }
     for (let i = 0; Object.keys(laddersObj).length < 4; i++) {
       let startNum = Math.floor(Math.random() * (90 - 6 + 1)) + 6;
       let endNum = Math.floor(Math.random() * (99 - startNum + 1)) + startNum;
-      if (endNum > startNum + 12) {
+      if (
+        endNum > startNum + 12 &&
+        !Object.values(laddersObj).includes(endNum)
+      ) {
         laddersObj[startNum] = endNum;
       }
     }
+    console.log('snakesObj----->', snakesObj);
+    console.log('laddersObj----->', laddersObj);
     for (let key in snakesObj) {
+      console.log('laddersObj----->', Object.values(snakesObj), snakesObj[key]);
+      let value = snakesObj[key];
       if (
         laddersObj.hasOwnProperty(snakesObj[key]) ||
         laddersObj.hasOwnProperty(key) ||
-        Object.values(snakesObj).includes(key) ||
-        Object.values(laddersObj).includes(key)
+        Object.values(snakesObj).includes(Number(key)) ||
+        Object.values(laddersObj).includes(Number(key))
       ) {
         delete snakesObj[key];
       }
@@ -301,12 +311,15 @@ const PlayGameScreen = () => {
       if (
         snakesObj.hasOwnProperty(laddersObj[key]) ||
         snakesObj.hasOwnProperty(key) ||
-        Object.values(laddersObj).includes(key) ||
-        Object.values(snakesObj).includes(key)
+        Object.values(laddersObj).includes(Number(key)) ||
+        Object.values(snakesObj).includes(Number(key))
       ) {
         delete laddersObj[key];
       }
     }
+
+    console.log('snakesObj----->', snakesObj);
+    console.log('laddersObj----->', laddersObj);
 
     randomSnakeLadders.push(snakesObj);
     randomSnakeLadders.push(laddersObj);
@@ -422,9 +435,9 @@ const PlayGameScreen = () => {
     }));
   }, [commObj.refresh]);
 
-  useEffect(() => {
-    console.log('PlayGameScreen-commObj------>', commObj);
-  }, [commObj]);
+  // useEffect(() => {
+  //   console.log('PlayGameScreen-commObj------>', commObj);
+  // }, [commObj]);
   return (
     <SafeAreaView
       style={{
