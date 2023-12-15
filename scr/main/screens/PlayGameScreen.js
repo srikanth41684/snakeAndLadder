@@ -241,7 +241,7 @@ const PlayGameScreen = () => {
       ladderSnakes: randomSnakeLadders,
       refresh: false,
     }));
-    console.log('randomSnakeLadders---->', randomSnakeLadders);
+    // console.log('randomSnakeLadders---->', randomSnakeLadders);
     let snakes = [];
     let ladders = [];
     if (randomSnakeLadders) {
@@ -340,7 +340,7 @@ const PlayGameScreen = () => {
         }
       }
     }
-    console.log('lines------->', snakes, ladders);
+    // console.log('lines------->', snakes, ladders);
     setCommObj(prev => ({
       ...prev,
       snakesLines: snakes,
@@ -348,9 +348,9 @@ const PlayGameScreen = () => {
     }));
   }, [commObj.refresh]);
 
-  // useEffect(() => {
-  //   console.log('PlayGameScreen-commObj------>', commObj);
-  // }, [commObj]);
+  useEffect(() => {
+    console.log('PlayGameScreen-commObj------>', commObj);
+  }, [commObj]);
   return (
     <SafeAreaView
       style={{
@@ -646,7 +646,7 @@ const PlayGameScreen = () => {
           </View>
           <View
             style={{
-              paddingVertical: 10,
+              paddingTop: 50,
               alignItems: 'center',
             }}>
             <TouchableWithoutFeedback

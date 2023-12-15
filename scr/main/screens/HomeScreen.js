@@ -445,8 +445,18 @@ const HomeScreen = ({navigation}) => {
           onPress={() => {
             navigation.navigate('play');
           }}>
-          <View>
-            <Text>Play</Text>
+          <View
+            style={{
+              padding: 20,
+            }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: '#000',
+              }}>
+              Play
+            </Text>
           </View>
         </TouchableWithoutFeedback>
 
