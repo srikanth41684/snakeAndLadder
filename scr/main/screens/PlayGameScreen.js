@@ -6,7 +6,7 @@ import {
   Modal,
   TextInput,
 } from 'react-native';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Line, Svg} from 'react-native-svg';
 
 const PlayGameScreen = () => {
@@ -292,11 +292,7 @@ const PlayGameScreen = () => {
         laddersObj[startNum] = endNum;
       }
     }
-    console.log('snakesObj----->', snakesObj);
-    console.log('laddersObj----->', laddersObj);
     for (let key in snakesObj) {
-      console.log('laddersObj----->', Object.values(snakesObj), snakesObj[key]);
-      let value = snakesObj[key];
       if (
         laddersObj.hasOwnProperty(snakesObj[key]) ||
         laddersObj.hasOwnProperty(key) ||
@@ -318,9 +314,6 @@ const PlayGameScreen = () => {
       }
     }
 
-    console.log('snakesObj----->', snakesObj);
-    console.log('laddersObj----->', laddersObj);
-
     randomSnakeLadders.push(snakesObj);
     randomSnakeLadders.push(laddersObj);
     setCommObj(prev => ({
@@ -328,7 +321,6 @@ const PlayGameScreen = () => {
       ladderSnakes: randomSnakeLadders,
       refresh: false,
     }));
-    // console.log('randomSnakeLadders---->', randomSnakeLadders);
     let snakes = [];
     let ladders = [];
     if (randomSnakeLadders) {
@@ -427,7 +419,6 @@ const PlayGameScreen = () => {
         }
       }
     }
-    // console.log('lines------->', snakes, ladders);
     setCommObj(prev => ({
       ...prev,
       snakesLines: snakes,
@@ -435,9 +426,9 @@ const PlayGameScreen = () => {
     }));
   }, [commObj.refresh]);
 
-  // useEffect(() => {
-  //   console.log('PlayGameScreen-commObj------>', commObj);
-  // }, [commObj]);
+  useEffect(() => {
+    console.log('PlayGameScreen-commObj------>', commObj);
+  }, [commObj]);
   return (
     <SafeAreaView
       style={{
