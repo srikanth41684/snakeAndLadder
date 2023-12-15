@@ -119,35 +119,52 @@ const PlayGameScreen = () => {
   //   }
   // }, [commObj.playerOneCount, commObj.playerTwoCount]);
 
-  function disePlayerHanlder(player) {
+  async function disePlayerHanlder(player) {
     let randomNum = Math.floor(Math.random() * 6) + 1;
     let playerCount =
       player == 'p1' ? commObj.playerOneCount : commObj.playerTwoCount;
 
     if (
-      (randomNum == 6 || playerCount !== null) &&
+      (randomNum === 6 || playerCount !== null) &&
       playerCount + randomNum <= 100
     ) {
-      setCommObj(prev => ({
-        ...prev,
-        diseNumber: randomNum,
-        playerOneCount:
-          player == 'p1'
-            ? prev.playerOneCount + randomNum
-            : prev.playerOneCount,
-        playerTwoCount:
-          player == 'p2'
-            ? prev.playerTwoCount + randomNum
-            : prev.playerTwoCount,
-        // player: player == 'p1' ? 'p2' : 'p1',
-      }));
+      for (let i = playerCount; i <= playerCount + randomNum; i++) {
+        await new Promise(resolve => setTimeout(resolve, 50))
+
+        setCommObj(prev => ({
+          ...prev,
+          diseNumber: randomNum,
+          playerOneCount: player === 'p1' ? i : prev.playerOneCount,
+          playerTwoCount: player === 'p2' ? i : prev.playerTwoCount,
+        }));
+      }
     } else {
       setCommObj(prev => ({
         ...prev,
         diseNumber: randomNum,
-        player: player == 'p1' ? 'p2' : 'p1',
+        player: player === 'p1' ? 'p2' : 'p1',
       }));
     }
+
+    // for (let i = playerCount; i <= playerCount + randomNum; i++) {
+    //   if (
+    //     (randomNum == 6 || playerCount !== null) &&
+    //     playerCount + randomNum <= 100
+    //   ) {
+    //     setCommObj(prev => ({
+    //       ...prev,
+    //       diseNumber: randomNum,
+    //       playerOneCount: player == 'p1' ? i : prev.playerOneCount,
+    //       playerTwoCount: player == 'p2' ? i : prev.playerTwoCount,
+    //     }));
+    //   } else {
+    //     setCommObj(prev => ({
+    //       ...prev,
+    //       diseNumber: randomNum,
+    //       player: player == 'p1' ? 'p2' : 'p1',
+    //     }));
+    //   }
+    // }
   }
 
   // function disePlayer1Hanlder() {
@@ -529,12 +546,12 @@ const PlayGameScreen = () => {
                           style={{
                             flexDirection: 'row',
                             gap: 5,
-                            marginLeft: 5,
+                            marginLeft: 2,
                           }}>
                           {commObj.playerOneCount == item2 && (
                             <View
                               style={{
-                                width: 10,
+                                width: 15,
                                 height: 20,
                                 backgroundColor: 'blue',
                                 borderBottomLeftRadius: 10,
@@ -544,7 +561,7 @@ const PlayGameScreen = () => {
                           {commObj.playerTwoCount == item2 && (
                             <View
                               style={{
-                                width: 10,
+                                width: 15,
                                 height: 20,
                                 backgroundColor: 'red',
                                 borderBottomLeftRadius: 10,
