@@ -20,6 +20,7 @@ const PlayGameScreen = () => {
     refresh: false,
     snakesLines: null,
     laddersLines: null,
+    active: true,
     // ladderSnakes: [
     //   [22, 4],
     //   [44, 6],
@@ -49,49 +50,49 @@ const PlayGameScreen = () => {
     }));
   }, []);
 
-  useEffect(() => {
-    let value = commObj.playerOneCount;
-    if (commObj.ladderSnakes) {
-      commObj.ladderSnakes.forEach(item => {
-        if (value in item) {
-          setTimeout(() => {
-            setCommObj(prev => ({
-              ...prev,
-              playerOneCount: item[value],
-              player: 'p2',
-            }));
-          }, 100);
-        } else {
-          setCommObj(prev => ({
-            ...prev,
-            player: 'p2',
-          }));
-        }
-      });
-    }
-  }, [commObj.playerOneCount]);
+  // useEffect(() => {
+  //   let value = commObj.playerOneCount;
+  //   if (commObj.ladderSnakes) {
+  //     commObj.ladderSnakes.forEach(item => {
+  //       if (value in item) {
+  //         setTimeout(() => {
+  //           setCommObj(prev => ({
+  //             ...prev,
+  //             playerOneCount: item[value],
+  //             player: 'p2',
+  //           }));
+  //         }, 100);
+  //       } else {
+  //         setCommObj(prev => ({
+  //           ...prev,
+  //           player: 'p2',
+  //         }));
+  //       }
+  //     });
+  //   }
+  // }, [commObj.playerOneCount]);
 
-  useEffect(() => {
-    let value = commObj.playerTwoCount;
-    if (commObj.ladderSnakes) {
-      commObj.ladderSnakes.forEach(item => {
-        if (value in item) {
-          setTimeout(() => {
-            setCommObj(prev => ({
-              ...prev,
-              playerTwoCount: item[value],
-              player: 'p1',
-            }));
-          }, 100);
-        } else {
-          setCommObj(prev => ({
-            ...prev,
-            player: 'p1',
-          }));
-        }
-      });
-    }
-  }, [commObj.playerTwoCount]);
+  // useEffect(() => {
+  //   let value = commObj.playerTwoCount;
+  //   if (commObj.ladderSnakes) {
+  //     commObj.ladderSnakes.forEach(item => {
+  //       if (value in item) {
+  //         setTimeout(() => {
+  //           setCommObj(prev => ({
+  //             ...prev,
+  //             playerTwoCount: item[value],
+  //             player: 'p1',
+  //           }));
+  //         }, 100);
+  //       } else {
+  //         setCommObj(prev => ({
+  //           ...prev,
+  //           player: 'p1',
+  //         }));
+  //       }
+  //     });
+  //   }
+  // }, [commObj.playerTwoCount]);
 
   // useEffect(() => {
   //   let value =
@@ -123,26 +124,38 @@ const PlayGameScreen = () => {
     let randomNum = Math.floor(Math.random() * 6) + 1;
     let playerCount =
       player == 'p1' ? commObj.playerOneCount : commObj.playerTwoCount;
-
+    setCommObj(prev => ({
+      ...prev,
+      diseNumber: randomNum,
+      active: false,
+    }));
     if (
       (randomNum === 6 || playerCount !== null) &&
       playerCount + randomNum <= 100
     ) {
       for (let i = playerCount; i <= playerCount + randomNum; i++) {
-        await new Promise(resolve => setTimeout(resolve, 50))
-
+        await new Promise(resolve => setTimeout(resolve, 50));
         setCommObj(prev => ({
           ...prev,
-          diseNumber: randomNum,
           playerOneCount: player === 'p1' ? i : prev.playerOneCount,
           playerTwoCount: player === 'p2' ? i : prev.playerTwoCount,
         }));
       }
+      if (player === 'p1') {
+        playerOneSnakeLadderHandler(playerCount + randomNum);
+      } else {
+        playerTwoSnakeLadderHandler(playerCount + randomNum);
+      }
+      setCommObj(prev => ({
+        ...prev,
+        active: true,
+      }));
     } else {
       setCommObj(prev => ({
         ...prev,
         diseNumber: randomNum,
         player: player === 'p1' ? 'p2' : 'p1',
+        active: true,
       }));
     }
 
@@ -165,6 +178,50 @@ const PlayGameScreen = () => {
     //     }));
     //   }
     // }
+  }
+
+  function playerOneSnakeLadderHandler(value) {
+    // let value = commObj.playerOneCount;
+    if (commObj.ladderSnakes) {
+      commObj.ladderSnakes.forEach(item => {
+        if (value in item) {
+          setTimeout(() => {
+            setCommObj(prev => ({
+              ...prev,
+              playerOneCount: item[value],
+              player: 'p2',
+            }));
+          }, 100);
+        } else {
+          setCommObj(prev => ({
+            ...prev,
+            player: 'p2',
+          }));
+        }
+      });
+    }
+  }
+
+  function playerTwoSnakeLadderHandler(value) {
+    // let value = commObj.playerTwoCount;
+    if (commObj.ladderSnakes) {
+      commObj.ladderSnakes.forEach(item => {
+        if (value in item) {
+          setTimeout(() => {
+            setCommObj(prev => ({
+              ...prev,
+              playerTwoCount: item[value],
+              player: 'p1',
+            }));
+          }, 100);
+        } else {
+          setCommObj(prev => ({
+            ...prev,
+            player: 'p1',
+          }));
+        }
+      });
+    }
   }
 
   // function disePlayer1Hanlder() {
@@ -625,7 +682,9 @@ const PlayGameScreen = () => {
             </View>
             <TouchableWithoutFeedback
               onPress={() => {
-                disePlayerHanlder(commObj.player);
+                if (commObj.active) {
+                  disePlayerHanlder(commObj.player);
+                }
                 // if (commObj.player == 'p1') {
                 //   disePlayer1Hanlder();
                 // }
@@ -635,7 +694,7 @@ const PlayGameScreen = () => {
               }}>
               <View
                 style={{
-                  backgroundColor: '#fff',
+                  backgroundColor: commObj.active ? '#fff' : 'lightgray',
                   width: 70,
                   paddingVertical: 5,
                   alignItems: 'center',
@@ -643,7 +702,11 @@ const PlayGameScreen = () => {
                 <Text
                   style={{
                     fontSize: 20,
-                    color: commObj.player == 'p1' ? 'blue' : 'red',
+                    color: commObj.active
+                      ? commObj.player == 'p1'
+                        ? 'blue'
+                        : 'red'
+                      : 'green',
                     fontWeight: 'bold',
                   }}>
                   {commObj.diseNumber}
