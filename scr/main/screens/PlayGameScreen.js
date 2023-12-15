@@ -297,7 +297,8 @@ const PlayGameScreen = () => {
         laddersObj.hasOwnProperty(snakesObj[key]) ||
         laddersObj.hasOwnProperty(key) ||
         Object.values(snakesObj).includes(Number(key)) ||
-        Object.values(laddersObj).includes(Number(key))
+        Object.values(laddersObj).includes(Number(key)) ||
+        Object.values(laddersObj).includes(snakesObj[key])
       ) {
         delete snakesObj[key];
       }
