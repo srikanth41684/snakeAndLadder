@@ -25,7 +25,6 @@ const CustomSnakes = ({x1, y1, x2, y2}) => {
             top: y1,
             width: 15,
             borderColor: 'red',
-
             zIndex: 1,
             height: distance,
             transform: [
@@ -48,13 +47,79 @@ const CustomSnakes = ({x1, y1, x2, y2}) => {
             }}>
             <View
               style={{
-                width: 20,
-                height: 20,
-                borderRadius: 20 / 2,
+                width: 25,
+                height: 25,
+                borderRadius: 25 / 2,
                 position: 'absolute',
                 top: -10,
-                backgroundColor: 'coral',
+                backgroundColor: 'green',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingBottom: 3,
               }}>
+              <View
+                style={{
+                  paddingTop: 4,
+                  paddingHorizontal: 2,
+                  flexDirection: 'row',
+                }}>
+                <View
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: 8 / 2,
+                    backgroundColor: '#000',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <View
+                    style={{
+                      width: 4,
+                      height: 4,
+                      borderRadius: 4 / 2,
+                      backgroundColor: '#fff',
+                    }}></View>
+                </View>
+                <View
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: 8 / 2,
+                    backgroundColor: '#000',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <View
+                    style={{
+                      width: 4,
+                      height: 4,
+                      borderRadius: 4 / 2,
+                      backgroundColor: '#fff',
+                    }}></View>
+                </View>
+              </View>
+              <View
+                style={{
+                  width: 15,
+                  height: 8,
+                  borderRadius: 5,
+                  backgroundColor: 'red',
+                  flexDirection: 'row',
+                  justifyContent: 'space-evenly'
+                }}>
+                <View
+                  style={{
+                    width: 2,
+                    height: 10,
+                    backgroundColor: '#000',
+                  }}></View>
+                <View
+                  style={{
+                    width: 2,
+                    height: 10,
+                    backgroundColor: '#000',
+                  }}></View>
+              </View>
             </View>
             {Array.from({length: Math.floor(distance / 50)}).map((_, index) => (
               <View
