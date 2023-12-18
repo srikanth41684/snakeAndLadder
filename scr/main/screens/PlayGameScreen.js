@@ -635,9 +635,74 @@ const PlayGameScreen = () => {
                 style={{
                   backgroundColor: commObj.active ? '#fff' : 'lightgray',
                   width: 70,
-                  paddingVertical: 5,
+                  paddingVertical: 10,
                   alignItems: 'center',
                 }}>
+                {/* <View
+                  style={{
+                    backgroundColor: 'lightgray',
+                    width: 40,
+                    height: 40,
+                    padding: 5,
+                    borderRadius: 5,
+                    flexDirection: 'column',
+                    justifyContent: 'space-around',
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}>
+                    <View
+                      style={{
+                        width: 8,
+                        height: 8,
+                        borderRadius: 8 / 2,
+                        backgroundColor: 'red',
+                      }}></View>
+                    <View
+                      style={{
+                        width: 8,
+                        height: 8,
+                        borderRadius: 8 / 2,
+                        backgroundColor: 'red',
+                      }}></View>
+                  </View>
+                  {commObj.diseNumber == 5 && (
+                    <View
+                      style={{
+                        alignItems: 'center',
+                      }}>
+                      <View
+                        style={{
+                          width: 8,
+                          height: 8,
+                          borderRadius: 8 / 2,
+                          backgroundColor: 'red',
+                        }}></View>
+                    </View>
+                  )}
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}>
+                    <View
+                      style={{
+                        width: 8,
+                        height: 8,
+                        borderRadius: 8 / 2,
+                        backgroundColor: 'red',
+                      }}></View>
+                    <View
+                      style={{
+                        width: 8,
+                        height: 8,
+                        borderRadius: 8 / 2,
+                        backgroundColor: 'red',
+                      }}></View>
+                  </View>
+                </View> */}
                 <Text
                   style={{
                     fontSize: 20,
