@@ -4,10 +4,10 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
   Modal,
-  TextInput,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {Line, Svg} from 'react-native-svg';
+import CustomLadder from '../components/CustomLadder';
+import CustomSnakes from '../components/CustomSnakes';
 
 const PlayGameScreen = () => {
   const [commObj, setCommObj] = useState({
@@ -458,46 +458,32 @@ const PlayGameScreen = () => {
           style={{
             position: 'relative',
             width: '100%',
-            height: '500',
+            height: 500,
           }}>
-          <View
-            style={{
-              position: 'absolute',
-              zIndex: 1,
-              width: '100%',
-              height: '100%',
-            }}>
-            <Svg height="500" width="100%">
-              {commObj.snakesLines &&
-                commObj.snakesLines.map((item, index) => {
-                  return (
-                    <Line
-                      key={index}
-                      x1={`${item.x1}%`}
-                      y1={item.y1}
-                      x2={`${item.x2}%`}
-                      y2={item.y2}
-                      stroke="#e64343"
-                      strokeWidth="10"
-                    />
-                  );
-                })}
-              {commObj.laddersLines &&
-                commObj.laddersLines.map((item, index) => {
-                  return (
-                    <Line
-                      key={index}
-                      x1={`${item.x1}%`}
-                      y1={item.y1}
-                      x2={`${item.x2}%`}
-                      y2={item.y2}
-                      stroke="#209cf5"
-                      strokeWidth="10"
-                    />
-                  );
-                })}
-            </Svg>
-          </View>
+          {commObj.laddersLines &&
+            commObj.laddersLines.map((item, index) => {
+              return (
+                <CustomLadder
+                  key={index}
+                  x1={item.x1}
+                  y1={item.y1}
+                  x2={item.x2}
+                  y2={item.y2}
+                />
+              );
+            })}
+          {commObj.snakesLines &&
+            commObj.snakesLines.map((item, index) => {
+              return (
+                <CustomSnakes
+                  key={index}
+                  x1={item.x1}
+                  y1={item.y1}
+                  x2={item.x2}
+                  y2={item.y2}
+                />
+              );
+            })}
           {commObj.NumbersArray &&
             commObj.NumbersArray.map((item, index) => {
               return (
