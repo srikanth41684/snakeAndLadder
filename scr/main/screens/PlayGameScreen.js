@@ -134,7 +134,7 @@ const PlayGameScreen = () => {
       playerCount + randomNum <= 100
     ) {
       for (let i = playerCount; i <= playerCount + randomNum; i++) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+        await new Promise(resolve => setTimeout(resolve, 200));
         setCommObj(prev => ({
           ...prev,
           playerOneCount: player === 'p1' ? i : prev.playerOneCount,
@@ -505,78 +505,6 @@ const PlayGameScreen = () => {
                           backgroundColor: item2 % 2 !== 0 ? '#fcf0f0' : '#fff',
                           position: 'relative',
                         }}>
-                        {commObj.ladderSnakes[0][item2] && (
-                          <View
-                            style={{
-                              backgroundColor: 'coral',
-                              width: 20,
-                              height: 20,
-                              alignItems: 'center',
-                              borderRadius: 20 / 2,
-                              position: 'absolute',
-                              zIndex: 5,
-                            }}>
-                            <Text
-                              style={{
-                                fontSize: 18,
-                                color: '#fff',
-                              }}>
-                              S
-                            </Text>
-                          </View>
-                        )}
-                        {commObj.ladderSnakes[0][item2] && (
-                          <View
-                            style={{
-                              position: 'absolute',
-                              bottom: 0,
-                              zIndex: 5,
-                            }}>
-                            <Text
-                              style={{
-                                fontSize: 10,
-                                color: '#000',
-                              }}>
-                              {`${item2} to ${commObj.ladderSnakes[0][item2]}`}
-                            </Text>
-                          </View>
-                        )}
-                        {commObj.ladderSnakes[1][item2] && (
-                          <View
-                            style={{
-                              backgroundColor: 'lightblue',
-                              width: 20,
-                              height: 20,
-                              alignItems: 'center',
-                              borderRadius: 20 / 2,
-                              position: 'absolute',
-                              zIndex: 5,
-                            }}>
-                            <Text
-                              style={{
-                                fontSize: 18,
-                                color: 'blue',
-                              }}>
-                              L
-                            </Text>
-                          </View>
-                        )}
-                        {commObj.ladderSnakes[1][item2] && (
-                          <View
-                            style={{
-                              position: 'absolute',
-                              bottom: 0,
-                              zIndex: 5,
-                            }}>
-                            <Text
-                              style={{
-                                fontSize: 10,
-                                color: '#000',
-                              }}>
-                              {`${item2} to ${commObj.ladderSnakes[1][item2]}`}
-                            </Text>
-                          </View>
-                        )}
                         <View
                           style={{
                             alignItems: 'flex-end',
@@ -600,21 +528,41 @@ const PlayGameScreen = () => {
                             <View
                               style={{
                                 width: 15,
-                                height: 20,
+                                height: 25,
                                 backgroundColor: 'blue',
                                 borderBottomLeftRadius: 10,
                                 borderBottomRightRadius: 10,
-                              }}></View>
+                                alignItems: 'center',
+                                paddingTop: 3,
+                              }}>
+                              <View
+                                style={{
+                                  width: 10,
+                                  height: 10,
+                                  backgroundColor: '#fff',
+                                  borderRadius: 10 / 2,
+                                }}></View>
+                            </View>
                           )}
                           {commObj.playerTwoCount == item2 && (
                             <View
                               style={{
                                 width: 15,
-                                height: 20,
+                                height: 25,
                                 backgroundColor: 'red',
                                 borderBottomLeftRadius: 10,
                                 borderBottomRightRadius: 10,
-                              }}></View>
+                                alignItems: 'center',
+                                paddingTop: 3,
+                              }}>
+                              <View
+                                style={{
+                                  width: 10,
+                                  height: 10,
+                                  backgroundColor: '#fff',
+                                  borderRadius: 10 / 2,
+                                }}></View>
+                            </View>
                           )}
                         </View>
                       </View>
