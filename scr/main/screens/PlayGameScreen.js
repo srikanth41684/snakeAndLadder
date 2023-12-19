@@ -8,6 +8,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import CustomLadder from '../components/CustomLadder';
 import CustomSnakes from '../components/CustomSnakes';
+import Dice from '../components/Dice';
 
 const PlayGameScreen = () => {
   const colors = ['coral', 'green', '#2ae830', 'red'];
@@ -609,7 +610,7 @@ const PlayGameScreen = () => {
               backgroundColor: 'lightblue',
               justifyContent: 'space-between',
               paddingHorizontal: 20,
-              paddingVertical: 5,
+              height: 75,
               alignItems: 'center',
             }}>
             <View>
@@ -634,90 +635,8 @@ const PlayGameScreen = () => {
                 //   disePlayer2Hanlder();
                 // }
               }}>
-              <View
-                style={{
-                  backgroundColor: commObj.active ? '#fff' : 'lightgray',
-                  width: 70,
-                  paddingVertical: 10,
-                  alignItems: 'center',
-                }}>
-                {/* <View
-                  style={{
-                    backgroundColor: 'lightgray',
-                    width: 40,
-                    height: 40,
-                    padding: 5,
-                    borderRadius: 5,
-                    flexDirection: 'column',
-                    justifyContent: 'space-around',
-                  }}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}>
-                    <View
-                      style={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: 8 / 2,
-                        backgroundColor: 'red',
-                      }}></View>
-                    <View
-                      style={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: 8 / 2,
-                        backgroundColor: 'red',
-                      }}></View>
-                  </View>
-                  {commObj.diseNumber == 5 && (
-                    <View
-                      style={{
-                        alignItems: 'center',
-                      }}>
-                      <View
-                        style={{
-                          width: 8,
-                          height: 8,
-                          borderRadius: 8 / 2,
-                          backgroundColor: 'red',
-                        }}></View>
-                    </View>
-                  )}
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}>
-                    <View
-                      style={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: 8 / 2,
-                        backgroundColor: 'red',
-                      }}></View>
-                    <View
-                      style={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: 8 / 2,
-                        backgroundColor: 'red',
-                      }}></View>
-                  </View>
-                </View> */}
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: commObj.active
-                      ? commObj.player == 'p1'
-                        ? 'blue'
-                        : 'red'
-                      : 'green',
-                    fontWeight: 'bold',
-                  }}>
-                  {commObj.diseNumber}
-                </Text>
+              <View style={{}}>
+                <Dice diseNumber={commObj.diseNumber} active={commObj.active} />
               </View>
             </TouchableWithoutFeedback>
             <View>
