@@ -10,7 +10,7 @@ import CustomLadder from '../components/CustomLadder';
 import CustomSnakes from '../components/CustomSnakes';
 
 const PlayGameScreen = () => {
-  const colors = ['red', 'green', '#2ae830', 'coral'];
+  const colors = ['coral', 'green', '#2ae830', 'red'];
   const [commObj, setCommObj] = useState({
     NumbersArray: [],
     player: 'p1',
