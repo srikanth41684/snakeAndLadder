@@ -44,7 +44,7 @@ const CustomSnakes = ({x1, y1, x2, y2, color, show}) => {
             top: y1 - 5,
             width: 50,
             borderColor: 'red',
-            zIndex: show + 5,
+            zIndex: show + 2,
             height: distance,
             // backgroundColor: 'green',
             transform: [

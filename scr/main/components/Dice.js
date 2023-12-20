@@ -1,7 +1,7 @@
 import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
 import React from 'react';
 
-const Dice = ({diseNumber}) => {
+const Dice = ({diseNumber, active}) => {
   return (
     <SafeAreaView
       style={{
@@ -17,7 +17,7 @@ const Dice = ({diseNumber}) => {
           style={{
             width: 60,
             height: 60,
-            backgroundColor: '#fff',
+            backgroundColor: active ? '#fff' : 'lightgray',
             borderRadius: 8,
           }}>
           {diseNumber == 1 && (

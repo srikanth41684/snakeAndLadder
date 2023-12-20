@@ -4,11 +4,13 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
   Modal,
+  Image,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import CustomLadder from '../components/CustomLadder';
 import CustomSnakes from '../components/CustomSnakes';
 import Dice from '../components/Dice';
+import PlayerCoin from '../components/PlayerCoin';
 
 const PlayGameScreen = () => {
   const colors = ['coral', 'green', '#2ae830', 'red'];
@@ -502,6 +504,7 @@ const PlayGameScreen = () => {
                       <View
                         key={index2}
                         style={{
+                          flex: 1,
                           width: '10%',
                           height: 50,
                           borderWidth: 0.5,
@@ -511,6 +514,8 @@ const PlayGameScreen = () => {
                         }}>
                         <View
                           style={{
+                            position: 'absolute',
+                            right: 5,
                             alignItems: 'flex-end',
                           }}>
                           <Text
@@ -525,46 +530,91 @@ const PlayGameScreen = () => {
                         <View
                           style={{
                             flexDirection: 'row',
-                            gap: 5,
-                            marginLeft: 2,
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            paddingBottom: 10,
                           }}>
                           {commObj.playerOneCount == item2 && (
                             <View
                               style={{
-                                width: 15,
-                                height: 25,
-                                backgroundColor: 'blue',
-                                borderBottomLeftRadius: 10,
-                                borderBottomRightRadius: 10,
-                                alignItems: 'center',
-                                paddingTop: 3,
+                                position: 'relative',
+                                zIndex: 19,
                               }}>
+                              {commObj.player == 'p1' && commObj.active && (
+                                <View
+                                  style={{
+                                    position: 'absolute',
+                                    top: 13,
+                                  }}>
+                                  <PlayerCoin />
+                                </View>
+                              )}
+                              <Image
+                                style={{
+                                  width:
+                                    commObj.playerOneCount ==
+                                    commObj.playerTwoCount
+                                      ? 20
+                                      : 30,
+                                  resizeMode: 'contain',
+                                  height:
+                                    commObj.playerOneCount ==
+                                    commObj.playerTwoCount
+                                      ? 20
+                                      : 30,
+                                }}
+                                source={require('../../../assets/images/bluekey.png')}
+                              />
                               <View
                                 style={{
-                                  width: 10,
-                                  height: 10,
-                                  backgroundColor: '#fff',
-                                  borderRadius: 10 / 2,
+                                  width: 20,
+                                  height: 6,
+                                  backgroundColor: 'gray',
+                                  alignSelf: 'center',
+                                  borderRadius: 50,
                                 }}></View>
                             </View>
                           )}
                           {commObj.playerTwoCount == item2 && (
                             <View
                               style={{
-                                width: 15,
-                                height: 25,
-                                backgroundColor: 'red',
-                                borderBottomLeftRadius: 10,
-                                borderBottomRightRadius: 10,
-                                alignItems: 'center',
-                                paddingTop: 3,
+                                position: 'relative',
                               }}>
+                              {commObj.player == 'p2' && commObj.active && (
+                                <View
+                                  style={{
+                                    position: 'absolute',
+                                    top: 13,
+                                  }}>
+                                  <PlayerCoin />
+                                </View>
+                              )}
+                              <Image
+                                style={{
+                                  width:
+                                    commObj.playerOneCount ==
+                                    commObj.playerTwoCount
+                                      ? 20
+                                      : 30,
+                                  resizeMode: 'contain',
+                                  height:
+                                    commObj.playerOneCount ==
+                                    commObj.playerTwoCount
+                                      ? 20
+                                      : 30,
+                                }}
+                                source={require('../../../assets/images/redkey.png')}
+                              />
                               <View
                                 style={{
-                                  width: 10,
-                                  height: 10,
-                                  backgroundColor: '#fff',
-                                  borderRadius: 10 / 2,
+                                  width: 20,
+                                  height: 6,
+                                  backgroundColor: 'gray',
+                                  alignSelf: 'center',
+                                  borderRadius: 50,
                                 }}></View>
                             </View>
                           )}
