@@ -446,17 +446,78 @@ const PlayGameScreen = () => {
         }}>
         <View
           style={{
-            alignItems: 'center',
-            paddingVertical: 10,
+            marginVertical: 20,
+            paddingHorizontal: 10,
           }}>
-          <Text
+          <View
             style={{
-              fontSize: 16,
-              lineHeight: 23,
-              color: '#000',
+              alignItems: 'flex-end',
             }}>
-            PlayGameScreen
-          </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  borderWidth: 2,
+                  height: 60,
+                  width: 60,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderColor: 'lightblue',
+                  borderRadius: 5,
+                  backgroundColor: '#ffdede',
+                  // borderLeftWidth: 0,
+                }}>
+                <TouchableWithoutFeedback
+                  onPress={() => {
+                    if (commObj.active) {
+                      disePlayerHanlder(commObj.player);
+                    }
+                  }}>
+                  <View style={{}}>
+                    <Dice
+                      diseNumber={commObj.diseNumber}
+                      active={commObj.active}
+                    />
+                  </View>
+                </TouchableWithoutFeedback>
+              </View>
+              <View
+                style={{
+                  height: 50,
+                  width: 50,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'lightblue',
+                  borderWidth: 2,
+                  borderLeftWidth: 0,
+                  borderColor: '#ffdede',
+                  borderTopRightRadius: 5,
+                  borderBottomRightRadius: 5,
+                }}>
+                <Image
+                  style={{
+                    width: 35,
+                    resizeMode: 'contain',
+                    height: 35,
+                  }}
+                  source={require('../../../assets/images/redkey.png')}
+                />
+              </View>
+            </View>
+            <View>
+              <Text
+                style={{
+                  fontSize: 14,
+                  lineHeight: 21,
+                  color: '#000',
+                }}>
+                Player2
+              </Text>
+            </View>
+          </View>
         </View>
         <View
           style={{
@@ -731,12 +792,10 @@ const PlayGameScreen = () => {
         </View> */}
         <View
           style={{
-            paddingTop: 30,
+            paddingTop: 20,
+            paddingHorizontal: 10,
           }}>
-          <View
-            style={{
-              paddingHorizontal: 10,
-            }}>
+          <View style={{}}>
             <View>
               <Text
                 style={{
@@ -761,7 +820,7 @@ const PlayGameScreen = () => {
                   backgroundColor: 'lightblue',
                   borderWidth: 2,
                   borderRightWidth: 0,
-                  borderColor: '#fa8e9a',
+                  borderColor: '#ffdede',
                   borderTopLeftRadius: 5,
                   borderBottomLeftRadius: 5,
                 }}>
@@ -783,7 +842,7 @@ const PlayGameScreen = () => {
                   alignItems: 'center',
                   borderColor: 'lightblue',
                   borderRadius: 5,
-                  backgroundColor: '#fa8e9a',
+                  backgroundColor: '#ffdede',
                   // borderLeftWidth: 0,
                 }}>
                 <TouchableWithoutFeedback
