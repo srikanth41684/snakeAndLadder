@@ -15,8 +15,8 @@ const Dice = ({diseNumber, active}) => {
         }}>
         <View
           style={{
-            width: 60,
-            height: 60,
+            width: 45,
+            height: 45,
             backgroundColor: active ? '#fff' : 'lightgray',
             borderRadius: 8,
           }}>
@@ -29,10 +29,10 @@ const Dice = ({diseNumber, active}) => {
               }}>
               <View
                 style={{
-                  width: 15,
-                  height: 15,
+                  width: 11,
+                  height: 11,
                   backgroundColor: '#000',
-                  borderRadius: 15 / 2,
+                  borderRadius: 11 / 2,
                 }}></View>
             </View>
           )}
@@ -47,8 +47,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    right: 5,
-                    top: 5,
+                    right: 6,
+                    top: 6,
                   },
                 ]}></View>
               <View
@@ -56,8 +56,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    bottom: 5,
-                    left: 5,
+                    bottom: 6,
+                    left: 6,
                   },
                 ]}></View>
             </View>
@@ -75,8 +75,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    right: 5,
-                    top: 5,
+                    right: 6,
+                    top: 6,
                   },
                 ]}></View>
               <View style={[styles.dot]}></View>
@@ -85,8 +85,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    bottom: 5,
-                    left: 5,
+                    bottom: 6,
+                    left: 6,
                   },
                 ]}></View>
             </View>
@@ -104,8 +104,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    left: 5,
-                    top: 5,
+                    left: 6,
+                    top: 6,
                   },
                 ]}></View>
               <View
@@ -113,8 +113,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    right: 5,
-                    top: 5,
+                    right: 6,
+                    top: 6,
                   },
                 ]}></View>
               <View
@@ -122,8 +122,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    right: 5,
-                    bottom: 5,
+                    right: 6,
+                    bottom: 6,
                   },
                 ]}></View>
               <View
@@ -131,8 +131,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    bottom: 5,
-                    left: 5,
+                    bottom: 6,
+                    left: 6,
                   },
                 ]}></View>
             </View>
@@ -150,8 +150,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    left: 5,
-                    top: 5,
+                    left: 6,
+                    top: 6,
                   },
                 ]}></View>
               <View
@@ -159,8 +159,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    right: 5,
-                    top: 5,
+                    right: 6,
+                    top: 6,
                   },
                 ]}></View>
               <View style={[styles.dot]}></View>
@@ -169,8 +169,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    right: 5,
-                    bottom: 5,
+                    right: 6,
+                    bottom: 6,
                   },
                 ]}></View>
               <View
@@ -178,8 +178,8 @@ const Dice = ({diseNumber, active}) => {
                   styles.dot,
                   {
                     position: 'absolute',
-                    bottom: 5,
-                    left: 5,
+                    bottom: 6,
+                    left: 6,
                   },
                 ]}></View>
             </View>
@@ -191,7 +191,7 @@ const Dice = ({diseNumber, active}) => {
                 justifyContent: 'space-between',
                 flexDirection: 'row',
                 position: 'relative',
-                padding: 5,
+                padding: 6,
               }}>
               <View
                 style={{
@@ -221,9 +221,9 @@ export default Dice;
 
 const styles = StyleSheet.create({
   dot: {
-    width: 15,
-    height: 15,
+    width: 9,
+    height: 9,
     backgroundColor: '#000',
-    borderRadius: 15 / 2,
+    borderRadius: 9 / 2,
   },
 });

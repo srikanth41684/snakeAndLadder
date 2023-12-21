@@ -650,7 +650,7 @@ const PlayGameScreen = () => {
               }}></View>
           )}
         </View>
-        <View
+        {/* <View
           style={{
             paddingTop: 20,
           }}>
@@ -678,12 +678,6 @@ const PlayGameScreen = () => {
                 if (commObj.active) {
                   disePlayerHanlder(commObj.player);
                 }
-                // if (commObj.player == 'p1') {
-                //   disePlayer1Hanlder();
-                // }
-                // if (commObj.player == 'p2') {
-                //   disePlayer2Hanlder();
-                // }
               }}>
               <View style={{}}>
                 <Dice diseNumber={commObj.diseNumber} active={commObj.active} />
@@ -733,6 +727,80 @@ const PlayGameScreen = () => {
                 </Text>
               </View>
             </TouchableWithoutFeedback>
+          </View>
+        </View> */}
+        <View
+          style={{
+            paddingTop: 30,
+          }}>
+          <View
+            style={{
+              paddingHorizontal: 10,
+            }}>
+            <View>
+              <Text
+                style={{
+                  fontSize: 14,
+                  lineHeight: 21,
+                  color: '#000',
+                }}>
+                Player1
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  height: 50,
+                  width: 50,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'lightblue',
+                  borderWidth: 2,
+                  borderRightWidth: 0,
+                  borderColor: '#fa8e9a',
+                  borderTopLeftRadius: 5,
+                  borderBottomLeftRadius: 5,
+                }}>
+                <Image
+                  style={{
+                    width: 35,
+                    resizeMode: 'contain',
+                    height: 35,
+                  }}
+                  source={require('../../../assets/images/bluekey.png')}
+                />
+              </View>
+              <View
+                style={{
+                  borderWidth: 2,
+                  height: 60,
+                  width: 60,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderColor: 'lightblue',
+                  borderRadius: 5,
+                  backgroundColor: '#fa8e9a',
+                  // borderLeftWidth: 0,
+                }}>
+                <TouchableWithoutFeedback
+                  onPress={() => {
+                    if (commObj.active) {
+                      disePlayerHanlder(commObj.player);
+                    }
+                  }}>
+                  <View style={{}}>
+                    <Dice
+                      diseNumber={commObj.diseNumber}
+                      active={commObj.active}
+                    />
+                  </View>
+                </TouchableWithoutFeedback>
+              </View>
+            </View>
           </View>
         </View>
         {commObj.playerOneCount == 100 || commObj.playerTwoCount == 100 ? (
