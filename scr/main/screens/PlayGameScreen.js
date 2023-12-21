@@ -443,13 +443,23 @@ const PlayGameScreen = () => {
         style={{
           flex: 1,
           backgroundColor: '#fff',
+          paddingTop: 20,
         }}>
         <View
           style={{
-            marginVertical: 20,
             paddingHorizontal: 10,
+            alignItems: 'flex-end',
+            paddingVertical: 10,
           }}>
-          <View
+          <Dice
+            diseNumber={commObj.diseNumber}
+            active={commObj.active}
+            player={commObj.player}
+            disePlayerHanlder={disePlayerHanlder}
+            number={'p2'}
+            src={require('../../../assets/images/redkey.png')}
+          />
+          {/* <View
             style={{
               alignItems: 'flex-end',
             }}>
@@ -519,7 +529,7 @@ const PlayGameScreen = () => {
                 Player2
               </Text>
             </View>
-          </View>
+          </View> */}
         </View>
         <View
           style={{
@@ -682,6 +692,35 @@ const PlayGameScreen = () => {
                             </View>
                           )}
                         </View>
+                        {item2 == 1 && (
+                          <View
+                            style={{
+                              position: 'absolute',
+                              bottom: 3,
+                              left: 3,
+                              flexDirection: 'row',
+                              gap: 5,
+                            }}>
+                            {commObj.playerOneCount == null && (
+                              <View
+                                style={{
+                                  width: 10,
+                                  height: 10,
+                                  borderRadius: 10 / 2,
+                                  backgroundColor: 'blue',
+                                }}></View>
+                            )}
+                            {commObj.playerTwoCount == null && (
+                              <View
+                                style={{
+                                  width: 10,
+                                  height: 10,
+                                  borderRadius: 10 / 2,
+                                  backgroundColor: 'red',
+                                }}></View>
+                            )}
+                          </View>
+                        )}
                       </View>
                     );
                   })}
@@ -689,30 +728,7 @@ const PlayGameScreen = () => {
               );
             })}
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            gap: 5,
-          }}>
-          {commObj.playerOneCount == null && (
-            <View
-              style={{
-                width: 10,
-                height: 10,
-                borderRadius: 10 / 2,
-                backgroundColor: 'blue',
-              }}></View>
-          )}
-          {commObj.playerTwoCount == null && (
-            <View
-              style={{
-                width: 10,
-                height: 10,
-                borderRadius: 10 / 2,
-                backgroundColor: 'red',
-              }}></View>
-          )}
-        </View>
+
         {/* <View
           style={{
             paddingTop: 20,
@@ -797,7 +813,15 @@ const PlayGameScreen = () => {
             paddingTop: 20,
             paddingHorizontal: 10,
           }}>
-          <View style={{}}>
+          <Dice
+            diseNumber={commObj.diseNumber}
+            active={commObj.active}
+            player={commObj.player}
+            disePlayerHanlder={disePlayerHanlder}
+            number={'p1'}
+            src={require('../../../assets/images/bluekey.png')}
+          />
+          {/* <View style={{}}>
             <View>
               <Text
                 style={{
@@ -864,7 +888,7 @@ const PlayGameScreen = () => {
                 )}
               </View>
             </View>
-          </View>
+          </View> */}
         </View>
         {commObj.playerOneCount == 100 || commObj.playerTwoCount == 100 ? (
           <Modal animationType="fade" transparent={true}>
