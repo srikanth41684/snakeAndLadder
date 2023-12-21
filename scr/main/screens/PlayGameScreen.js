@@ -470,19 +470,21 @@ const PlayGameScreen = () => {
                   backgroundColor: '#ffdede',
                   // borderLeftWidth: 0,
                 }}>
-                <TouchableWithoutFeedback
-                  onPress={() => {
-                    if (commObj.active) {
-                      disePlayerHanlder(commObj.player);
-                    }
-                  }}>
-                  <View style={{}}>
-                    <Dice
-                      diseNumber={commObj.diseNumber}
-                      active={commObj.active}
-                    />
-                  </View>
-                </TouchableWithoutFeedback>
+                {commObj.player == 'p2' && (
+                  <TouchableWithoutFeedback
+                    onPress={() => {
+                      if (commObj.active) {
+                        disePlayerHanlder(commObj.player);
+                      }
+                    }}>
+                    <View style={{}}>
+                      <Dice
+                        diseNumber={commObj.diseNumber}
+                        active={commObj.active}
+                      />
+                    </View>
+                  </TouchableWithoutFeedback>
+                )}
               </View>
               <View
                 style={{
@@ -845,19 +847,21 @@ const PlayGameScreen = () => {
                   backgroundColor: '#ffdede',
                   // borderLeftWidth: 0,
                 }}>
-                <TouchableWithoutFeedback
-                  onPress={() => {
-                    if (commObj.active) {
-                      disePlayerHanlder(commObj.player);
-                    }
-                  }}>
-                  <View style={{}}>
-                    <Dice
-                      diseNumber={commObj.diseNumber}
-                      active={commObj.active}
-                    />
-                  </View>
-                </TouchableWithoutFeedback>
+                {commObj.player == 'p1' && (
+                  <TouchableWithoutFeedback
+                    onPress={() => {
+                      if (commObj.active) {
+                        disePlayerHanlder(commObj.player);
+                      }
+                    }}>
+                    <View style={{}}>
+                      <Dice
+                        diseNumber={commObj.diseNumber}
+                        active={commObj.active}
+                      />
+                    </View>
+                  </TouchableWithoutFeedback>
+                )}
               </View>
             </View>
           </View>
