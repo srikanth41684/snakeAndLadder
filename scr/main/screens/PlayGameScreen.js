@@ -12,6 +12,7 @@ import CustomLadder from '../components/CustomLadder';
 import CustomSnakes from '../components/CustomSnakes';
 import Dice from '../components/Dice';
 import PlayerCoin from '../components/PlayerCoin';
+import UserIndicator from '../components/UserIndicator';
 
 const PlayGameScreen = () => {
   const colors = ['coral', 'green', '#2ae830', 'red'];
@@ -460,17 +461,31 @@ const PlayGameScreen = () => {
         <View
           style={{
             paddingHorizontal: 10,
-            alignItems: 'flex-end',
+            alignItems: 'center',
+            flexDirection: 'row',
             paddingVertical: 10,
+            alignSelf: 'flex-end',
           }}>
-          <Dice
-            diseNumber={commObj.diseNumber}
-            active={commObj.active}
-            player={commObj.player}
-            disePlayerHanlder={disePlayerHanlder}
-            number={'p2'}
-            src={require('../../../assets/images/redkey.png')}
-          />
+          {commObj.player == 'p2' && commObj.active && (
+            <View
+              style={{
+                paddingTop: 20,
+                paddingLeft: 15,
+                transform: [{rotate: '180deg'}],
+              }}>
+              <UserIndicator />
+            </View>
+          )}
+          <View>
+            <Dice
+              diseNumber={commObj.diseNumber}
+              active={commObj.active}
+              player={commObj.player}
+              disePlayerHanlder={disePlayerHanlder}
+              number={'p2'}
+              src={require('../../../assets/images/redkey.png')}
+            />
+          </View>
         </View>
         <View
           style={{
@@ -673,15 +688,28 @@ const PlayGameScreen = () => {
           style={{
             paddingTop: 20,
             paddingHorizontal: 10,
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 15,
           }}>
-          <Dice
-            diseNumber={commObj.diseNumber}
-            active={commObj.active}
-            player={commObj.player}
-            disePlayerHanlder={disePlayerHanlder}
-            number={'p1'}
-            src={require('../../../assets/images/bluekey.png')}
-          />
+          <View>
+            <Dice
+              diseNumber={commObj.diseNumber}
+              active={commObj.active}
+              player={commObj.player}
+              disePlayerHanlder={disePlayerHanlder}
+              number={'p1'}
+              src={require('../../../assets/images/bluekey.png')}
+            />
+          </View>
+          {commObj.player == 'p1' && commObj.active && (
+            <View
+              style={{
+                paddingTop: 20,
+              }}>
+              <UserIndicator />
+            </View>
+          )}
         </View>
         {commObj.playerOneCount == 100 || commObj.playerTwoCount == 100 ? (
           <Modal animationType="fade" transparent={true}>
