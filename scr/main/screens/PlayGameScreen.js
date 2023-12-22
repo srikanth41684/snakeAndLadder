@@ -5,6 +5,7 @@ import {
   TouchableWithoutFeedback,
   Modal,
   Image,
+  TextInput,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import CustomLadder from '../components/CustomLadder';
@@ -16,6 +17,24 @@ const PlayGameScreen = () => {
   const colors = ['coral', 'green', '#2ae830', 'red'];
   const [commObj, setCommObj] = useState({
     NumbersArray: [],
+    numberOfPlayers: [
+      {
+        playerNumber: 1,
+        playerName: 'Player1',
+      },
+      {
+        playerNumber: 2,
+        playerName: 'Player2',
+      },
+      {
+        playerNumber: 3,
+        playerName: 'Player1',
+      },
+      {
+        playerNumber: 4,
+        playerName: 'Player2',
+      },
+    ],
     player: 'p1',
     diseNumber: 1,
     playerOneCount: null,
@@ -25,13 +44,6 @@ const PlayGameScreen = () => {
     snakesLines: null,
     laddersLines: null,
     active: true,
-    // ladderSnakes: [
-    //   [22, 4],
-    //   [44, 6],
-    //   [65, 27],
-    //   [6, 64],
-    //   [16, 45],
-    // ],
   });
 
   useEffect(() => {
@@ -792,13 +804,16 @@ const PlayGameScreen = () => {
                     alignItems: 'center',
                     gap: 5,
                   }}>
-                  <View
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderRadius: 20 / 2,
-                      backgroundColor: 'blue',
-                    }}></View>
+                  <View>
+                    <Image
+                      style={{
+                        width: 20,
+                        height: 20,
+                        resizeMode: 'contain',
+                      }}
+                      source={require('../../../assets/images/bluekey.png')}
+                    />
+                  </View>
                   <View
                     style={{
                       width: 200,
@@ -820,13 +835,16 @@ const PlayGameScreen = () => {
                     alignItems: 'center',
                     gap: 5,
                   }}>
-                  <View
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderRadius: 20 / 2,
-                      backgroundColor: 'red',
-                    }}></View>
+                  <View>
+                    <Image
+                      style={{
+                        width: 20,
+                        height: 20,
+                        resizeMode: 'contain',
+                      }}
+                      source={require('../../../assets/images/redkey.png')}
+                    />
+                  </View>
                   <View
                     style={{
                       width: 200,
@@ -842,6 +860,115 @@ const PlayGameScreen = () => {
                     />
                   </View>
                 </View>
+                {commObj.numberOfPlayers == 3 && (
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      gap: 5,
+                    }}>
+                    <View>
+                      <Image
+                        style={{
+                          width: 20,
+                          height: 20,
+                          resizeMode: 'contain',
+                        }}
+                        source={require('../../../assets/images/greenkey.png')}
+                      />
+                    </View>
+                    <View
+                      style={{
+                        width: 200,
+                      }}>
+                      <TextInput
+                        style={{
+                          borderWidth: 0.5,
+                          padding: 0,
+                          borderRadius: 8,
+                          paddingLeft: 5,
+                        }}
+                        placeholder="Player 3"
+                      />
+                    </View>
+                  </View>
+                )}
+                {commObj.numberOfPlayers == 4 && (
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      gap: 5,
+                    }}>
+                    <View>
+                      <Image
+                        style={{
+                          width: 20,
+                          height: 20,
+                          resizeMode: 'contain',
+                        }}
+                        source={require('../../../assets/images/yellowkey.png')}
+                      />
+                    </View>
+                    <View
+                      style={{
+                        width: 200,
+                      }}>
+                      <TextInput
+                        style={{
+                          borderWidth: 0.5,
+                          padding: 0,
+                          borderRadius: 8,
+                          paddingLeft: 5,
+                        }}
+                        placeholder="Player 4"
+                      />
+                    </View>
+                  </View>
+                )}
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  gap: 10,
+                }}>
+                {[1, 2, 3, 4].map((item, index) => {
+                  return (
+                    <View key={index}>
+                      <TouchableWithoutFeedback
+                        onPress={() => {
+                          setCommObj(prev => ({
+                            ...prev,
+                            numberOfPlayers: item,
+                          }));
+                        }}>
+                        <View
+                          style={{
+                            width: 40,
+                            height: 30,
+                            borderWidth: 3,
+                            borderRadius: 10,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            backgroundColor:
+                              item == commObj.numberOfPlayers
+                                ? 'coral'
+                                : '#fff',
+                          }}>
+                          <Text
+                            style={{
+                              fontSize: 16,
+                              lineHeight: 23,
+                              fontWeight: '500',
+                              color: '#000',
+                            }}>
+                            {item}P
+                          </Text>
+                        </View>
+                      </TouchableWithoutFeedback>
+                    </View>
+                  );
+                })}
               </View>
               <View>
                 <TouchableWithoutFeedback>
