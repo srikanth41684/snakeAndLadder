@@ -38,8 +38,8 @@ const Dice = ({
           }}>
           <View
             style={{
-              height: 50,
-              width: 50,
+              height: 40,
+              width: 40,
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: 'lightblue',
@@ -51,9 +51,9 @@ const Dice = ({
             }}>
             <Image
               style={{
-                width: 35,
+                width: 25,
                 resizeMode: 'contain',
-                height: 35,
+                height: 25,
               }}
               source={src}
             />
@@ -61,8 +61,8 @@ const Dice = ({
           <View
             style={{
               borderWidth: 2,
-              height: 60,
-              width: 60,
+              height: 50,
+              width: 50,
               justifyContent: 'center',
               alignItems: 'center',
               borderColor: 'lightblue',
@@ -80,10 +80,10 @@ const Dice = ({
                 <View style={{}}>
                   <View
                     style={{
-                      width: 45,
-                      height: 45,
+                      width: 40,
+                      height: 40,
                       backgroundColor: active ? '#fff' : 'lightgray',
-                      borderRadius: 8,
+                      borderRadius: 5,
                     }}>
                     {diseNumber == 1 && (
                       <View
@@ -315,9 +315,9 @@ export default Dice;
 
 const styles = StyleSheet.create({
   dot: {
-    width: 9,
-    height: 9,
+    width: 8,
+    height: 8,
     backgroundColor: '#000',
-    borderRadius: 9 / 2,
+    borderRadius: 8 / 2,
   },
 });
