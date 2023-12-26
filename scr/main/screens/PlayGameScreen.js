@@ -454,29 +454,62 @@ const PlayGameScreen = () => {
             alignItems: 'center',
             flexDirection: 'row',
             paddingVertical: 10,
-            alignSelf: 'flex-end',
+            justifyContent:
+              commObj.numberOfPlayers > 2 ? 'space-between' : 'flex-end',
           }}>
-          {commObj.player == 'p2' && commObj.active && (
+          <View
+            style={{
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}>
+            <View>
+              <Dice
+                diseNumber={commObj.diseNumber}
+                active={commObj.active}
+                player={commObj.player}
+                disePlayerHanlder={disePlayerHanlder}
+                number={'p2'}
+                name={commObj.playerTwoName}
+                src={require('../../../assets/images/redkey.png')}
+              />
+            </View>
+            {commObj.player == 'p2' && commObj.active && (
+              <View
+                style={{
+                  paddingLeft: 15,
+                }}>
+                <UserIndicator />
+              </View>
+            )}
+          </View>
+          {commObj.numberOfPlayers > 2 && (
             <View
               style={{
-                paddingTop: 20,
-                paddingLeft: 15,
-                transform: [{rotate: '180deg'}],
+                alignItems: 'center',
+                flexDirection: 'row',
               }}>
-              <UserIndicator />
+              {commObj.player == 'p3' && commObj.active && (
+                <View
+                  style={{
+                    paddingLeft: 15,
+                    transform: [{rotate: '180deg'}],
+                  }}>
+                  <UserIndicator />
+                </View>
+              )}
+              <View>
+                <Dice
+                  diseNumber={commObj.diseNumber}
+                  active={commObj.active}
+                  player={commObj.player}
+                  disePlayerHanlder={disePlayerHanlder}
+                  number={'p3'}
+                  name={commObj.playerTwoName}
+                  src={require('../../../assets/images/yellowkey.png')}
+                />
+              </View>
             </View>
           )}
-          <View>
-            <Dice
-              diseNumber={commObj.diseNumber}
-              active={commObj.active}
-              player={commObj.player}
-              disePlayerHanlder={disePlayerHanlder}
-              number={'p2'}
-              name={commObj.playerTwoName}
-              src={require('../../../assets/images/redkey.png')}
-            />
-          </View>
         </View>
         <View
           style={{
@@ -681,25 +714,61 @@ const PlayGameScreen = () => {
             paddingHorizontal: 10,
             flexDirection: 'row',
             alignItems: 'center',
-            gap: 15,
+            justifyContent: 'space-between',
           }}>
-          <View>
-            <Dice
-              diseNumber={commObj.diseNumber}
-              active={commObj.active}
-              player={commObj.player}
-              disePlayerHanlder={disePlayerHanlder}
-              number={'p1'}
-              name={commObj.playerOneName}
-              src={require('../../../assets/images/bluekey.png')}
-            />
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 15,
+            }}>
+            <View>
+              <Dice
+                diseNumber={commObj.diseNumber}
+                active={commObj.active}
+                player={commObj.player}
+                disePlayerHanlder={disePlayerHanlder}
+                number={'p1'}
+                name={commObj.playerOneName}
+                src={require('../../../assets/images/bluekey.png')}
+              />
+            </View>
+            {commObj.player == 'p1' && commObj.active && (
+              <View
+                style={{
+                  paddingTop: 20,
+                }}>
+                <UserIndicator />
+              </View>
+            )}
           </View>
-          {commObj.player == 'p1' && commObj.active && (
+          {commObj.numberOfPlayers > 3 && (
             <View
               style={{
-                paddingTop: 20,
+                flexDirection: 'row-reverse',
+                alignItems: 'center',
+                gap: 15,
               }}>
-              <UserIndicator />
+              <View>
+                <Dice
+                  diseNumber={commObj.diseNumber}
+                  active={commObj.active}
+                  player={commObj.player}
+                  disePlayerHanlder={disePlayerHanlder}
+                  number={'p4'}
+                  name={commObj.playerOneName}
+                  src={require('../../../assets/images/greenkey.png')}
+                />
+              </View>
+              {commObj.player == 'p4' && commObj.active && (
+                <View
+                  style={{
+                    paddingLeft: 15,
+                    transform: [{rotate: '180deg'}],
+                  }}>
+                  <UserIndicator />
+                </View>
+              )}
             </View>
           )}
         </View>

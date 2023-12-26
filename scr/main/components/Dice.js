@@ -294,6 +294,18 @@ const Dice = ({
             </Text>
           </View>
         )}
+        {number == 'p3' && (
+          <View>
+            <Text
+              style={{
+                fontSize: 14,
+                lineHeight: 21,
+                color: '#000',
+              }}>
+              {name !== '' ? name : 'Player3'}
+            </Text>
+          </View>
+        )}
       </View>
     </View>
   );
