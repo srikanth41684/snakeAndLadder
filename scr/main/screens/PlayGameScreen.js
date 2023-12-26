@@ -130,7 +130,13 @@ const PlayGameScreen = () => {
   async function disePlayerHanlder(player) {
     let randomNum = Math.floor(Math.random() * 6) + 1;
     let playerCount =
-      player == 'p1' ? commObj.playerOneCount : commObj.playerTwoCount;
+      player === 'p1'
+        ? commObj.playerOneCount
+        : player === 'p2'
+        ? commObj.playerTwoCount
+        : player === 'p3'
+        ? commObj.PlayerThreeCount
+        : commObj.playerFourCount;
     setCommObj(prev => ({
       ...prev,
       diseNumber: randomNum,
@@ -146,12 +152,18 @@ const PlayGameScreen = () => {
           ...prev,
           playerOneCount: player === 'p1' ? i : prev.playerOneCount,
           playerTwoCount: player === 'p2' ? i : prev.playerTwoCount,
+          PlayerThreeCount: player === 'p3' ? i : prev.PlayerThreeCount,
+          playerFourCount: player === 'p4' ? i : prev.playerFourCount,
         }));
       }
       if (player === 'p1') {
         playerOneSnakeLadderHandler(playerCount + randomNum);
-      } else {
+      } else if (player === 'p2') {
         playerTwoSnakeLadderHandler(playerCount + randomNum);
+      } else if (player === 'p3') {
+        playerThreeSnakeLadderHandler(playerCount + randomNum);
+      } else {
+        playerFourSnakeLadderHandler(playerCount + randomNum);
       }
       setCommObj(prev => ({
         ...prev,
@@ -161,7 +173,18 @@ const PlayGameScreen = () => {
       setCommObj(prev => ({
         ...prev,
         diseNumber: randomNum,
-        player: player === 'p1' ? 'p2' : 'p1',
+        player:
+          player === 'p1'
+            ? 'p2'
+            : player === 'p2'
+            ? prev.numberOfPlayers > 2
+              ? 'p3'
+              : 'p1'
+            : player === 'p3'
+            ? prev.numberOfPlayers > 3
+              ? 'p4'
+              : 'p1'
+            : 'p1',
         active: true,
       }));
     }
@@ -218,6 +241,48 @@ const PlayGameScreen = () => {
             setCommObj(prev => ({
               ...prev,
               playerTwoCount: item[value],
+              player: prev.numberOfPlayers > 2 ? 'p3' : 'p1',
+            }));
+          }, 100);
+        } else {
+          setCommObj(prev => ({
+            ...prev,
+            player: prev.numberOfPlayers > 2 ? 'p3' : 'p1',
+          }));
+        }
+      });
+    }
+  }
+
+  function playerThreeSnakeLadderHandler(value) {
+    if (commObj.ladderSnakes) {
+      commObj.ladderSnakes.forEach(item => {
+        if (value in item) {
+          setTimeout(() => {
+            setCommObj(prev => ({
+              ...prev,
+              PlayerThreeCount: item[value],
+              player: prev.numberOfPlayers > 3 ? 'p4' : 'p1',
+            }));
+          }, 100);
+        } else {
+          setCommObj(prev => ({
+            ...prev,
+            player: prev.numberOfPlayers > 3 ? 'p4' : 'p1',
+          }));
+        }
+      });
+    }
+  }
+
+  function playerFourSnakeLadderHandler(value) {
+    if (commObj.ladderSnakes) {
+      commObj.ladderSnakes.forEach(item => {
+        if (value in item) {
+          setTimeout(() => {
+            setCommObj(prev => ({
+              ...prev,
+              playerFourCount: item[value],
               player: 'p1',
             }));
           }, 100);
@@ -671,6 +736,86 @@ const PlayGameScreen = () => {
                                 }}></View>
                             </View>
                           )}
+                          {commObj.PlayerThreeCount == item2 && (
+                            <View
+                              style={{
+                                position: 'relative',
+                              }}>
+                              {commObj.player == 'p3' && commObj.active && (
+                                <View
+                                  style={{
+                                    position: 'absolute',
+                                    top: 13,
+                                  }}>
+                                  <PlayerCoin />
+                                </View>
+                              )}
+                              <Image
+                                style={{
+                                  width:
+                                    commObj.playerOneCount ==
+                                    commObj.playerTwoCount
+                                      ? 20
+                                      : 30,
+                                  resizeMode: 'contain',
+                                  height:
+                                    commObj.playerOneCount ==
+                                    commObj.playerTwoCount
+                                      ? 20
+                                      : 30,
+                                }}
+                                source={require('../../../assets/images/yellowkey.png')}
+                              />
+                              <View
+                                style={{
+                                  width: 20,
+                                  height: 6,
+                                  backgroundColor: 'gray',
+                                  alignSelf: 'center',
+                                  borderRadius: 50,
+                                }}></View>
+                            </View>
+                          )}
+                          {commObj.playerFourCount == item2 && (
+                            <View
+                              style={{
+                                position: 'relative',
+                              }}>
+                              {commObj.player == 'p4' && commObj.active && (
+                                <View
+                                  style={{
+                                    position: 'absolute',
+                                    top: 13,
+                                  }}>
+                                  <PlayerCoin />
+                                </View>
+                              )}
+                              <Image
+                                style={{
+                                  width:
+                                    commObj.playerOneCount ==
+                                    commObj.playerTwoCount
+                                      ? 20
+                                      : 30,
+                                  resizeMode: 'contain',
+                                  height:
+                                    commObj.playerOneCount ==
+                                    commObj.playerTwoCount
+                                      ? 20
+                                      : 30,
+                                }}
+                                source={require('../../../assets/images/greenkey.png')}
+                              />
+                              <View
+                                style={{
+                                  width: 20,
+                                  height: 6,
+                                  backgroundColor: 'gray',
+                                  alignSelf: 'center',
+                                  borderRadius: 50,
+                                }}></View>
+                            </View>
+                          )}
                         </View>
                         {item2 == 1 && (
                           <View
@@ -679,6 +824,7 @@ const PlayGameScreen = () => {
                               bottom: 3,
                               left: 3,
                               flexDirection: 'row',
+                              flexWrap: 'wrap',
                               gap: 5,
                             }}>
                             {commObj.playerOneCount == null && (
@@ -697,6 +843,24 @@ const PlayGameScreen = () => {
                                   height: 10,
                                   borderRadius: 10 / 2,
                                   backgroundColor: 'red',
+                                }}></View>
+                            )}
+                            {commObj.PlayerThreeCount == null && (
+                              <View
+                                style={{
+                                  width: 10,
+                                  height: 10,
+                                  borderRadius: 10 / 2,
+                                  backgroundColor: 'yellow',
+                                }}></View>
+                            )}
+                            {commObj.playerFourCount == null && (
+                              <View
+                                style={{
+                                  width: 10,
+                                  height: 10,
+                                  borderRadius: 10 / 2,
+                                  backgroundColor: 'green',
                                 }}></View>
                             )}
                           </View>
