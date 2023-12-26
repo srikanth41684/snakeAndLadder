@@ -504,7 +504,7 @@ const PlayGameScreen = () => {
                   player={commObj.player}
                   disePlayerHanlder={disePlayerHanlder}
                   number={'p3'}
-                  name={commObj.playerTwoName}
+                  name={commObj.playerThreeName}
                   src={require('../../../assets/images/yellowkey.png')}
                 />
               </View>
@@ -756,7 +756,7 @@ const PlayGameScreen = () => {
                   player={commObj.player}
                   disePlayerHanlder={disePlayerHanlder}
                   number={'p4'}
-                  name={commObj.playerOneName}
+                  name={commObj.playerFourName}
                   src={require('../../../assets/images/greenkey.png')}
                 />
               </View>

@@ -31,6 +31,18 @@ const Dice = ({
             </Text>
           </View>
         )}
+        {number == 'p4' && (
+          <View>
+            <Text
+              style={{
+                fontSize: 14,
+                lineHeight: 21,
+                color: '#000',
+              }}>
+              {name !== '' ? name : 'Player4'}
+            </Text>
+          </View>
+        )}
         <View
           style={{
             flexDirection: 'row',
