@@ -24,18 +24,18 @@ const HomeScreen = () => {
       duration: 500,
       useNativeDriver: false,
     }).start(() => {
-      position.setValue(0); // Reset position after the animation completes
-      moveLeftToRight(); // Start the animation again in a loop
+      position.setValue(0);
+      moveLeftToRight();
     });
   };
 
   useEffect(() => {
-    moveLeftToRight(); // Start the initial animation
+    moveLeftToRight();
   }, []);
 
   const interpolatedX = position.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 20], // Adjust the distance as needed
+    outputRange: [0, 20],
   });
   return (
     <SafeAreaView

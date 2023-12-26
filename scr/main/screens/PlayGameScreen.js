@@ -18,27 +18,22 @@ const PlayGameScreen = () => {
   const colors = ['coral', 'green', '#2ae830', 'red'];
   const [commObj, setCommObj] = useState({
     NumbersArray: [],
+    modal: true,
     numberOfPlayers: [
       {
         playerNumber: 1,
-        playerName: 'Player1',
+        playerName: '',
       },
       {
         playerNumber: 2,
-        playerName: 'Player2',
-      },
-      {
-        playerNumber: 3,
-        playerName: 'Player1',
-      },
-      {
-        playerNumber: 4,
-        playerName: 'Player2',
+        playerName: '',
       },
     ],
     player: 'p1',
     diseNumber: 1,
+    playerOneName: '',
     playerOneCount: null,
+    playerTwoName: '',
     playerTwoCount: null,
     ladderSnakes: null,
     refresh: false,
@@ -483,6 +478,7 @@ const PlayGameScreen = () => {
               player={commObj.player}
               disePlayerHanlder={disePlayerHanlder}
               number={'p2'}
+              name={commObj.playerTwoName}
               src={require('../../../assets/images/redkey.png')}
             />
           </View>
@@ -699,6 +695,7 @@ const PlayGameScreen = () => {
               player={commObj.player}
               disePlayerHanlder={disePlayerHanlder}
               number={'p1'}
+              name={commObj.playerOneName}
               src={require('../../../assets/images/bluekey.png')}
             />
           </View>
@@ -742,10 +739,14 @@ const PlayGameScreen = () => {
                         : '#000',
                   }}>
                   {commObj.playerOneCount == 100
-                    ? 'Player 1'
+                    ? commObj.playerOneName !== ''
+                      ? commObj.playerOneName
+                      : 'Player 1'
                     : commObj.playerTwoCount == 100
-                    ? 'Playe 2'
-                    : ''}
+                    ? commObj.playerTwoName !== ''
+                      ? commObj.playerTwoName
+                      : 'Player 2'
+                    : ''}{' '}
                   Win
                 </Text>
                 <View
@@ -790,7 +791,7 @@ const PlayGameScreen = () => {
             </View>
           </Modal>
         ) : null}
-        {/* <Modal animationType="fade" transparent={true}>
+        <Modal visible={commObj.modal} animationType="fade" transparent={true}>
           <View
             style={{
               flex: 1,
@@ -852,6 +853,17 @@ const PlayGameScreen = () => {
                         padding: 0,
                         borderRadius: 8,
                         paddingLeft: 5,
+                        fontSize: 14,
+                        lineHeight: 21,
+                        color: '#000',
+                      }}
+                      placeholderTextColor="gray"
+                      value={commObj.playerOneName}
+                      onChangeText={text => {
+                        setCommObj(prev => ({
+                          ...prev,
+                          playerOneName: text,
+                        }));
                       }}
                       placeholder="Player 1"
                     />
@@ -883,12 +895,23 @@ const PlayGameScreen = () => {
                         padding: 0,
                         borderRadius: 8,
                         paddingLeft: 5,
+                        fontSize: 14,
+                        lineHeight: 21,
+                        color: '#000',
                       }}
+                      placeholderTextColor="gray"
                       placeholder="Player 2"
+                      value={commObj.playerTwoName}
+                      onChangeText={text => {
+                        setCommObj(prev => ({
+                          ...prev,
+                          playerTwoName: text,
+                        }));
+                      }}
                     />
                   </View>
                 </View>
-                {commObj.numberOfPlayers == 3 && (
+                {/* {commObj.numberOfPlayers == 3 && (
                   <View
                     style={{
                       flexDirection: 'row',
@@ -953,14 +976,14 @@ const PlayGameScreen = () => {
                       />
                     </View>
                   </View>
-                )}
+                )} */}
               </View>
-              <View
+              {/* <View
                 style={{
                   flexDirection: 'row',
                   gap: 10,
                 }}>
-                {[1, 2, 3, 4].map((item, index) => {
+                {[2, 3, 4].map((item, index) => {
                   return (
                     <View key={index}>
                       <TouchableWithoutFeedback
@@ -997,9 +1020,15 @@ const PlayGameScreen = () => {
                     </View>
                   );
                 })}
-              </View>
+              </View> */}
               <View>
-                <TouchableWithoutFeedback>
+                <TouchableWithoutFeedback
+                  onPress={() => {
+                    setCommObj(prev => ({
+                      ...prev,
+                      modal: false,
+                    }));
+                  }}>
                   <View
                     style={{
                       backgroundColor: 'skyblue',
@@ -1013,7 +1042,7 @@ const PlayGameScreen = () => {
               </View>
             </View>
           </View>
-        </Modal> */}
+        </Modal>
       </View>
     </SafeAreaView>
   );

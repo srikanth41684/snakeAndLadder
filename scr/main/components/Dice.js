@@ -7,7 +7,15 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const Dice = ({diseNumber, active, player, disePlayerHanlder, number, src}) => {
+const Dice = ({
+  diseNumber,
+  active,
+  player,
+  disePlayerHanlder,
+  number,
+  name,
+  src,
+}) => {
   return (
     <View>
       <View style={{}}>
@@ -19,7 +27,7 @@ const Dice = ({diseNumber, active, player, disePlayerHanlder, number, src}) => {
                 lineHeight: 21,
                 color: '#000',
               }}>
-              Player1
+              {name !== '' ? name : 'Player1'}
             </Text>
           </View>
         )}
@@ -282,7 +290,7 @@ const Dice = ({diseNumber, active, player, disePlayerHanlder, number, src}) => {
                 lineHeight: 21,
                 color: '#000',
               }}>
-              Player2
+              {name !== '' ? name : 'Player2'}
             </Text>
           </View>
         )}

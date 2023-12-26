@@ -1,4 +1,4 @@
-import {View, Animated} from 'react-native';
+import {View, Animated, Easing} from 'react-native';
 import React, {useEffect, useRef} from 'react';
 
 const UserIndicator = () => {
