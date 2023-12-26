@@ -35,6 +35,10 @@ const PlayGameScreen = () => {
     playerOneCount: null,
     playerTwoName: '',
     playerTwoCount: null,
+    playerThreeName: '',
+    PlayerThreeCount: null,
+    playerFourName: '',
+    playerFourCount: null,
     ladderSnakes: null,
     refresh: false,
     snakesLines: null,
@@ -911,72 +915,82 @@ const PlayGameScreen = () => {
                     />
                   </View>
                 </View>
-                {/* {commObj.numberOfPlayers == 3 && (
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 5,
+                  }}>
+                  <View>
+                    <Image
+                      style={{
+                        width: 20,
+                        height: 20,
+                        resizeMode: 'contain',
+                      }}
+                      source={require('../../../assets/images/greenkey.png')}
+                    />
+                  </View>
                   <View
                     style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      gap: 5,
+                      width: 200,
                     }}>
-                    <View>
-                      <Image
-                        style={{
-                          width: 20,
-                          height: 20,
-                          resizeMode: 'contain',
-                        }}
-                        source={require('../../../assets/images/greenkey.png')}
-                      />
-                    </View>
-                    <View
+                    <TextInput
                       style={{
-                        width: 200,
-                      }}>
-                      <TextInput
-                        style={{
-                          borderWidth: 0.5,
-                          padding: 0,
-                          borderRadius: 8,
-                          paddingLeft: 5,
-                        }}
-                        placeholder="Player 3"
-                      />
-                    </View>
+                        borderWidth: 0.5,
+                        padding: 0,
+                        borderRadius: 8,
+                        paddingLeft: 5,
+                      }}
+                      placeholder="Player 3"
+                      value={commObj.playerThreeName}
+                      onChangeText={text => {
+                        setCommObj(prev => ({
+                          ...prev,
+                          playerThreeName: text,
+                        }));
+                      }}
+                    />
                   </View>
-                )}
-                {commObj.numberOfPlayers == 4 && (
+                </View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 5,
+                  }}>
+                  <View>
+                    <Image
+                      style={{
+                        width: 20,
+                        height: 20,
+                        resizeMode: 'contain',
+                      }}
+                      source={require('../../../assets/images/yellowkey.png')}
+                    />
+                  </View>
                   <View
                     style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      gap: 5,
+                      width: 200,
                     }}>
-                    <View>
-                      <Image
-                        style={{
-                          width: 20,
-                          height: 20,
-                          resizeMode: 'contain',
-                        }}
-                        source={require('../../../assets/images/yellowkey.png')}
-                      />
-                    </View>
-                    <View
+                    <TextInput
                       style={{
-                        width: 200,
-                      }}>
-                      <TextInput
-                        style={{
-                          borderWidth: 0.5,
-                          padding: 0,
-                          borderRadius: 8,
-                          paddingLeft: 5,
-                        }}
-                        placeholder="Player 4"
-                      />
-                    </View>
+                        borderWidth: 0.5,
+                        padding: 0,
+                        borderRadius: 8,
+                        paddingLeft: 5,
+                      }}
+                      placeholder="Player 4"
+                      value={commObj.playerFourName}
+                      onChangeText={text => {
+                        setCommObj(prev => ({
+                          ...prev,
+                          playerFourName: text,
+                        }));
+                      }}
+                    />
                   </View>
-                )} */}
+                </View>
               </View>
               {/* <View
                 style={{
