@@ -525,7 +525,8 @@ const PlayGameScreen = () => {
           <View
             style={{
               alignItems: 'center',
-              flexDirection: 'row',
+              flexDirection:
+                commObj.numberOfPlayers > 2 ? 'row' : 'row-reverse',
             }}>
             <View>
               <Dice
@@ -541,7 +542,10 @@ const PlayGameScreen = () => {
             {commObj.player == 'p2' && commObj.active && (
               <View
                 style={{
-                  paddingLeft: 15,
+                  paddingLeft: 10,
+                  transform:
+                    commObj.numberOfPlayers > 2 ? '' : [{rotate: '180deg'}],
+                  marginBottom: 20,
                 }}>
                 <UserIndicator />
               </View>
@@ -558,6 +562,7 @@ const PlayGameScreen = () => {
                   style={{
                     paddingLeft: 15,
                     transform: [{rotate: '180deg'}],
+                    marginBottom: 20,
                   }}>
                   <UserIndicator />
                 </View>
@@ -927,8 +932,8 @@ const PlayGameScreen = () => {
               {commObj.player == 'p4' && commObj.active && (
                 <View
                   style={{
-                    paddingLeft: 15,
                     transform: [{rotate: '180deg'}],
+                    marginTop: 20,
                   }}>
                   <UserIndicator />
                 </View>
