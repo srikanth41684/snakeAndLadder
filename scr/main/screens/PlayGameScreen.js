@@ -17,6 +17,7 @@ import Sound from 'react-native-sound';
 
 const PlayGameScreen = () => {
   const colors = ['coral', 'green', '#2ae830', 'red'];
+  const [sound, setSound] = useState(null);
   const [commObj, setCommObj] = useState({
     NumbersArray: [],
     modal: true,
@@ -129,11 +130,16 @@ const PlayGameScreen = () => {
   // }, [commObj.playerOneCount, commObj.playerTwoCount]);
 
   const audioHandler = value => {
+    if (sound) {
+      sound.release();
+    }
+
     const newSound = new Sound(value, Sound.MAIN_BUNDLE, error => {
       if (error) {
         console.log('Error loading audio:', error);
       } else {
         console.log('Audio loaded successfully');
+        setSound(newSound);
         newSound.play(success => {
           if (success) {
             console.log('Sound played successfully');
@@ -144,6 +150,14 @@ const PlayGameScreen = () => {
       }
     });
   };
+
+  useEffect(() => {
+    return () => {
+      if (sound) {
+        sound.release();
+      }
+    };
+  }, [sound]);
   async function disePlayerHanlder(player) {
     let randomNum = Math.floor(Math.random() * 6) + 1;
     audioHandler('diceroll.mp3');
