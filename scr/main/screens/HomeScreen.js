@@ -1,14 +1,14 @@
 import {
   View,
   Text,
-  TouchableWithoutFeedback,
-  SafeAreaView,
-  Dimensions,
-  Image,
-  StyleSheet,
-  Animated,
   Easing,
   TouchableOpacity,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+  Image,
+  StyleSheet,
+  Button,
+  Animated,
 } from 'react-native';
 import React, {useEffect, useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -48,61 +48,51 @@ const HomeScreen = () => {
             backgroundColor: '#fff',
             paddingTop: 50,
             paddingLeft: 20,
-          }}></View>
-
-        <View>
-          <TouchableWithoutFeedback
-            onPress={() => {
-              CustomNavigation.navigate('play');
+          }}>
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
             }}>
-            <View
-              style={{
-                padding: 20,
+            <TouchableWithoutFeedback
+              onPress={() => {
+                CustomNavigation.navigate('play');
               }}>
-              <Text
+              <View
                 style={{
-                  fontSize: 18,
-                  fontWeight: 'bold',
-                  color: '#000',
+                  padding: 20,
                 }}>
-                Play
-              </Text>
-            </View>
-          </TouchableWithoutFeedback>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    color: '#000',
+                  }}>
+                  Play Game
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
         </View>
       </View>
     </SafeAreaView>
   );
 };
 
-const styles = {
-  triangleContainer: {
-    width: 0,
-    height: 0,
-    backgroundColor: 'transparent',
-    borderStyle: 'solid',
-    borderTopWidth: 25,
-    borderRightWidth: 35,
-    borderBottomWidth: 25,
-    borderTopColor: 'transparent',
-    borderRightColor: 'red',
-    borderBottomColor: 'transparent', // Change this color to the desired triangle color
-  },
-  triangle: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: 0,
-    height: 0,
-    backgroundColor: 'transparent',
-    borderStyle: 'solid',
-    borderTopWidth: 25,
-    borderRightWidth: 35,
-    borderBottomWidth: 25,
-    borderTopColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderBottomColor: 'transparent',
-  },
-};
-
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  box: {
+    height: 120,
+    width: 120,
+    backgroundColor: '#b58df1',
+    borderRadius: 20,
+    marginVertical: 50,
+  },
+});
