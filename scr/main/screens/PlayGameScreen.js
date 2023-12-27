@@ -13,6 +13,7 @@ import CustomSnakes from '../components/CustomSnakes';
 import Dice from '../components/Dice';
 import PlayerCoin from '../components/PlayerCoin';
 import UserIndicator from '../components/UserIndicator';
+import Sound from 'react-native-sound';
 
 const PlayGameScreen = () => {
   const colors = ['coral', 'green', '#2ae830', 'red'];
@@ -127,8 +128,25 @@ const PlayGameScreen = () => {
   //   }
   // }, [commObj.playerOneCount, commObj.playerTwoCount]);
 
+  const audioHandler = value => {
+    const newSound = new Sound(value, Sound.MAIN_BUNDLE, error => {
+      if (error) {
+        console.log('Error loading audio:', error);
+      } else {
+        console.log('Audio loaded successfully');
+        newSound.play(success => {
+          if (success) {
+            console.log('Sound played successfully');
+          } else {
+            console.log('Error playing sound');
+          }
+        });
+      }
+    });
+  };
   async function disePlayerHanlder(player) {
     let randomNum = Math.floor(Math.random() * 6) + 1;
+    audioHandler('diceroll.mp3');
     let playerCount =
       player === 'p1'
         ? commObj.playerOneCount
@@ -148,6 +166,9 @@ const PlayGameScreen = () => {
     ) {
       for (let i = playerCount; i <= playerCount + randomNum; i++) {
         await new Promise(resolve => setTimeout(resolve, 200));
+        if (playerCount !== i) {
+          audioHandler('player_move.mp3');
+        }
         setCommObj(prev => ({
           ...prev,
           playerOneCount: player === 'p1' ? i : prev.playerOneCount,
@@ -215,6 +236,7 @@ const PlayGameScreen = () => {
     if (commObj.ladderSnakes) {
       commObj.ladderSnakes.forEach(item => {
         if (value in item) {
+          audioHandler('snake_hit.mp3');
           setTimeout(() => {
             setCommObj(prev => ({
               ...prev,
@@ -237,6 +259,7 @@ const PlayGameScreen = () => {
     if (commObj.ladderSnakes) {
       commObj.ladderSnakes.forEach(item => {
         if (value in item) {
+          audioHandler('snake_hit.mp3');
           setTimeout(() => {
             setCommObj(prev => ({
               ...prev,
@@ -258,6 +281,7 @@ const PlayGameScreen = () => {
     if (commObj.ladderSnakes) {
       commObj.ladderSnakes.forEach(item => {
         if (value in item) {
+          audioHandler('snake_hit.mp3');
           setTimeout(() => {
             setCommObj(prev => ({
               ...prev,
@@ -279,6 +303,7 @@ const PlayGameScreen = () => {
     if (commObj.ladderSnakes) {
       commObj.ladderSnakes.forEach(item => {
         if (value in item) {
+          audioHandler('snake_hit.mp3');
           setTimeout(() => {
             setCommObj(prev => ({
               ...prev,

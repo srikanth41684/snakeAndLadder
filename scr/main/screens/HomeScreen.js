@@ -10,11 +10,30 @@ import {
   Button,
   Animated,
 } from 'react-native';
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import Sound from 'react-native-sound';
 
 const HomeScreen = () => {
   const CustomNavigation = useNavigation();
+
+  const audioHandler = () => {
+    const newSound = new Sound('snake_hit.mp3', Sound.MAIN_BUNDLE, error => {
+      if (error) {
+        console.log('Error loading audio:', error);
+      } else {
+        console.log('Audio loaded successfully');
+        newSound.play(success => {
+          if (success) {
+            console.log('Sound played successfully');
+          } else {
+            console.log('Error playing sound');
+          }
+        });
+      }
+    });
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -55,6 +74,24 @@ const HomeScreen = () => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                audioHandler();
+              }}>
+              <View
+                style={{
+                  padding: 20,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    color: '#000',
+                  }}>
+                  Sound
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
             <TouchableWithoutFeedback
               onPress={() => {
                 CustomNavigation.navigate('play');
