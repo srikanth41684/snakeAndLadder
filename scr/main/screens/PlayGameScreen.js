@@ -404,7 +404,7 @@ const PlayGameScreen = () => {
       let startNum = Math.floor(Math.random() * (99 - 12 + 1)) + 12;
       let endNum = Math.floor(Math.random() * (startNum - 2 + 1)) + 2;
       if (
-        startNum > endNum + 12 &&
+        startNum > endNum + 20 &&
         !Object.values(snakesObj).includes(endNum)
       ) {
         snakesObj[startNum] = endNum;
@@ -414,7 +414,7 @@ const PlayGameScreen = () => {
       let startNum = Math.floor(Math.random() * (90 - 6 + 1)) + 6;
       let endNum = Math.floor(Math.random() * (99 - startNum + 1)) + startNum;
       if (
-        endNum > startNum + 12 &&
+        endNum > startNum + 20 &&
         !Object.values(laddersObj).includes(endNum)
       ) {
         laddersObj[startNum] = endNum;
