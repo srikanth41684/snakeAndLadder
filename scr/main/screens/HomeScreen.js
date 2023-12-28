@@ -69,6 +69,24 @@ const HomeScreen = () => {
                 </Text>
               </View>
             </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                CustomNavigation.navigate('cube');
+              }}>
+              <View
+                style={{
+                  padding: 20,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    color: '#000',
+                  }}>
+                  Cube
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
           </View>
         </View>
       </View>
