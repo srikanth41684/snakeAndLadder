@@ -158,6 +158,7 @@ const PlayGameScreen = () => {
       }
     };
   }, [sound]);
+
   async function disePlayerHanlder(player) {
     let randomNum = Math.floor(Math.random() * 6) + 1;
     audioHandler('diceroll.mp3');
@@ -1080,6 +1081,26 @@ const PlayGameScreen = () => {
             </View>
           )}
         </View>
+        {/* <TouchableWithoutFeedback
+          onPress={() => {
+            setCommObj(prev => ({
+              ...prev,
+              refresh: !prev.resizeMode,
+            }));
+          }}>
+          <View
+            style={{
+              paddingVertical: 30,
+              marginTop: 20,
+            }}>
+            <Text
+              style={{
+                color: '#000',
+              }}>
+              Refresh
+            </Text>
+          </View>
+        </TouchableWithoutFeedback> */}
         {commObj.playerOneCount == 100 ||
         commObj.playerTwoCount == 100 ||
         commObj.PlayerThreeCount == 100 ||

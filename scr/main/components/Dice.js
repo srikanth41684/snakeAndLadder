@@ -23,7 +23,7 @@ const Dice = ({
   const startAnimation = toValue => {
     Animated.timing(spinValue, {
       toValue,
-      duration: 1000,
+      duration: 400,
       easing: Easing.linear,
       useNativeDriver: true,
     }).start(() => {
@@ -113,7 +113,7 @@ const Dice = ({
                     startAnimation(1);
                   }
                 }}>
-                <Animated.View style={{transform: [{rotateY: spin}]}}>
+                <Animated.View style={{transform: [{rotateX: spin}]}}>
                   <View
                     style={{
                       width: 40,
