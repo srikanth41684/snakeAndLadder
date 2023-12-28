@@ -4,8 +4,10 @@ import {
   StyleSheet,
   Image,
   TouchableWithoutFeedback,
+  Animated,
+  Easing,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 
 const Dice = ({
   diseNumber,
@@ -16,6 +18,27 @@ const Dice = ({
   name,
   src,
 }) => {
+  const spinValue = useRef(new Animated.Value(0)).current;
+
+  const startAnimation = toValue => {
+    Animated.timing(spinValue, {
+      toValue,
+      duration: 1000,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start(() => {
+      spinValue.setValue(0);
+    });
+  };
+
+  useEffect(() => {
+    startAnimation(1);
+  }, []);
+
+  const spin = spinValue.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: ['0deg', '180deg', '360deg'],
+  });
   return (
     <View>
       <View style={{}}>
@@ -87,15 +110,18 @@ const Dice = ({
                 onPress={() => {
                   if (active) {
                     disePlayerHanlder(player);
+                    startAnimation(1);
                   }
                 }}>
-                <View style={{}}>
+                <Animated.View style={{transform: [{rotate: spin}]}}>
                   <View
                     style={{
                       width: 40,
                       height: 40,
                       backgroundColor: active ? '#fff' : 'lightgray',
                       borderRadius: 5,
+                      shadowColor: 'red',
+                      elevation: 5,
                     }}>
                     {diseNumber == 1 && (
                       <View
@@ -289,7 +315,7 @@ const Dice = ({
                       </View>
                     )}
                   </View>
-                </View>
+                </Animated.View>
               </TouchableWithoutFeedback>
             )}
           </View>

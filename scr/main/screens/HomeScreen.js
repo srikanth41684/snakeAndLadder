@@ -1,18 +1,12 @@
 import {
   View,
   Text,
-  Easing,
-  TouchableOpacity,
   SafeAreaView,
   TouchableWithoutFeedback,
-  Image,
   StyleSheet,
-  Button,
-  Animated,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import Sound from 'react-native-sound';
 
 const HomeScreen = () => {
   const CustomNavigation = useNavigation();
@@ -83,18 +77,3 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    height: 120,
-    width: 120,
-    backgroundColor: '#b58df1',
-    borderRadius: 20,
-    marginVertical: 50,
-  },
-});

@@ -205,23 +205,25 @@ const PlayGameScreen = () => {
         active: true,
       }));
     } else {
-      setCommObj(prev => ({
-        ...prev,
-        diseNumber: randomNum,
-        player:
-          player === 'p1'
-            ? 'p2'
-            : player === 'p2'
-            ? prev.numberOfPlayers > 2
-              ? 'p3'
-              : 'p1'
-            : player === 'p3'
-            ? prev.numberOfPlayers > 3
-              ? 'p4'
-              : 'p1'
-            : 'p1',
-        active: true,
-      }));
+      setTimeout(() => {
+        setCommObj(prev => ({
+          ...prev,
+          // diseNumber: randomNum,
+          player:
+            player === 'p1'
+              ? 'p2'
+              : player === 'p2'
+              ? prev.numberOfPlayers > 2
+                ? 'p3'
+                : 'p1'
+              : player === 'p3'
+              ? prev.numberOfPlayers > 3
+                ? 'p4'
+                : 'p1'
+              : 'p1',
+          active: true,
+        }));
+      }, 1000);
     }
 
     // for (let i = playerCount; i <= playerCount + randomNum; i++) {
