@@ -41,11 +41,11 @@ const CustomLadder = ({x1, y1, x2, y2}) => {
             style={{
               height: '100%',
             }}>
-            {Array.from({length: Math.floor(distance / 26)}).map((_, index) => (
+            {Array.from({length: Math.floor(distance / 15)}).map((_, index) => (
               <View
                 key={index}
                 style={{
-                  height: 25,
+                  height: 15,
                   borderBottomWidth: 2,
                   // paddingBottom: 10,
                   borderBottomColor: 'blue',

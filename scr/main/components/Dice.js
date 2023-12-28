@@ -113,12 +113,12 @@ const Dice = ({
                     startAnimation(1);
                   }
                 }}>
-                <Animated.View style={{transform: [{rotate: spin}]}}>
+                <Animated.View style={{transform: [{rotateY: spin}]}}>
                   <View
                     style={{
                       width: 40,
                       height: 40,
-                      backgroundColor: active ? '#fff' : 'lightgray',
+                      backgroundColor: '#fff',
                       borderRadius: 5,
                       shadowColor: 'red',
                       elevation: 5,

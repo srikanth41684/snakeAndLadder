@@ -169,9 +169,16 @@ const PlayGameScreen = () => {
         : player === 'p3'
         ? commObj.PlayerThreeCount
         : commObj.playerFourCount;
+
+    setTimeout(() => {
+      setCommObj(prev => ({
+        ...prev,
+        diseNumber: randomNum,
+      }));
+    }, 600);
     setCommObj(prev => ({
       ...prev,
-      diseNumber: randomNum,
+      // diseNumber: randomNum,
       active: false,
     }));
     if (
@@ -191,15 +198,16 @@ const PlayGameScreen = () => {
           playerFourCount: player === 'p4' ? i : prev.playerFourCount,
         }));
       }
-      if (player === 'p1') {
-        playerOneSnakeLadderHandler(playerCount + randomNum);
-      } else if (player === 'p2') {
-        playerTwoSnakeLadderHandler(playerCount + randomNum);
-      } else if (player === 'p3') {
-        playerThreeSnakeLadderHandler(playerCount + randomNum);
-      } else {
-        playerFourSnakeLadderHandler(playerCount + randomNum);
-      }
+      playerSnakeLadderHandler(player, playerCount + randomNum);
+      // if (player === 'p1') {
+      //   playerOneSnakeLadderHandler(playerCount + randomNum);
+      // } else if (player === 'p2') {
+      //   playerTwoSnakeLadderHandler(playerCount + randomNum);
+      // } else if (player === 'p3') {
+      //   playerThreeSnakeLadderHandler(playerCount + randomNum);
+      // } else {
+      //   playerFourSnakeLadderHandler(playerCount + randomNum);
+      // }
       setCommObj(prev => ({
         ...prev,
         active: true,
@@ -247,8 +255,7 @@ const PlayGameScreen = () => {
     // }
   }
 
-  function playerOneSnakeLadderHandler(value) {
-    // let value = commObj.playerOneCount;
+  function playerSnakeLadderHandler(player, value) {
     if (commObj.ladderSnakes) {
       commObj.ladderSnakes.forEach(item => {
         if (value in item) {
@@ -256,86 +263,138 @@ const PlayGameScreen = () => {
           setTimeout(() => {
             setCommObj(prev => ({
               ...prev,
-              playerOneCount: item[value],
-              player: 'p2',
+              playerOneCount:
+                player === 'p1' ? item[value] : prev.playerOneCount,
+              playerTwoCount:
+                player === 'p2' ? item[value] : prev.playerTwoCount,
+              PlayerThreeCount:
+                player === 'p3' ? item[value] : prev.PlayerThreeCount,
+              playerFourCount:
+                player === 'p4' ? item[value] : prev.playerFourCount,
+              player:
+                player === 'p1'
+                  ? 'p2'
+                  : player === 'p2'
+                  ? prev.numberOfPlayers > 2
+                    ? 'p3'
+                    : 'p1'
+                  : player === 'p3'
+                  ? prev.numberOfPlayers > 3
+                    ? 'p4'
+                    : 'p1'
+                  : 'p1',
             }));
           }, 100);
         } else {
           setCommObj(prev => ({
             ...prev,
-            player: 'p2',
+            player:
+              player === 'p1'
+                ? 'p2'
+                : player === 'p2'
+                ? prev.numberOfPlayers > 2
+                  ? 'p3'
+                  : 'p1'
+                : player === 'p3'
+                ? prev.numberOfPlayers > 3
+                  ? 'p4'
+                  : 'p1'
+                : 'p1',
           }));
         }
       });
     }
   }
 
-  function playerTwoSnakeLadderHandler(value) {
-    // let value = commObj.playerTwoCount;
-    if (commObj.ladderSnakes) {
-      commObj.ladderSnakes.forEach(item => {
-        if (value in item) {
-          audioHandler('snake_hit.mp3');
-          setTimeout(() => {
-            setCommObj(prev => ({
-              ...prev,
-              playerTwoCount: item[value],
-              player: prev.numberOfPlayers > 2 ? 'p3' : 'p1',
-            }));
-          }, 100);
-        } else {
-          setCommObj(prev => ({
-            ...prev,
-            player: prev.numberOfPlayers > 2 ? 'p3' : 'p1',
-          }));
-        }
-      });
-    }
-  }
+  // function playerOneSnakeLadderHandler(value) {
+  //   // let value = commObj.playerOneCount;
+  //   if (commObj.ladderSnakes) {
+  //     commObj.ladderSnakes.forEach(item => {
+  //       if (value in item) {
+  //         audioHandler('snake_hit.mp3');
+  //         setTimeout(() => {
+  //           setCommObj(prev => ({
+  //             ...prev,
+  //             playerOneCount: item[value],
+  //             player: 'p2',
+  //           }));
+  //         }, 100);
+  //       } else {
+  //         setCommObj(prev => ({
+  //           ...prev,
+  //           player: 'p2',
+  //         }));
+  //       }
+  //     });
+  //   }
+  // }
 
-  function playerThreeSnakeLadderHandler(value) {
-    if (commObj.ladderSnakes) {
-      commObj.ladderSnakes.forEach(item => {
-        if (value in item) {
-          audioHandler('snake_hit.mp3');
-          setTimeout(() => {
-            setCommObj(prev => ({
-              ...prev,
-              PlayerThreeCount: item[value],
-              player: prev.numberOfPlayers > 3 ? 'p4' : 'p1',
-            }));
-          }, 100);
-        } else {
-          setCommObj(prev => ({
-            ...prev,
-            player: prev.numberOfPlayers > 3 ? 'p4' : 'p1',
-          }));
-        }
-      });
-    }
-  }
+  // function playerTwoSnakeLadderHandler(value) {
+  //   // let value = commObj.playerTwoCount;
+  //   if (commObj.ladderSnakes) {
+  //     commObj.ladderSnakes.forEach(item => {
+  //       if (value in item) {
+  //         audioHandler('snake_hit.mp3');
+  //         setTimeout(() => {
+  //           setCommObj(prev => ({
+  //             ...prev,
+  //             playerTwoCount: item[value],
+  //             player: prev.numberOfPlayers > 2 ? 'p3' : 'p1',
+  //           }));
+  //         }, 100);
+  //       } else {
+  //         setCommObj(prev => ({
+  //           ...prev,
+  //           player: prev.numberOfPlayers > 2 ? 'p3' : 'p1',
+  //         }));
+  //       }
+  //     });
+  //   }
+  // }
 
-  function playerFourSnakeLadderHandler(value) {
-    if (commObj.ladderSnakes) {
-      commObj.ladderSnakes.forEach(item => {
-        if (value in item) {
-          audioHandler('snake_hit.mp3');
-          setTimeout(() => {
-            setCommObj(prev => ({
-              ...prev,
-              playerFourCount: item[value],
-              player: 'p1',
-            }));
-          }, 100);
-        } else {
-          setCommObj(prev => ({
-            ...prev,
-            player: 'p1',
-          }));
-        }
-      });
-    }
-  }
+  // function playerThreeSnakeLadderHandler(value) {
+  //   if (commObj.ladderSnakes) {
+  //     commObj.ladderSnakes.forEach(item => {
+  //       if (value in item) {
+  //         audioHandler('snake_hit.mp3');
+  //         setTimeout(() => {
+  //           setCommObj(prev => ({
+  //             ...prev,
+  //             PlayerThreeCount: item[value],
+  //             player: prev.numberOfPlayers > 3 ? 'p4' : 'p1',
+  //           }));
+  //         }, 100);
+  //       } else {
+  //         setCommObj(prev => ({
+  //           ...prev,
+  //           player: prev.numberOfPlayers > 3 ? 'p4' : 'p1',
+  //         }));
+  //       }
+  //     });
+  //   }
+  // }
+
+  // function playerFourSnakeLadderHandler(value) {
+  //   if (commObj.ladderSnakes) {
+  //     commObj.ladderSnakes.forEach(item => {
+  //       if (value in item) {
+  //         audioHandler('snake_hit.mp3');
+  //         setTimeout(() => {
+  //           setCommObj(prev => ({
+  //             ...prev,
+  //             playerFourCount: item[value],
+  //             player: 'p1',
+  //           }));
+  //         }, 100);
+  //       } else {
+  //         setCommObj(prev => ({
+  //           ...prev,
+  //           player: 'p1',
+  //         }));
+  //       }
+  //     });
+  //   }
+  // }
 
   useEffect(() => {
     let randomSnakeLadders = [];
