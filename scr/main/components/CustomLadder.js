@@ -23,7 +23,7 @@ const CustomLadder = ({x1, y1, x2, y2}) => {
             position: 'absolute',
             left: `${x1}%`,
             top: y1,
-            width: 25,
+            width: 20,
             borderColor: 'blue',
             borderLeftWidth: 4,
             borderRightWidth: 4,

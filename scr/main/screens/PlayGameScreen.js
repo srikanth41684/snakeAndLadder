@@ -401,48 +401,63 @@ const PlayGameScreen = () => {
     let randomSnakeLadders = [];
     let snakesObj = {};
     let laddersObj = {};
-    for (let i = 0; Object.keys(snakesObj).length < 4; i++) {
-      let startNum = Math.floor(Math.random() * (99 - 12 + 1)) + 12;
-      let endNum = Math.floor(Math.random() * (startNum - 2 + 1)) + 2;
+    for (let i = 0; Object.keys(snakesObj).length < 3; i++) {
+      let ln = Object.keys(snakesObj).length + 1;
+      let num = 33 * ln;
+      let startNum =
+        Math.floor(Math.random() * (num - (num - 28) + 1)) + (num - 28);
+      let endNum =
+        Math.floor(Math.random() * (num - 32 - startNum + 1)) + startNum;
       if (
-        startNum > endNum + 20 &&
-        !Object.values(snakesObj).includes(endNum)
+        startNum > endNum + 11 &&
+        !laddersObj.hasOwnProperty(startNum) &&
+        !laddersObj.hasOwnProperty(endNum) &&
+        !Object.values(laddersObj).includes(startNum) &&
+        !Object.values(laddersObj).includes(endNum)
       ) {
         snakesObj[startNum] = endNum;
       }
     }
     for (let i = 0; Object.keys(laddersObj).length < 4; i++) {
-      let startNum = Math.floor(Math.random() * (90 - 6 + 1)) + 6;
-      let endNum = Math.floor(Math.random() * (99 - startNum + 1)) + startNum;
+      let ln = Object.keys(laddersObj).length + 1;
+      let num = ln == 4 ? 99 : 25 * ln;
+      let startNum =
+        Math.floor(Math.random() * (num - 10 - (num - 20) + 1)) + (num - 20);
+      let endNum = Math.floor(Math.random() * (num - startNum + 1)) + startNum;
       if (
-        endNum > startNum + 20 &&
-        !Object.values(laddersObj).includes(endNum)
+        endNum > startNum + 11 &&
+        !snakesObj.hasOwnProperty(startNum) &&
+        !snakesObj.hasOwnProperty(endNum) &&
+        !Object.values(snakesObj).includes(startNum) &&
+        !Object.values(snakesObj).includes(endNum)
       ) {
         laddersObj[startNum] = endNum;
       }
     }
-    for (let key in snakesObj) {
-      if (
-        laddersObj.hasOwnProperty(snakesObj[key]) ||
-        laddersObj.hasOwnProperty(key) ||
-        Object.values(snakesObj).includes(Number(key)) ||
-        Object.values(laddersObj).includes(Number(key)) ||
-        Object.values(laddersObj).includes(snakesObj[key])
-      ) {
-        delete snakesObj[key];
-      }
-    }
+    // for (let key in snakesObj) {
+    //   if (
+    //     laddersObj.hasOwnProperty(snakesObj[key]) ||
+    //     laddersObj.hasOwnProperty(key) ||
+    //     Object.values(snakesObj).includes(Number(key)) ||
+    //     Object.values(laddersObj).includes(Number(key)) ||
+    //     Object.values(laddersObj).includes(snakesObj[key])
+    //   ) {
+    //     delete snakesObj[key];
+    //   }
+    // }
 
-    for (let key in laddersObj) {
-      if (
-        snakesObj.hasOwnProperty(laddersObj[key]) ||
-        snakesObj.hasOwnProperty(key) ||
-        Object.values(laddersObj).includes(Number(key)) ||
-        Object.values(snakesObj).includes(Number(key))
-      ) {
-        delete laddersObj[key];
-      }
-    }
+    // for (let key in laddersObj) {
+    //   if (
+    //     snakesObj.hasOwnProperty(laddersObj[key]) ||
+    //     snakesObj.hasOwnProperty(key) ||
+    //     Object.values(laddersObj).includes(Number(key)) ||
+    //     Object.values(snakesObj).includes(Number(key))
+    //   ) {
+    //     delete laddersObj[key];
+    //   }
+    // }
+
+    console.log('snakesObj-------->', snakesObj);
 
     randomSnakeLadders.push(snakesObj);
     randomSnakeLadders.push(laddersObj);
@@ -557,7 +572,7 @@ const PlayGameScreen = () => {
   }, [commObj.refresh]);
 
   useEffect(() => {
-    console.log('PlayGameScreen-commObj------>', commObj);
+    // console.log('PlayGameScreen-commObj------>', commObj);
   }, [commObj]);
   return (
     <SafeAreaView
@@ -1081,7 +1096,7 @@ const PlayGameScreen = () => {
             </View>
           )}
         </View>
-        {/* <TouchableWithoutFeedback
+        <TouchableWithoutFeedback
           onPress={() => {
             setCommObj(prev => ({
               ...prev,
@@ -1100,7 +1115,7 @@ const PlayGameScreen = () => {
               Refresh
             </Text>
           </View>
-        </TouchableWithoutFeedback> */}
+        </TouchableWithoutFeedback>
         {commObj.playerOneCount == 100 ||
         commObj.playerTwoCount == 100 ||
         commObj.PlayerThreeCount == 100 ||
