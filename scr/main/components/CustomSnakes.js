@@ -43,10 +43,7 @@ const CustomSnakes = ({x1, y1, x2, y2, color, show}) => {
               {translateX: -5},
               {translateY: -distance / 2},
               {
-                rotate:
-                  angle > 20 && angle < 35
-                    ? `${-angle + 5}deg`
-                    : `${-angle}deg`,
+                rotate: `${-angle}deg`,
               },
               {translateX: 5},
               {translateY: distance / 2},
