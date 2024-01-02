@@ -22,16 +22,32 @@ const CustomSnakes = ({x1, y1, x2, y2, color, show}) => {
         <View
           style={{
             alignItems: 'center',
-            left: angle > 0 ? `${x1 - 5}%` : `${x1}%`,
-            top: y1 - 5,
-            width: 30,
+            left:
+              angle > 0
+                ? `${x1 - 5}%`
+                : angle == 0
+                ? `${x1 - 3}%`
+                : `${x1 - 3}%`,
+            top: y1 - 8,
+            width: 40,
             zIndex: show + 2,
-            height: angle < 0 ? distance + 15 : distance,
+            height:
+              angle < 0
+                ? distance + 15
+                : angle == 0
+                ? distance + 20
+                : distance + 15,
+            // height: distance,
             overflow: 'hidden',
             transform: [
               {translateX: -5},
               {translateY: -distance / 2},
-              {rotate: `${-angle}deg`},
+              {
+                rotate:
+                  angle > 20 && angle < 35
+                    ? `${-angle + 5}deg`
+                    : `${-angle}deg`,
+              },
               {translateX: 5},
               {translateY: distance / 2},
             ],
@@ -40,6 +56,7 @@ const CustomSnakes = ({x1, y1, x2, y2, color, show}) => {
             <View
               style={{
                 position: 'relative',
+                zIndex: 12,
               }}>
               <Image
                 style={{
@@ -47,23 +64,80 @@ const CustomSnakes = ({x1, y1, x2, y2, color, show}) => {
                   height: 25,
                   resizeMode: 'center',
                   position: 'absolute',
-                  zIndex: 5,
+                  zIndex: 12,
+                  // top: 0,
                 }}
                 source={require('../../../assets/images/snakeface.png')}
                 alt="snakeface"
               />
-              <View
-                style={{
-                  width: 10,
-                  height: 25,
-                  backgroundColor: color,
-                  position: 'absolute',
-                  left: 7,
-                  top: 10,
-                  borderBottomRightRadius: 10,
-                }}></View>
             </View>
-            {Array.from({length: 10}).map((_, index) => (
+            {Array.from({length: 5}).map((_, index) => (
+              <View
+                key={index}
+                style={{
+                  width: 30,
+                  height: 100,
+                  position: 'relative',
+                  // top: index > 0 ? 0 : 10,
+                  bottom: index > 0 ? index * 38 : 0,
+                  alignItems: 'center',
+                  zIndex: 10,
+                  marginTop: 12,
+                }}>
+                <View
+                  style={{
+                    position: 'absolute',
+                    left: -4,
+                    top: -20,
+                    width: 8,
+                    height: 8,
+                    borderRadius: 10,
+                    backgroundColor: '#fff',
+                  }}></View>
+                <View
+                  style={{
+                    width: 40,
+                    height: 50,
+                    borderTopWidth: 10,
+                    borderRightWidth: 10,
+                    borderColor: color,
+                    borderBottomRightRadius: 0,
+                    borderTopLeftRadius: 20,
+                    // borderRadius: 20,
+                    transform: [{rotate: '45deg'}],
+                    position: 'relative',
+                    right: 7,
+                    top: 0,
+                  }}></View>
+                <View
+                  style={{
+                    position: 'absolute',
+                    left: 23,
+                    top: 17,
+                    width: 8,
+                    height: 8,
+                    borderRadius: 10,
+                    backgroundColor: 'orange',
+                    zIndex: 10,
+                  }}></View>
+                <View
+                  style={{
+                    width: 40,
+                    height: 50,
+                    borderBottomWidth: 10,
+                    borderLeftWidth: 10,
+                    borderColor: color,
+                    borderBottomRightRadius: 0,
+                    borderTopLeftRadius: 0,
+                    borderRadius: 20,
+                    transform: [{rotate: '45deg'}],
+                    position: 'relative',
+                    left: 3,
+                    bottom: 20,
+                  }}></View>
+              </View>
+            ))}
+            {/* {Array.from({length: 10}).map((_, index) => (
               <View
                 key={index}
                 style={{
@@ -110,7 +184,7 @@ const CustomSnakes = ({x1, y1, x2, y2, color, show}) => {
                   )}
                 </View>
               </View>
-            ))}
+            ))} */}
           </View>
           {/* <View
             style={{

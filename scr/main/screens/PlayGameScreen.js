@@ -585,6 +585,28 @@ const PlayGameScreen = () => {
           backgroundColor: '#fff',
           paddingTop: 20,
         }}>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            setCommObj(prev => ({
+              ...prev,
+              refresh: !prev.resizeMode,
+            }));
+          }}>
+          <View
+            style={{
+              paddingVertical: 5,
+              alignItems: 'center',
+            }}>
+            <Text
+              style={{
+                color: '#000',
+                fontSize: 14,
+                fontWeight: '500',
+              }}>
+              Refresh
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
         <View
           style={{
             paddingHorizontal: 10,
@@ -680,7 +702,7 @@ const PlayGameScreen = () => {
                   y1={item.y1}
                   x2={item.x2}
                   y2={item.y2}
-                  color={colors[Math.floor(Math.random() * colors.length)]}
+                  color={colors[index]}
                   show={index}
                 />
               );
@@ -1096,26 +1118,6 @@ const PlayGameScreen = () => {
             </View>
           )}
         </View>
-        <TouchableWithoutFeedback
-          onPress={() => {
-            setCommObj(prev => ({
-              ...prev,
-              refresh: !prev.resizeMode,
-            }));
-          }}>
-          <View
-            style={{
-              paddingVertical: 30,
-              marginTop: 20,
-            }}>
-            <Text
-              style={{
-                color: '#000',
-              }}>
-              Refresh
-            </Text>
-          </View>
-        </TouchableWithoutFeedback>
         {commObj.playerOneCount == 100 ||
         commObj.playerTwoCount == 100 ||
         commObj.PlayerThreeCount == 100 ||
