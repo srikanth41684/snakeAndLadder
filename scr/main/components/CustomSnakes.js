@@ -36,7 +36,7 @@ const CustomSnakes = ({x1, y1, x2, y2, color, show}) => {
               {translateY: distance / 2},
             ],
           }}>
-          <View>
+          <View style={{}}>
             <View
               style={{
                 position: 'relative',

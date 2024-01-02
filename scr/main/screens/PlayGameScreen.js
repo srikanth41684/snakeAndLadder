@@ -16,7 +16,7 @@ import UserIndicator from '../components/UserIndicator';
 import Sound from 'react-native-sound';
 
 const PlayGameScreen = () => {
-  const colors = ['coral', 'green', '#2ae830', 'red'];
+  const colors = ['green', '#2ae830', 'red'];
   const [sound, setSound] = useState(null);
   const [commObj, setCommObj] = useState({
     NumbersArray: [],
@@ -680,7 +680,7 @@ const PlayGameScreen = () => {
                   y1={item.y1}
                   x2={item.x2}
                   y2={item.y2}
-                  color={colors[index]}
+                  color={colors[Math.floor(Math.random() * colors.length)]}
                   show={index}
                 />
               );
